@@ -1,0 +1,74 @@
+
+              Changelog for M2M PHP SDK
+			  MLM] version 3.20.0
+			  - Business rules: this feature links the alarm triggers with the sim card status management.
+			  - Obsolete SubscriptionStatus and IncidentDiagnosis V1 services were removed from the SDK. 
+			  
+              [MLM] version 3.19.0
+              Session History, Traffic Tracking, Customer alarm : before version 3.19 the data communications were split between GPRS and UMTS bearers. 
+              Now, 2G and 3G data are all linked to the GPRS bearer. 
+              The UMTS bearer is no longer used.
+              Version 3.19 contains only a modification of the user manual. The binaries (jar), sources or samples are the same as version 3.16.
+
+              [MLM] version 3.16.0
+              - Integration of WSDL 3.16.0 evolution :
+              * A Connectivity Directory : new data, new search criteria and new order criteria.
+              - searchInConnectivityDirectory
+              New search criteria on the user who owns the subscription and on the subscription user reference in the searchInConnectivityDirectory request.
+              New search criteria on the current IMSI for the subscription.
+              New order criteria on the subscription creation date and on the connection date.
+              The customer account name is returned in the response.
+              The current IMSI is returned in the response.
+              3 new functions in the SDK for SSN (SIM Serial Number) to ICCID (Integrated Circuit Card Identifier)  conversion.
+
+              - getConnectivityDirectory
+              The customer account name is returned in the response.
+              The current IMSI is returned in the response.
+              The ICCID identifier is returned in the response.
+
+              * IncidentDiagnostics : new network status available for 3G 900, 3G 2100, H+, 4G.
+              * Network Status : new information on the network coverage.
+
+              [MLM] version 3.11.2
+              - Integration of WSDL 3.11.2 evolution :
+              * Device Info added : new service : enables the end-user to get supervision and geolocation data from devices containing a compatible SIM card.
+              * Connectivity Directory evolution : retrieve the sim card location and/or the sim card compatibility with the location service.
+
+              [MLM] version 3.10.1
+              - Integration of WSDL 3.10.1 evolution :
+              * Service customer alarm V2 added : new trigger on subscription option change : an alarm will be raised when subscription options are added or deleted.
+              * Connectivity Directory added : new search based on the IMSI identifier (getConnectivityDirectory)
+
+
+              [MLM] version 3.9.0
+              - Integration of WSDL 3.9.0 evolution :
+              * ConnectivityDirectory : List of the services linked to the subscription. If the label of the service is not null, it's displayed, otherwise it's the code of service.
+              * ConnectivityDirectory : 	GetCD response : Machine serialNumber and device Unique identifier are now 0..1
+              SearchInCD response : Machine serialNumber and device Unique identifier are now 0..1
+              UpdateCD request ; Machine serialNumber and device Unique identifier are now 0..1
+              * Service customer alarm V2 added : new trigger on subscription status change : an alarm will be raised when subscription status (ACTIVATED, ACTIVATEd_FOR_TEST...) have changed.
+              * Service customer alarm V2 added : new trigger on "crazy" machine: an alarm will be raised if the cumulated traffic for given call origin and bearer type exceeds the given threshold for the given period.
+
+              [MLM] version 3.7.0
+              - Integration of WSDL 3.7.0 evolution :
+              * Traffic tracking updated : roaming and local traffic
+              * Service customer alarm V2 added : Alarms on ALL ORIGINS (unitary and global threshold trigger), Lazy machine, silent machine, notification by email
+              * Incident diagnostics V1 deprecated
+              * Session History V1 deprecated
+              * Consumption Tracking deprecated
+
+              * PHP 5.3.13 (Wamp Server)
+
+              ===========
+              = 2011/01 =
+              ===========
+              [MLM] version 2.2.0
+              * Integration of WSDL 2.2.0 evolution :
+              + Consumption tracking deprecated
+              + Traffic tracking added
+              + Service customer alarm added
+              + Incident diagnostics V2 added
+
+
+
+            

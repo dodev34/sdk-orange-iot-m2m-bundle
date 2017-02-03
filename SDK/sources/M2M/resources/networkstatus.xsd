@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified" targetNamespace="http://networkstatus.types.malima.francetelecom.com"
+  xmlns:tns="http://networkstatus.types.malima.francetelecom.com" xmlns:cm="http://common.types.malima.francetelecom.com"
+  xmlns="http://www.w3.org/2001/XMLSchema">
+
+  <annotation>
+    <documentation>
+      This schema defines the Network Status services types.
+    </documentation>
+  </annotation>
+
+  <!-- External schemas import -->
+  <import namespace="http://common.types.malima.francetelecom.com" schemaLocation="common.xsd" />
+
+  <!-- Get Network Status input parameters -->
+  <group name="GetNetworkStatusIn">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="coordinates" type="cm:Coordinates" />
+      <element minOccurs="0" maxOccurs="1" name="showExtendedFeatures" type="boolean" />
+    </sequence>
+  </group>
+
+  <!-- Get Network Status output parameters -->
+  <group name="GetNetworkStatusOut">
+    <sequence>
+      <!-- Status -->
+      <element minOccurs="1" maxOccurs="1" name="status" type="tns:NetStatStatus" />
+      <element minOccurs="0" maxOccurs="1" name="errorMessage" type="string" />
+      <!-- Coverage data -->
+      <element minOccurs="0" maxOccurs="unbounded" name="areaCoverage" type="tns:AreaCoverage" />
+      <element minOccurs="0" maxOccurs="unbounded" name="areaCoverageDescription" type="string" />
+      <!-- Breakdown data -->
+      <element minOccurs="0" maxOccurs="unbounded" name="breakdownReport" type="tns:BreakdownReport" />
+      <element minOccurs="0" maxOccurs="unbounded" name="breakdownReportDescription" type="string" />
+      <element minOccurs="0" maxOccurs="unbounded" name="networkResolutionMessage" type="string" />
+      <element minOccurs="0" maxOccurs="unbounded" name="areaCoverageCode" type="int" />
+      <element minOccurs="0" maxOccurs="unbounded" name="breakdownReportCode" type="int" />
+       <!-- ForecastCoverage  -->
+      <element minOccurs="0" maxOccurs="unbounded" name="forecastCoverage" type="tns:ForecastCoverage" />
+    </sequence>
+  </group>
+
+  <!-- Network status response status -->
+  <simpleType name="NetStatStatus">
+    <restriction base="string">
+      <enumeration value="OK" />
+      <enumeration value="REQUEST_ERROR" />
+      <enumeration value="TECHNICAL_ERROR" />
+    </restriction>
+  </simpleType>
+
+  <!-- Area coverage -->
+  <complexType name="ForecastCoverage">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="technology" type="tns:Technology" />
+      <element minOccurs="1" maxOccurs="1" name="coverage" type="string" />
+    </sequence>
+  </complexType>
+
+  <!-- Area coverage -->
+  <complexType name="AreaCoverage">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="technology" type="tns:Technology" />
+      <element minOccurs="1" maxOccurs="1" name="coverage" type="boolean" />
+      <element minOccurs="0" maxOccurs="1" name="qualityCoverageCode" type="int" />
+      <element minOccurs="0" maxOccurs="1" name="qualityCoverageDescription" type="string" />
+    </sequence>
+  </complexType>
+
+  <!-- Technology -->
+  <simpleType name="Technology">
+    <restriction base="string">
+      <enumeration value="TECH_2G" />
+      <enumeration value="TECH_3G_2100" />
+      <enumeration value="TECH_3G_900" />
+      <enumeration value="TECH_Hplus" />
+      <enumeration value="TECH_4G" />
+    </restriction>
+  </simpleType>
+
+  <!-- Breakdown report -->
+  <complexType name="BreakdownReport">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="communicationType" type="tns:CommunicationType" />
+      <element minOccurs="1" maxOccurs="1" name="classification" type="tns:BreakdownClassification" />
+    </sequence>
+  </complexType>
+
+  <!-- Communication type -->
+  <simpleType name="CommunicationType">
+    <restriction base="string">
+      <enumeration value="VOICE_2G" />
+      <enumeration value="VOICE_3G" />
+      <enumeration value="VOICE_3G_900" />
+      <enumeration value="VOICE_3G_2100" />
+      <enumeration value="DATA_2G" />
+      <enumeration value="DATA_3G" />
+      <enumeration value="DATA_3G_900" />
+      <enumeration value="DATA_3G_2100" />
+      <enumeration value="DATA_Hplus" />
+      <enumeration value="DATA_VOICE_4G" />
+    </restriction>
+  </simpleType>
+
+  <!-- Breakdown classification -->
+  <simpleType name="BreakdownClassification">
+    <restriction base="string">
+      <enumeration value="MAJOR_INCIDENT" />
+      <enumeration value="MINOR_INCIDENT" />
+      <enumeration value="NO_INCIDENT" />
+      <enumeration value="NO_INFORMATION_AVAILABLE" />
+      <enumeration value="NA" />
+    </restriction>
+  </simpleType>
+
+</schema>

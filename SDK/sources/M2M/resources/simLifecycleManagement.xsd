@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified"
+	targetNamespace="http://simLifecycleManagement.types.malima.francetelecom.com"
+        xmlns:tns="http://simLifecycleManagement.types.malima.francetelecom.com"
+    	xmlns:cm="http://common.types.malima.francetelecom.com"
+        xmlns="http://www.w3.org/2001/XMLSchema">
+
+    <annotation>
+        <documentation>
+            This schema defines the Sim Lifecycle Management services types.
+        </documentation>
+    </annotation>
+    
+	<!-- Common types external schema -->
+	<import namespace="http://common.types.malima.francetelecom.com" schemaLocation="common.xsd" />
+
+    <!-- Submit Update SIM Status request input parameters -->
+	<group name="SubmitUpdateSimStatusRequestIn">
+		<sequence>
+            <!-- Line identifiers -->
+            <element minOccurs="1" maxOccurs="1" name="lineIdentifiers" type="cm:LineIdentifierCollection" />
+			<!-- New status requested -->
+			<element minOccurs="1" maxOccurs="1" name="requestedStatus" type="tns:SlmSimStatus" />
+            <!-- Test mode (International, european, metropole or au_compteur) -->
+            <element minOccurs="0" maxOccurs="1" name="testMode" type="cm:TestMode" />      		
+		</sequence>
+	</group>
+    
+    <!-- SLM SIM status -->
+    <simpleType name="SlmSimStatus">
+        <restriction base="string">
+            <enumeration value="ACTIVATED" />
+            <enumeration value="ACTIVATED_FOR_TEST" />
+            <enumeration value="SLEEPING" />
+            <enumeration value="SUSPENDED" />
+        </restriction>
+    </simpleType>
+	
+	<!-- Submit Update SIM Status request output parameters -->
+	<group name="SubmitUpdateSimStatusRequestOut">
+		<sequence>
+			<!-- Ticket number -->
+			<element minOccurs="0" maxOccurs="1" name="ticketNumber" type="int" />	
+			<!-- Unknown identifiers -->
+            <element minOccurs="0" maxOccurs="1" name="unknownLineIdentifiers" type="cm:LineIdentifierCollection" />
+ 		</sequence>
+	</group>
+
+	<!-- Get Update SIM Status result input parameters -->
+	<group name="GetUpdateSimStatusResultIn">
+		<sequence>
+            <!-- Ticket number -->
+			<element minOccurs="1" maxOccurs="1" name="ticketNumber" type="int" />
+		</sequence>
+	</group>
+
+	<!-- Get Update SIM Status result output parameters -->
+	<group name="GetUpdateSimStatusResultOut">
+        <sequence>
+            <!-- Ticket global processing status -->
+            <element minOccurs="1" maxOccurs="1" name="globalProcessingStatus" type="cm:TicketStatusType" />
+            <!-- Error code and message -->
+            <element minOccurs="0" maxOccurs="1" name="errorCode" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="errorMessage" type="string" />
+            <!-- New status requested -->
+            <element minOccurs="1" maxOccurs="1" name="requestedStatus" type="tns:SlmSimStatus" />
+            <!-- Mode of test : International, european, metropole or au_compteur -->
+            <element minOccurs="0" maxOccurs="1" name="testMode" type="cm:TestMode" />  
+            <!-- Status update tasks -->
+            <element minOccurs="0" maxOccurs="unbounded" name="statusUpdate" type="tns:StatusUpdate" />
+            <!-- Unknown identifiers -->
+            <element minOccurs="0" maxOccurs="1" name="unknownLineIdentifiers" type="cm:LineIdentifierCollection"/>
+        </sequence>
+	</group>
+
+	<!-- StatusUpdate task -->
+	<complexType name="StatusUpdate">
+        <sequence>
+            <!-- Input identifier -->
+            <element minOccurs="1" maxOccurs="1" name="inputLineIdentifier" type="cm:LineIdentifier" />
+            <!-- Task processing status -->
+            <element minOccurs="1" maxOccurs="1" name="processingStatus" type="cm:TaskStatusType" />
+            <!-- progress message -->
+            <element minOccurs="0" maxOccurs="1" name="progressMessage" type="string" />
+            <!-- Error code and message -->
+            <element minOccurs="0" maxOccurs="1" name="errorCode" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="errorMessage" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="errorDate" type="dateTime" />
+            <!-- Status update date -->
+            <element minOccurs="0" maxOccurs="1" name="updateDate" type="dateTime" />
+            <!-- Date update of status -->
+            <element minOccurs="0" maxOccurs="1" name="plannedModeExitDate" type="dateTime" />
+        </sequence>
+	</complexType>
+    
+</schema>

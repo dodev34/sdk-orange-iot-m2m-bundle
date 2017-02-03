@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified" targetNamespace="http://connectivityDirectory.types.malima.francetelecom.com"
+  xmlns:tns="http://connectivityDirectory.types.malima.francetelecom.com" xmlns:cm="http://common.types.malima.francetelecom.com"
+  xmlns="http://www.w3.org/2001/XMLSchema">
+
+  <annotation>
+    <documentation>
+      This schema defines the Connectivity Directory services types.
+    </documentation>
+  </annotation>
+
+  <!-- Common types external schema -->
+  <import namespace="http://common.types.malima.francetelecom.com" schemaLocation="common.xsd" />
+
+  <!-- Get Connectivity Directory input parameters -->
+  <group name="GetConnectivityDirectoryIn">
+    <sequence>
+      <choice>
+        <element minOccurs="1" maxOccurs="1" name="lineIdentifiers" type="cm:LineIdentifierCollection" />
+        <element minOccurs="1" maxOccurs="unbounded" name="imsi" type="string" />
+      </choice>
+      <element minOccurs="0" maxOccurs="1" name="showHierarchyDetail" type="boolean" />
+      <element minOccurs="0" maxOccurs="1" name="showDeviceInfo" type="boolean" />
+      <element minOccurs="0" maxOccurs="1" name="showIccid" type="boolean" />
+      <element minOccurs="0" maxOccurs="1" name="showImsi" type="boolean" />
+    </sequence>
+  </group>
+
+
+  <!-- Get Connectivity Directory output parameters -->
+  <group name="GetConnectivityDirectoryOut">
+    <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="connectivityDirectory" type="tns:ConnectivityDirectory" />
+      <element minOccurs="0" maxOccurs="1" name="unknownLinesIdentifiers" type="cm:LineIdentifierCollection" />
+      <element minOccurs="0" maxOccurs="1" name="unknownImsi" type="tns:Imsi" />
+    </sequence>
+  </group>
+
+  <complexType name="ConnectivityDirectory">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="customerEnvironmentIdentifier" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="customerEnvironmentName" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="imsi" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="iccid" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="sim" type="cm:Sim" />
+      <element minOccurs="1" maxOccurs="1" name="subscription" type="cm:Subscription" />
+      <element minOccurs="0" maxOccurs="1" name="device" type="tns:ConnectivityDirectoryDevice" />
+      <element minOccurs="0" maxOccurs="1" name="machine" type="tns:ConnectivityDirectoryMachine" />
+      <!-- <element minOccurs="0" maxOccurs="1" name="geolocation" type="cm:GeolocationData" /> DESCOPE V1 -->
+      <element minOccurs="0" maxOccurs="unbounded" name="customerIdentifier" type="cm:CustomerIdentifier" />
+      <element minOccurs="0" maxOccurs="1" name="geographicPosition" type="tns:ConnectivityDirectoryGeographicPosition" />
+      <element minOccurs="0" maxOccurs="1" name="deviceInfoCompatibility" type="string" />
+    </sequence>
+  </complexType>
+
+  <!-- Geographic position -->
+  <complexType name="ConnectivityDirectoryGeographicPosition">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="latitude" type="float" />
+      <element minOccurs="1" maxOccurs="1" name="longitude" type="float" />
+      <element minOccurs="1" maxOccurs="1" name="lastGeolocDate" type="dateTime" />
+      <element minOccurs="1" maxOccurs="1" name="accuracy" type="tns:ConnectivityDirectoryGeographicPositionAccuracy" />
+    </sequence>
+  </complexType>
+
+  <!-- Geographic position -->
+  <complexType name="ConnectivityDirectoryGeographicPositionAccuracy">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="value" type="int" />
+      <element minOccurs="1" maxOccurs="1" name="unit" type="string" />
+    </sequence>
+  </complexType>
+
+  <!-- Device common type extension (updateDate added) -->
+  <complexType name="ConnectivityDirectoryDevice">
+    <complexContent>
+      <extension base="cm:Device">
+        <sequence>
+          <element minOccurs="0" maxOccurs="1" name="updateDate" type="dateTime" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- Machine common type extension (updateDate added) -->
+  <complexType name="ConnectivityDirectoryMachine">
+    <complexContent>
+      <extension base="cm:Machine">
+        <sequence>
+          <element minOccurs="0" maxOccurs="1" name="updateDate" type="dateTime" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+
+
+  <!-- Search in Connectivity Directory input parameters -->
+  <group name="SearchInConnectivityDirectoryIn">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="searchCriterion" type="tns:ConnectivityDirectorySearchCriterion" />
+      <element minOccurs="0" maxOccurs="1" name="showHierarchyDetail" type="boolean" />
+      <element minOccurs="0" maxOccurs="1" name="showStatSimPerSimStatus" type="boolean" />
+      <element minOccurs="0" maxOccurs="1" name="showDeviceInfo" type="boolean" />
+      <element minOccurs="0" maxOccurs="1" name="showImsi" type="boolean" />
+      <element minOccurs="0" maxOccurs="1" name="rangeSize" type="int" />
+      <element minOccurs="0" maxOccurs="1" name="rangeStart" type="int" />
+      <element minOccurs="0" maxOccurs="2" name="sortCriterion" type="tns:SortCriterion" />
+    </sequence>
+  </group>
+
+  <!-- Search criterion -->
+  <complexType name="ConnectivityDirectorySearchCriterion">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="simSerialNumber" type="string" />
+      <element minOccurs="0" maxOccurs="unbounded" name="simStatus" type="cm:SimStatus" />
+      <element minOccurs="0" maxOccurs="1" name="deviceCategory" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="deviceUniqueId" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="deviceSerialNumber" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="deviceHolder" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="deviceImei" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="communicationModuleBrand" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="communicationModuleModel" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="machineSerialNumber" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="machineName" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="subcriptionIdentifier" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="msisdnData" type="cm:Msisdn" />
+      <element minOccurs="0" maxOccurs="1" name="msisdnVoice" type="cm:Msisdn" />
+      <element minOccurs="0" maxOccurs="1" name="msisdnFax" type="cm:Msisdn" />
+      <element minOccurs="0" maxOccurs="1" name="imsi" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="simStatusChangeMinDate" type="dateTime" />
+      <element minOccurs="0" maxOccurs="1" name="simStatusChangeMaxDate" type="dateTime" />
+      <element minOccurs="0" maxOccurs="1" name="simStatusRefreshMinDate" type="dateTime" />
+      <element minOccurs="0" maxOccurs="1" name="simStatusRefreshMaxDate" type="dateTime" />
+      <element minOccurs="0" maxOccurs="1" name="requestedSimStatus" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="user" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="userRef" type="string" />
+    </sequence>
+  </complexType>
+
+  <!-- Sort criterion -->
+  <complexType name="SortCriterion">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="order" type="tns:SortOrder" />
+      <element minOccurs="1" maxOccurs="1" name="attribute" type="tns:SortAttribute" />
+    </sequence>
+  </complexType>
+
+  <!-- Sort order -->
+  <simpleType name="SortOrder">
+    <restriction base="string">
+      <enumeration value="ASC" />
+      <enumeration value="DESC" />
+    </restriction>
+  </simpleType>
+
+  <!-- Attribute to sort on -->
+  <simpleType name="SortAttribute">
+    <restriction base="string">
+      <enumeration value="SIM_STATUS" />
+      <enumeration value="STATUS_CHANGE_DATE" />
+      <enumeration value="SIM_SSN" />
+      <enumeration value="CONTACT" />
+      <enumeration value="DEVICE_UNIQUE_IDENTIFIER" />
+      <enumeration value="SUB_CONNECTION_DATE" />
+      <enumeration value="SUB_CREATION_DATE" />
+    </restriction>
+  </simpleType>
+
+
+  <!-- Search in Connectivity Directory output parameters -->
+  <group name="SearchInConnectivityDirectoryOut">
+    <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="connectivityDirectory" type="tns:ConnectivityDirectory" />
+      <element minOccurs="0" maxOccurs="1" name="simStatusDistribution" type="tns:SimStatusDistribution" />
+      <element minOccurs="1" maxOccurs="1" name="resultsNumberExceeded" type="boolean" default="false" />
+      <element minOccurs="1" maxOccurs="1" name="totalResultsNumber" type="int" />
+    </sequence>
+  </group>
+
+  <complexType name="SimStatusDistribution">
+    <sequence>
+      <element minOccurs="1" maxOccurs="unbounded" name="totalSimStatusNumber" type="tns:SimStatusStatistic" />
+    </sequence>
+  </complexType>
+
+  <complexType name="SimStatusStatistic">
+    <simpleContent>
+      <extension base="int">
+        <attribute name="status" type="cm:SimStatus" use="required" />
+      </extension>
+    </simpleContent>
+  </complexType>
+
+  <!-- Update Connectovity Directory input parameters -->
+  <group name="UpdateConnectivityDirectoryIn">
+    <choice>
+      <element minOccurs="1" maxOccurs="unbounded" name="dataBySubscriptionNumber" type="tns:DataBySubscriptionNumber" />
+      <element minOccurs="1" maxOccurs="unbounded" name="dataBySimSerialNumber" type="tns:DataBySimSerialNumber" />
+      <element minOccurs="1" maxOccurs="unbounded" name="dataByDeviceImei" type="tns:DataByDeviceImei" />
+      <element minOccurs="1" maxOccurs="unbounded" name="dataByDeviceSerialNumber" type="tns:DataByDeviceSerialNumber" />
+      <element minOccurs="1" maxOccurs="unbounded" name="dataByDeviceUniqueId" type="tns:DataByDeviceUniqueId" />
+      <element minOccurs="1" maxOccurs="unbounded" name="dataByMachineSerialNumber" type="tns:DataByMachineSerialNumber" />
+      <element minOccurs="1" maxOccurs="unbounded" name="dataByMsisdnVoice" type="tns:DataByMsisdnVoice" />
+      <element minOccurs="1" maxOccurs="unbounded" name="dataByMsisdnData" type="tns:DataByMsisdnData" />
+      <element minOccurs="1" maxOccurs="unbounded" name="dataByMsisdnFax" type="tns:DataByMsisdnFax" />
+    </choice>
+  </group>
+
+  <complexType name="DataBySubscriptionNumber">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="subscriptionNumber" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="machineData" type="cm:Machine" />
+      <element minOccurs="0" maxOccurs="1" name="deviceData" type="cm:Device" />
+    </sequence>
+  </complexType>
+
+  <complexType name="DataBySimSerialNumber">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="simSerialNumber" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="machineData" type="cm:Machine" />
+      <element minOccurs="0" maxOccurs="1" name="deviceData" type="cm:Device" />
+    </sequence>
+  </complexType>
+
+  <complexType name="DataByDeviceImei">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="deviceImei" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="machineData" type="cm:Machine" />
+      <element minOccurs="0" maxOccurs="1" name="deviceData" type="cm:Device" />
+    </sequence>
+  </complexType>
+
+  <complexType name="DataByDeviceSerialNumber">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="deviceSerialNumber" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="machineData" type="cm:Machine" />
+      <element minOccurs="0" maxOccurs="1" name="deviceData" type="cm:Device" />
+    </sequence>
+  </complexType>
+
+  <complexType name="DataByDeviceUniqueId">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="deviceUniqueId" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="machineData" type="cm:Machine" />
+      <element minOccurs="0" maxOccurs="1" name="deviceData" type="cm:Device" />
+    </sequence>
+  </complexType>
+
+  <complexType name="DataByMachineSerialNumber">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="machineSerialNumber" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="machineData" type="cm:Machine" />
+      <element minOccurs="0" maxOccurs="1" name="deviceData" type="cm:Device" />
+    </sequence>
+  </complexType>
+
+  <complexType name="DataByMsisdnVoice">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="msisdnVoice" type="cm:Msisdn" />
+      <element minOccurs="0" maxOccurs="1" name="machineData" type="cm:Machine" />
+      <element minOccurs="0" maxOccurs="1" name="deviceData" type="cm:Device" />
+    </sequence>
+  </complexType>
+
+  <complexType name="DataByMsisdnData">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="msisdnData" type="cm:Msisdn" />
+      <element minOccurs="0" maxOccurs="1" name="machineData" type="cm:Machine" />
+      <element minOccurs="0" maxOccurs="1" name="deviceData" type="cm:Device" />
+    </sequence>
+  </complexType>
+
+  <complexType name="DataByMsisdnFax">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="msisdnFax" type="cm:Msisdn" />
+      <element minOccurs="0" maxOccurs="1" name="machineData" type="cm:Machine" />
+      <element minOccurs="0" maxOccurs="1" name="deviceData" type="cm:Device" />
+    </sequence>
+  </complexType>
+
+
+  <!-- Update Connectovity Directory output parameters -->
+  <group name="UpdateConnectivityDirectoryOut">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="updatesCompleted" type="tns:UpdatesCompletedList" />
+      <element minOccurs="0" maxOccurs="1" name="updatesFailed" type="tns:UpdatesFailedList" />
+    </sequence>
+  </group>
+
+  <complexType name="UpdatesCompletedList">
+    <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="lineIdentifier" type="cm:LineIdentifier" />
+    </sequence>
+  </complexType>
+
+  <complexType name="UpdatesFailedList">
+    <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="fail" type="tns:UpdateFailed" />
+    </sequence>
+  </complexType>
+
+  <complexType name="UpdateFailed">
+    <choice>
+      <sequence>
+        <element minOccurs="1" maxOccurs="1" name="lineIdentifier" type="cm:LineIdentifier" />
+        <element minOccurs="1" maxOccurs="1" name="errorCode" type="tns:UpdateConnectivityDirectoryError" />
+        <element minOccurs="1" maxOccurs="1" name="errorMessage" type="string" />
+      </sequence>
+    </choice>
+  </complexType>
+
+  <!-- Update customer Device Data error codes -->
+  <simpleType name="UpdateConnectivityDirectoryError">
+    <restriction base="string">
+      <enumeration value="IDENTIFIER_NOT_FOUND" />
+      <enumeration value="BAD_IDENTIFIER_TYPE" />
+      <enumeration value="DEVICE_SERIALNUMBER_ALREADY_EXISTS" />
+      <enumeration value="DEVICE_UNIQUEID_ALREADY_EXIST" />
+      <enumeration value="MACHINE_SERIALNUMBER_ALREADY_EXISTS" />
+    </restriction>
+  </simpleType>
+
+  <!-- Unknows Imsi -->
+  <complexType name="Imsi">
+    <sequence>
+      <element minOccurs="1" maxOccurs="unbounded" name="imsi" type="string" />
+    </sequence>
+  </complexType>
+
+</schema>
+

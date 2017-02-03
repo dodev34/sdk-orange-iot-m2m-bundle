@@ -1,0 +1,54 @@
+You will learn here how to run the code snippets depending on your operating system.
+
+***********************************************
+******************* WINDOWS *******************
+***********************************************
+The following steps will allow you to run the code snippets within a few minutes under Windows with WAMP server.
+
+The 2 first steps describe how to install a PHP server (namely Wampserver). Skip them if you already have your own PHP server running.
+• Download and install WampServer at http://www.wampserver.com/en. Just leave the default parameters when installing.
+• Check that PHP server runs well by starting Wamp: Start -> All Programs -> WampServer -> Start WampServer, wait a few seconds et type in your favorite internet browser the URL "http://localhost".
+
+You should get a page that displays information about PHP. From now, your PHP server is properly installed!
+
+Once Wamp is installed, you can see its icon in the tray. When clicking on the icon, you'll get the menu.
+
+The following steps explain how to run your first code snippets.
+
+• Activate the following extensions through your php.ini file (the one of the PHP folder if running CLI or the one of the Apache folder if running the server):
+  + curl
+  + open ssl
+  + soap
+• Restart your webserver if you've modified your php.ini
+• Unzip the archive you've downloaded in the folder C:\wamp\www\mytest. The folder C:\Wamp\www\mytest should contain folders, among other COMMON, M2M and sample
+• Edit the ini file m2m.ini stored in the M2M folder to input your own connection settings (credentials, URL, proxy, ...)
+• You are now ready to run one of the PHP file in sample folder! First check that WampServer does run. 
+• On the http://localhost webpage, you can see a section "Vos Projets" or "Your Projects". Below, you'll find the project called "mytest". Click on that link.
+• Click now on sample.
+• Choose one of the snippets to run!
+
+Note: you can also run the sample in CLI mode: <php.exe> <one_sample.php>
+
+
+***********************************************
+******************* LINUX *********************
+***********************************************
+
+You'll find hereafter some commands to install PHP under Unix. These commands were run under Ubuntu and Debian. You may need to modify them for your environment.
+
+• sudo apt-get install apache2 apache2-doc mysql-server php5 libapache2-mod-php5 php5-mysql phpmyadmin
+• sudo apt-get install php5-cli (if you wish / need to use PHP through commandline)
+• sudo apt-get install php5-curl (you will need this option to call the APIs)
+• sudo apt-get install php5-soap (you will need this option to call the APIs)
+• Install also open ssl 
+
+Edit apache2.conf file: Alias /sdk/ "/project/php/" <Directory "/project/php/">Order allow,deny Allow from all </Directory>.
+
+Then, you are ready to run the SDK. Since you're under Unix, mind the upper- and lowercase!
+
+• Unzip the archive you've downloaded in the folder mytest. The folder mytest should contain several folders, among other COMMON, M2M and sample
+• Edit the ini file m2m.ini stored in the M2M folder to input your own connection settings (credentials, URL, proxy, ...).
+• You are now ready to run one of the PHP file in sample folder!
+• Go to the http://localhost:port/.../sample to run the snippets!
+
+Note: you can also run the sample in CLI mode: <php> <one_sample.php>

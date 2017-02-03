@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified"
+	targetNamespace="http://trafficTracking.types.malima.francetelecom.com"
+	xmlns:tns="http://trafficTracking.types.malima.francetelecom.com"
+	xmlns:cm="http://common.types.malima.francetelecom.com" xmlns="http://www.w3.org/2001/XMLSchema">
+
+	<annotation>
+		<documentation>
+			This schema defines the Traffic Tracking services types.
+		</documentation>
+	</annotation>
+	
+	<!-- External schemas import -->
+    <import namespace="http://common.types.malima.francetelecom.com" schemaLocation="common.xsd" />
+	
+	<!-- Submit Traffic Tracking request input parameters -->
+    <group name="SubmitTrafficTrackingRequestIn">
+        <sequence>
+            <!-- Line identifiers -->
+            <element minOccurs="1" maxOccurs="1" name="lineIdentifiers" type="cm:LineIdentifierCollection" />
+            <!-- Period start date/time  -->
+            <element minOccurs="0" maxOccurs="1" name="periodStartDateTime" type="dateTime" />
+            <!-- Period end date/time  -->
+            <element minOccurs="0" maxOccurs="1" name="periodEndDateTime" type="dateTime" />          
+        </sequence>
+    </group>
+    
+    <!-- Submit Traffic Tracking request output parameters -->
+    <group name="SubmitTrafficTrackingRequestOut">
+        <sequence>
+            <!-- Ticket number -->
+            <element minOccurs="0" maxOccurs="1" name="ticketNumber" type="int" />
+            <!-- Unknown identifiers -->
+            <element minOccurs="0" maxOccurs="1" name="unknownLineIdentifiers" type="cm:LineIdentifierCollection" />
+        </sequence>
+    </group>
+    
+    <!-- Get Traffic Tracking input parameters -->
+    <group name="GetTrafficTrackingIn">
+        <sequence>
+            <!-- Ticket number -->
+            <element minOccurs="1" maxOccurs="1" name="ticketNumber" type="int" />
+            <!-- Show all origin flag -->
+            <element minOccurs="0" maxOccurs="1" name="showAllOriginSum" type="boolean" />  
+        </sequence>
+    </group>
+		
+	<!-- Get Traffic Tracking output parameters -->
+    <group name="GetTrafficTrackingOut">
+        <sequence>
+            <!-- Ticket global processing status -->
+            <element minOccurs="1" maxOccurs="1" name="globalProcessingStatus" type="cm:TicketStatusType" />
+            <!-- Error code and message (if globalProcessingStatus is error) -->
+            <element minOccurs="0" maxOccurs="1" name="errorCode" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="errorMessage" type="string" />
+            <!-- Total CDR number -->
+            <element minOccurs="0" maxOccurs="1" name="totalCdrNumber" type="int" />
+            <!-- First CDR date/time  -->
+            <element minOccurs="0" maxOccurs="1" name="firstCdrDateTime" type="dateTime" />
+            <!-- Last CDR date/time  -->
+            <element minOccurs="0" maxOccurs="1" name="lastCdrDateTime" type="dateTime" />
+            <!-- Customer identifiers -->
+            <element minOccurs="0" maxOccurs="unbounded" name="customerIdentifier" type="cm:CustomerIdentifier" />
+            <!-- Lines -->
+            <element minOccurs="0" maxOccurs="unbounded" name="line" type="tns:Line" />
+            <!-- Unknown identifiers -->
+            <element minOccurs="0" maxOccurs="1" name="unknownLineIdentifiers" type="cm:LineIdentifierCollection" />
+        </sequence>
+    </group>
+    
+    <!-- Line type -->
+    <complexType name="Line">
+        <sequence>
+            <!-- Input identifier -->
+            <element minOccurs="1" maxOccurs="1" name="inputLineIdentifier" type="cm:LineIdentifier" />
+            <!-- Task processing status -->
+            <element minOccurs="1" maxOccurs="1" name="processingStatus" type="cm:TaskStatusType" />
+            <!-- Error code and message (if processingStatus is error) -->
+            <element minOccurs="0" maxOccurs="1" name="errorCode" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="errorMessage" type="string" />
+            <!-- Line traffic tracking (if processingStatus is terminated) -->
+            <element minOccurs="0" maxOccurs="1" name="lineTrafficTracking" type="tns:LineTrafficTracking" />
+        </sequence>
+    </complexType>
+    
+	<!-- Line traffic tracking type -->
+    <complexType name="LineTrafficTracking">
+        <sequence>
+            <!-- Period start date/time  -->
+            <element minOccurs="1" maxOccurs="1" name="periodStartDateTime" type="dateTime" />
+            <!-- Period end date/time  -->
+            <element minOccurs="1" maxOccurs="1" name="periodEndDateTime" type="dateTime" />
+            <!-- First CDR date/time  -->
+            <element minOccurs="0" maxOccurs="1" name="firstCdrDateTime" type="dateTime" />
+            <!-- Last CDR date/time  -->
+            <element minOccurs="0" maxOccurs="1" name="lastCdrDateTime" type="dateTime" />
+            <!-- Number of considered CDR -->
+            <element minOccurs="1" maxOccurs="1" name="cdrNumber" type="int" />
+            <!-- Volumes -->
+            <element minOccurs="0" maxOccurs="unbounded" name="volume" type="tns:Volume" />
+        </sequence>
+    </complexType>
+    
+    <!-- Volume type  -->
+    <complexType name="Volume">
+        <sequence>
+            <element minOccurs="1" maxOccurs="1" name="bearer" type="cm:BearerType" />
+            <element minOccurs="1" maxOccurs="1" name="roaming" type="cm:RoamingType" />
+            <element minOccurs="1" maxOccurs="1" name="type" type="cm:VolumeTypeType" />
+            <element minOccurs="1" maxOccurs="1" name="value" type="double" />
+        </sequence>
+    </complexType>
+    
+</schema>

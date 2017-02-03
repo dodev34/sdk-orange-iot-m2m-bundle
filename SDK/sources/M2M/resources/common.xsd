@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified" targetNamespace="http://common.types.malima.francetelecom.com" xmlns:tns="http://common.types.malima.francetelecom.com"
+  xmlns="http://www.w3.org/2001/XMLSchema">
+
+  <annotation>
+    <documentation>
+      This schema defines the types common to several Malima services.
+    </documentation>
+  </annotation>
+
+  <!-- msisdn type -->
+  <complexType name="Msisdn">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="cc" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="sn" type="string" />
+    </sequence>
+  </complexType>
+
+  <!-- Line Identifier -->
+  <complexType name="LineIdentifier">
+    <choice>
+      <element minOccurs="1" maxOccurs="1" name="subscriptionNumber" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="simSerialNumber" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="deviceImei" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="deviceSerialNumber" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="deviceUniqueId" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="machineSerialNumber" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="msisdnVoice" type="tns:Msisdn" />
+      <element minOccurs="1" maxOccurs="1" name="msisdnData" type="tns:Msisdn" />
+      <element minOccurs="1" maxOccurs="1" name="msisdnFax" type="tns:Msisdn" />
+    </choice>
+  </complexType>
+
+  <!-- Line Identifier Collection -->
+  <complexType name="LineIdentifierCollection">
+    <choice>
+      <element minOccurs="1" maxOccurs="unbounded" name="subscriptionNumber" type="string" />
+      <element minOccurs="1" maxOccurs="unbounded" name="simSerialNumber" type="string" />
+      <element minOccurs="1" maxOccurs="unbounded" name="deviceImei" type="string" />
+      <element minOccurs="1" maxOccurs="unbounded" name="deviceSerialNumber" type="string" />
+      <element minOccurs="1" maxOccurs="unbounded" name="deviceUniqueId" type="string" />
+      <element minOccurs="1" maxOccurs="unbounded" name="machineSerialNumber" type="string" />
+      <element minOccurs="1" maxOccurs="unbounded" name="msisdnVoice" type="tns:Msisdn" />
+      <element minOccurs="1" maxOccurs="unbounded" name="msisdnData" type="tns:Msisdn" />
+      <element minOccurs="1" maxOccurs="unbounded" name="msisdnFax" type="tns:Msisdn" />
+    </choice>
+  </complexType>
+
+  <!-- Customer environment number -->
+  <simpleType name="CustomerEnvironmentNumber">
+    <restriction base="string">
+      <maxLength value="30" />
+    </restriction>
+  </simpleType>
+
+  <!-- Ticket Status type -->
+  <simpleType name="TicketStatusType">
+    <restriction base="string">
+      <!-- Waiting status -->
+      <enumeration value="WAITING" />
+      <!-- Work in progress status -->
+      <enumeration value="WORK_IN_PROGRESS" />
+      <!-- Terminated status -->
+      <enumeration value="TERMINATED" />
+      <!-- Terminated with errors status -->
+      <enumeration value="ERROR" />
+    </restriction>
+  </simpleType>
+
+  <!-- Task Status type -->
+  <simpleType name="TaskStatusType">
+    <restriction base="string">
+      <!-- Waiting status -->
+      <enumeration value="WAITING" />
+      <!-- Work in progress status -->
+      <enumeration value="WORK_IN_PROGRESS" />
+      <!-- Waiting for external validation status -->
+      <enumeration value="WAITING_FOR_EXT_SYSTEM_PROCESSING" />
+      <!-- Terminated status -->
+      <enumeration value="TERMINATED" />
+      <!-- Terminated with errors status -->
+      <enumeration value="ERROR" />
+    </restriction>
+  </simpleType>
+
+
+  <!-- Customer identifier -->
+  <complexType name="CustomerIdentifier">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="type" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="identifier" type="string" />
+    </sequence>
+  </complexType>
+
+  <!-- Address -->
+  <complexType name="Address">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="streetNameAndNumber" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="complements" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="localityOrPOBox" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="postCode" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="town" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="country" type="string" />
+    </sequence>
+  </complexType>
+
+  <!-- Malima generic SIM status -->
+  <simpleType name="SimStatus">
+    <restriction base="string">
+      <enumeration value="PRE_ACTIVATED" />
+      <enumeration value="ACTIVATED_FOR_TEST" />
+      <enumeration value="ACTIVATED" />
+      <enumeration value="SLEEPING" />
+      <enumeration value="SUSPENDED" />
+      <enumeration value="CANCELLED" />
+    </restriction>
+  </simpleType>
+
+  <!-- SIM data -->
+  <complexType name="Sim">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="serialNumber" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="puk1" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="puk2" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="imei" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="status" type="tns:SimStatus" />
+      <element minOccurs="0" maxOccurs="1" name="suspensionReason" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="lastStatusRefreshDate" type="dateTime" />
+      <element minOccurs="0" maxOccurs="1" name="lastStatusChangeDate" type="dateTime" />
+      <element minOccurs="0" maxOccurs="1" name="requestedStatus" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="statusChangeRequestDate" type="dateTime" />
+    </sequence>
+  </complexType>
+
+  <!-- Subscription data -->
+  <complexType name="Subscription">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="identifier" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="description" type="tns:SubscriptionDescription" />
+      <element minOccurs="0" maxOccurs="1" name="creationDate" type="dateTime" />
+      <element minOccurs="0" maxOccurs="1" name="connectionDate" type="dateTime" />
+      <element minOccurs="0" maxOccurs="1" name="msisdnData" type="tns:Msisdn" />
+      <element minOccurs="0" maxOccurs="1" name="msisdnVoice" type="tns:Msisdn" />
+      <element minOccurs="0" maxOccurs="1" name="msisdnFax" type="tns:Msisdn" />
+    </sequence>
+  </complexType>
+
+  <!-- Subscription description data -->
+  <complexType name="SubscriptionDescription">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="value" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="user" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="userRef" type="string" />
+      <element minOccurs="0" maxOccurs="unbounded" name="service" type="string" />
+      <element minOccurs="0" maxOccurs="unbounded" name="customInformation" type="tns:CustomInformation" />
+    </sequence>
+  </complexType>
+
+  <!-- Custom information -->
+  <complexType name="CustomInformation">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="customLabel" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="customValue" type="string" />
+    </sequence>
+  </complexType>
+
+  <complexType name="UpdateCustomInformation">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="customLabel" type="tns:string100" />
+      <element minOccurs="0" maxOccurs="1" name="customValue" type="tns:string64" />
+    </sequence>
+  </complexType>
+
+  <!-- Device data -->
+  <complexType name="Device">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="uniqueIdentifier" type="tns:string30" />
+      <element minOccurs="0" maxOccurs="1" name="serialNumber" type="tns:string150" />
+      <element minOccurs="0" maxOccurs="1" name="contact" type="tns:Contact" />
+      <element minOccurs="0" maxOccurs="1" name="communicationModule" type="tns:CommunicationModule" />
+      <element minOccurs="0" maxOccurs="1" name="deviceLocation" type="tns:string150" />
+      <element minOccurs="0" maxOccurs="1" name="category" type="tns:string30" />
+      <element minOccurs="0" maxOccurs="1" name="description" type="tns:string150" />
+      <element minOccurs="0" maxOccurs="1" name="address" type="tns:string150" />
+      <element minOccurs="0" maxOccurs="1" name="deviceHolder" type="tns:string150" />
+    </sequence>
+  </complexType>
+
+  <!-- Contact -->
+  <complexType name="Contact">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="name" type="tns:string150" />
+      <element minOccurs="0" maxOccurs="1" name="email" type="tns:string150" />
+      <element minOccurs="0" maxOccurs="1" name="phone" type="tns:string30" />
+    </sequence>
+  </complexType>
+
+  <!-- Communication Module -->
+  <complexType name="CommunicationModule">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="brand" type="tns:string30" />
+      <element minOccurs="0" maxOccurs="1" name="model" type="tns:string150" />
+    </sequence>
+  </complexType>
+
+  <!-- Machine data -->
+  <complexType name="Machine">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="serialNumber" type="tns:string150" />
+      <element minOccurs="0" maxOccurs="1" name="name" type="tns:string150" />
+      <element minOccurs="0" maxOccurs="1" name="description" type="tns:string150" />
+    </sequence>
+  </complexType>
+
+  <!-- Geolocation data used only on ID V2 -->
+  <complexType name="GeolocationData">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="geolocationDataFormat" type="tns:GeolocationDataFormat" />
+      <element minOccurs="1" maxOccurs="1" name="coordinates" type="tns:Coordinates" />
+      <element minOccurs="1" maxOccurs="1" name="radius" type="int" />
+    </sequence>
+  </complexType>
+
+
+  <!-- Geolocation data format -->
+  <complexType name="GeolocationDataFormat">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="geodeticDatum" type="tns:GeodeticDatum" />
+      <element minOccurs="1" maxOccurs="1" name="coordinateSystem" type="tns:CoordinateSystem" />
+      <element minOccurs="1" maxOccurs="1" name="positionFormat" type="tns:PositionFormat" />
+    </sequence>
+  </complexType>
+
+  <!-- Geolocation coordinates -->
+  <complexType name="Coordinates">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="latitude" type="string" />
+      <element minOccurs="1" maxOccurs="1" name="longitude" type="string" />
+    </sequence>
+  </complexType>
+
+  <!-- Geodetic Datum enumeration -->
+  <simpleType name="GeodeticDatum">
+    <restriction base="string">
+      <!-- WGS-84 number -->
+      <enumeration value="WGS-84" />
+    </restriction>
+  </simpleType>
+
+  <!-- Coordinate System enumeration -->
+  <simpleType name="CoordinateSystem">
+    <restriction base="string">
+      <!-- LL number -->
+      <enumeration value="LL" />
+    </restriction>
+  </simpleType>
+
+  <!-- Position Format enumeration -->
+  <simpleType name="PositionFormat">
+    <restriction base="string">
+      <!-- DMSO number -->
+      <enumeration value="DMS0" />
+    </restriction>
+  </simpleType>
+
+  <!-- Volume bearer enumerated type -->
+  <simpleType name="BearerType">
+    <restriction base="string">
+      <!-- Fixed service complement -->
+      <enumeration value="FIXED_SERVICE_COMPLEMENT" />
+      <!-- Voice communication -->
+      <enumeration value="VOICE" />
+      <!-- WIFI connexion -->
+      <enumeration value="WIFI" />
+      <!-- Value based communication -->
+      <enumeration value="VALUE_BASED_COMMUNICATION" />
+      <!-- SMS sending -->
+      <enumeration value="SMS" />
+      <!-- MMS sending -->
+      <enumeration value="MMS" />
+      <!-- Multimedia purchase -->
+      <enumeration value="MULTIMEDIA_PURCHASE" />
+      <!-- Comsumption tracking -->
+      <enumeration value="CONSUMPTION_TRACKING" />
+      <!-- GPRS / EDGE communication -->
+      <enumeration value="GPRS_EDGE" />
+      <!-- 3G communication -->
+      <enumeration value="UMTS_3G" />
+      <!-- fax communication -->
+      <enumeration value="FAX" />
+      <!-- Unknown communication -->
+      <enumeration value="UNKNOWN" />
+      <!-- Data non Available -->
+      <enumeration value="NA" />
+    </restriction>
+  </simpleType>
+
+  <!-- Volume roaming enumerated type -->
+  <simpleType name="RoamingType">
+    <restriction base="string">
+      <!-- Local -->
+      <enumeration value="LOCAL" />
+      <!-- Roaming -->
+      <enumeration value="ROAMING" />
+      <!-- all_origin -->
+      <enumeration value="ALL_ORIGIN" />
+      <!-- Unknown -->
+      <enumeration value="UNKNOWN" />
+    </restriction>
+  </simpleType>
+
+  <!-- Volume type enumerated type -->
+  <simpleType name="VolumeTypeType">
+    <restriction base="string">
+      <!-- Volume in KB -->
+      <enumeration value="VOLUME_IN_KBYTES" />
+      <!-- Duration in seconds -->
+      <enumeration value="DURATION_IN_SECONDS" />
+      <!-- Number -->
+      <enumeration value="NUMBER" />
+    </restriction>
+  </simpleType>
+
+  <!-- Malima Test mode -->
+  <simpleType name="TestMode">
+    <restriction base="string">
+      <enumeration value="INTERNATIONAL" />
+      <enumeration value="EUROPE" />
+      <enumeration value="METROPOLE" />
+      <enumeration value="AU_COMPTEUR" />
+    </restriction>
+  </simpleType>
+
+  <!-- Xsd string max length restricted to 30 -->
+  <simpleType name="string30">
+    <restriction base="string">
+      <maxLength value="30" />
+    </restriction>
+  </simpleType>
+
+  <!-- Xsd string max length restricted to 150 -->
+  <simpleType name="string150">
+    <restriction base="string">
+      <maxLength value="150" />
+    </restriction>
+  </simpleType>
+
+  <!-- Xsd string max length restricted to 100 -->
+  <simpleType name="string100">
+    <restriction base="string">
+      <maxLength value="100" />
+    </restriction>
+  </simpleType>
+
+  <!-- Xsd string max length restricted to 64 -->
+  <simpleType name="string64">
+    <restriction base="string">
+      <maxLength value="64" />
+    </restriction>
+  </simpleType>
+  
+  <!-- Xsd For billing account SH_V2 & CT_V2 -->
+  <!-- Sessions data -->
+  <complexType name="BillingAccount">
+    <sequence>
+      <!-- Billing account number -->
+      <element minOccurs="1" maxOccurs="1" name="billingAccountNumber" type="string" />
+      <!-- Billing address -->
+      <element minOccurs="1" maxOccurs="1" name="billingAddress" type="tns:Address" />
+      <!-- Number of lines linked to the billing account -->
+      <element minOccurs="1" maxOccurs="1" name="lineNumber" type="int" />
+      <!-- list of lines linked to the billing account -->
+      <element minOccurs="1" maxOccurs="1" name="lineIdentifiers" type="tns:LineIdentifierCollection" />
+    </sequence>
+  </complexType>
+  <!-- Line type -->
+  <complexType name="LineStatus">
+    <sequence>
+      <!-- Input identifier -->
+      <element minOccurs="1" maxOccurs="1" name="inputLineIdentifier" type="tns:LineIdentifier" />
+      <!-- Task processing status -->
+      <element minOccurs="1" maxOccurs="1" name="processingStatus" type="tns:TaskStatusType" />
+      <!-- Error code and message (if processingStatus is error) -->
+      <element minOccurs="0" maxOccurs="1" name="errorCode" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="errorMessage" type="string" />
+    </sequence>
+  </complexType>
+
+  <!-- Trigger identifier -->
+  <simpleType name="TriggerIdentifier">
+    <restriction base="int" />
+  </simpleType>
+
+  <!-- Trigger identifier -->
+  <simpleType name="AlarmIdentifier">
+    <restriction base="int" />
+  </simpleType>
+
+</schema>
+

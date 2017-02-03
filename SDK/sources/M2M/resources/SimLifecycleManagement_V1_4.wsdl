@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SimLifecycleManagement"
+	targetNamespace="http://webservice.malima.francetelecom.com/v1"
+	xmlns:tns="http://webservice.malima.francetelecom.com/v1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ex="http://exception.malima.francetelecom.com">
+
+	<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+		--------------------------------------------------------------------
+		Contract interface documentation
+		----------------------------------
+		Document release: V1.0
+		Author (Entity): M. Janvier (ITLabs), G. Ragot (ITLabs), D. Foricher
+		(ITLabs)
+		Creation date: 13/10/2009
+		Description: Malima SIM Lifecycle Management service
+		--------------------------------------------------------------------
+		Changes history
+		----------------------------------
+		Version      Date         Comments
+		V0.1         13/10/2009   Beta version
+		V1.0         18/11/2009   Malima services harmonization
+        V1.4         24/05/2013   Harmonization with IOSW service version
+		--------------------------------------------------------------------
+	</wsdl:documentation>
+
+	<wsdl:types>
+		<schema elementFormDefault="qualified"
+			targetNamespace="http://webservice.malima.francetelecom.com/v1"
+			xmlns:slm="http://simLifecycleManagement.types.malima.francetelecom.com"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+
+			<!-- External schemas import -->
+			<import
+				namespace="http://simLifecycleManagement.types.malima.francetelecom.com"
+				schemaLocation="simLifecycleManagement.xsd" />
+			<import namespace="http://exception.malima.francetelecom.com"
+				schemaLocation="exceptions.xsd" />
+
+			<!-- Submit Update SIM Status request -->
+			<element name="submitUpdateSimStatusRequest">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1"
+							ref="slm:SubmitUpdateSimStatusRequestIn" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="submitUpdateSimStatusRequestResponse">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1"
+							ref="slm:SubmitUpdateSimStatusRequestOut" />
+					</sequence>
+				</complexType>
+			</element>
+
+			<!-- Get Update SIM Status result -->
+			<element name="getUpdateSimStatusResult">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1"
+							ref="slm:GetUpdateSimStatusResultIn" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getUpdateSimStatusResultResponse">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1"
+							ref="slm:GetUpdateSimStatusResultOut" />
+					</sequence>
+				</complexType>
+			</element>
+
+		</schema>
+	</wsdl:types>
+
+
+	<!-- Submit Update SIM Status request -->
+	<wsdl:message name="submitUpdateSimStatusRequestRequest">
+		<wsdl:part name="submitUpdateSimStatusRequest" element="tns:submitUpdateSimStatusRequest" />
+	</wsdl:message>
+	<wsdl:message name="submitUpdateSimStatusRequestResponse">
+		<wsdl:part name="submitUpdateSimStatusRequest" element="tns:submitUpdateSimStatusRequestResponse" />
+	</wsdl:message>
+
+	<!-- Get Update SIM Status result -->
+	<wsdl:message name="getUpdateSimStatusResultRequest">
+		<wsdl:part name="getUpdateSimStatusResult" element="tns:getUpdateSimStatusResult" />
+	</wsdl:message>
+	<wsdl:message name="getUpdateSimStatusResultResponse">
+		<wsdl:part name="getUpdateSimStatusResult" element="tns:getUpdateSimStatusResultResponse" />
+	</wsdl:message>
+
+	<!-- Faults -->
+	<wsdl:message name="malimaErrorFault">
+		<wsdl:part name="parameters" element="ex:MalimaError" />
+	</wsdl:message>
+	<wsdl:message name="unknownTicketFault">
+		<wsdl:part name="parameters" element="ex:UnknownTicketError" />
+	</wsdl:message>
+	<wsdl:message name="resultAlreadyRetrievedFault">
+		<wsdl:part name="parameters" element="ex:ResultAlreadyRetrievedError" />
+	</wsdl:message>
+    <wsdl:message name="tooManyLineIdentifiersFault">
+        <wsdl:part name="parameters" element="ex:TooManyLineIdentifiersError"/>
+    </wsdl:message>
+    <wsdl:message name="invalidParameterFault">
+        <wsdl:part name="parameters" element="ex:InvalidParameterError" />
+    </wsdl:message>
+
+
+	<wsdl:portType name="ISimLifecycleManagement">
+
+		<!-- Submit Update SIM Status request -->
+		<wsdl:operation name="submitUpdateSimStatusRequest">
+			<wsdl:input name="submitUpdateSimStatusRequestRequest"
+				message="tns:submitUpdateSimStatusRequestRequest" />
+			<wsdl:output name="submitUpdateSimStatusRequestResponse"
+				message="tns:submitUpdateSimStatusRequestResponse" />
+			<wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+			<wsdl:fault name="tooManyLineIdentifiersError" message="tns:tooManyLineIdentifiersFault"/>
+            <wsdl:fault name="invalidParameterError" message="tns:invalidParameterFault"/>
+		</wsdl:operation>
+
+		<!-- Get Update SIM Status result -->
+		<wsdl:operation name="getUpdateSimStatusResult">
+			<wsdl:input name="getUpdateSimStatusResultRequest"
+				message="tns:getUpdateSimStatusResultRequest" />
+			<wsdl:output name="getUpdateSimStatusResultResponse"
+				message="tns:getUpdateSimStatusResultResponse" />
+			<wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+			<wsdl:fault name="unknownTicketError" message="tns:unknownTicketFault" />
+			<wsdl:fault name="resultAlreadyRetrievedError" message="tns:resultAlreadyRetrievedFault" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+
+	<wsdl:binding name="SimLifecycleManagementSoapBinding"
+		type="tns:ISimLifecycleManagement">
+
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<!-- Submit Update SIM Status request -->
+		<wsdl:operation name="submitUpdateSimStatusRequest">
+			<soap:operation />
+			<wsdl:input name="submitUpdateSimStatusRequestRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="submitUpdateSimStatusRequestResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="malimaError">
+				<soap:fault name="malimaError" use="literal" />
+			</wsdl:fault>
+            <wsdl:fault name="tooManyLineIdentifiersError">
+                <soap:fault name="tooManyLineIdentifiersError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="invalidParameterError">
+                <soap:fault name="invalidParameterError" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+
+		<!-- Get Update SIM Status result -->
+		<wsdl:operation name="getUpdateSimStatusResult">
+			<soap:operation />
+			<wsdl:input name="getUpdateSimStatusResultRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getUpdateSimStatusResultResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="malimaError">
+				<soap:fault name="malimaError" use="literal" />
+			</wsdl:fault>
+			<wsdl:fault name="unknownTicketError">
+				<soap:fault name="unknownTicketError" use="literal" />
+			</wsdl:fault>
+            <wsdl:fault name="resultAlreadyRetrievedError">
+                <soap:fault name="resultAlreadyRetrievedError" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+
+	</wsdl:binding>
+
+
+	<wsdl:service name="SimLifecycleManagement">
+		<wsdl:port name="SimLifecycleManagementSoapBinding" binding="tns:SimLifecycleManagementSoapBinding">
+			<soap:address
+				location="http://localhost:9000/malima-ws/ws/simLifecycleManagement" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

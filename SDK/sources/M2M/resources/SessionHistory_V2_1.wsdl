@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SessionHistory" 
+    targetNamespace="http://webservice.malima.francetelecom.com/v2"
+        xmlns:tns="http://webservice.malima.francetelecom.com/v2"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:ex="http://exception.malima.francetelecom.com">
+
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        --------------------------------------------------------------------
+        Contract interface documentation
+        ----------------------------------
+        Document release: V1.0
+        Author (Entity): A. Mouchere (ITLabs)
+        Creation date: 27/04/2010
+        Description: Malima Session History V2 service
+        --------------------------------------------------------------------
+        Changes history
+        ----------------------------------
+        Version      Date            Comments
+        V1.0         27/04/2010      Creation
+        V2.1         24/05/2013      Harmonization with IOSW service version
+        --------------------------------------------------------------------
+    </wsdl:documentation>
+
+	<wsdl:types>
+		<schema elementFormDefault="qualified"
+            targetNamespace="http://webservice.malima.francetelecom.com/v2"
+                xmlns:sh="http://sessionHistory.types.malima.francetelecom.com"
+                xmlns:cmsh="http://common.sessionHistory.types.malima.francetelecom.com"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+			
+			<!-- External schemas import -->
+            <import namespace="http://sessionHistory.types.malima.francetelecom.com" schemaLocation="sessionHistory_V2.xsd"/>
+            <import namespace="http://common.sessionHistory.types.malima.francetelecom.com" schemaLocation="sessionHistoryCommon.xsd"/>
+            <import namespace="http://exception.malima.francetelecom.com" schemaLocation="exceptions.xsd" />
+			
+			<!-- Submit Session History request -->
+			<element name="submitSessionHistoryRequest">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="cmsh:SubmitSessionHistoryRequestIn"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="submitSessionHistoryRequestResponse">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="cmsh:SubmitSessionHistoryRequestOut" />
+					</sequence>
+				</complexType>
+			</element>
+			
+			<!-- Get Session History -->
+			<element name="getSessionHistory">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="cmsh:GetSessionHistoryIn"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getSessionHistoryResponse">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="sh:GetSessionHistory2Out" />
+					</sequence>
+				</complexType>
+			</element>
+            
+            
+		</schema>
+	</wsdl:types>
+
+
+	<!-- Submit Session History request -->
+	<wsdl:message name="submitSessionHistoryRequestRequest">
+		<wsdl:part name="submitSessionHistoryRequest" element="tns:submitSessionHistoryRequest"/>
+	</wsdl:message>
+	<wsdl:message name="submitSessionHistoryRequestResponse">
+		<wsdl:part name="submitSessionHistoryRequest" element="tns:submitSessionHistoryRequestResponse"/>
+	</wsdl:message>
+	
+	<!-- Get Session History -->
+	<wsdl:message name="getSessionHistoryRequest">
+		<wsdl:part name="getSessionHistory" element="tns:getSessionHistory"/>
+	</wsdl:message>
+	<wsdl:message name="getSessionHistoryResponse">
+		<wsdl:part name="getSessionHistory" element="tns:getSessionHistoryResponse"/>
+	</wsdl:message>
+	
+	<!-- Fault -->
+	<wsdl:message name="malimaErrorFault">
+		<wsdl:part name="parameters" element="ex:MalimaError"/>
+	</wsdl:message>
+    <wsdl:message name="unknownLineIdentifierErrorFault">
+        <wsdl:part name="parameters" element="ex:UnknownLineIdentifierError"/>
+    </wsdl:message>
+    <wsdl:message name="invalidPeriodErrorFault">
+        <wsdl:part name="parameters" element="ex:InvalidPeriodError"/>
+    </wsdl:message>
+    <wsdl:message name="unknownTicketFault">
+        <wsdl:part name="parameters" element="ex:UnknownTicketError"/>
+    </wsdl:message>
+    <wsdl:message name="resultAlreadyRetrievedFault">
+        <wsdl:part name="parameters" element="ex:ResultAlreadyRetrievedError"/>
+    </wsdl:message>
+
+	
+	<wsdl:portType name="ISessionHistory">
+		
+		<!-- Submit Session History Request -->
+		<wsdl:operation name="submitSessionHistoryRequest">
+			<wsdl:input name="submitSessionHistoryRequestRequest" message="tns:submitSessionHistoryRequestRequest"/>
+			<wsdl:output name="submitSessionHistoryRequestResponse" message="tns:submitSessionHistoryRequestResponse"/>
+			<wsdl:fault name="malimaError" message="tns:malimaErrorFault"/>
+            <wsdl:fault name="unknownLineIdentifierError" message="tns:unknownLineIdentifierErrorFault"/>
+            <wsdl:fault name="invalidPeriodError" message="tns:invalidPeriodErrorFault"/>
+		</wsdl:operation>
+		
+		<!-- Get Session History -->
+		<wsdl:operation name="getSessionHistory">
+			<wsdl:input name="getSessionHistoryRequest" message="tns:getSessionHistoryRequest"/>
+			<wsdl:output name="getSessionHistoryResponse" message="tns:getSessionHistoryResponse"/>
+			<wsdl:fault name="malimaError" message="tns:malimaErrorFault"/>
+            <wsdl:fault name="unknownTicketError" message="tns:unknownTicketFault" />
+            <wsdl:fault name="resultAlreadyRetrievedError" message="tns:resultAlreadyRetrievedFault" />
+		</wsdl:operation>
+				
+	</wsdl:portType>
+
+
+	<wsdl:binding name="SessionHistorySoapBinding" type="tns:ISessionHistory"> 
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<!-- Submit Session History Request -->
+		<wsdl:operation name="submitSessionHistoryRequest">
+			<soap:operation />
+			<wsdl:input name="submitSessionHistoryRequestRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="submitSessionHistoryRequestResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="malimaError">
+				<soap:fault name="malimaError" use="literal"/>
+			</wsdl:fault>
+            <wsdl:fault name="unknownLineIdentifierError">
+                <soap:fault name="unknownLineIdentifierError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="invalidPeriodError">
+                <soap:fault name="invalidPeriodError" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+		
+		<!-- Get Session History -->
+		<wsdl:operation name="getSessionHistory">
+			<soap:operation />
+			<wsdl:input name="getSessionHistoryRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getSessionHistoryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="malimaError">
+				<soap:fault name="malimaError" use="literal"/>
+			</wsdl:fault>
+            <wsdl:fault name="unknownTicketError">
+                <soap:fault name="unknownTicketError" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="resultAlreadyRetrievedError">
+                <soap:fault name="resultAlreadyRetrievedError" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SessionHistory">
+		<wsdl:port name="SessionHistorySoapBinding" binding="tns:SessionHistorySoapBinding">
+			<soap:address location="http://localhost:9000/malima-ws/ws/sessionHistory/v2"/>
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

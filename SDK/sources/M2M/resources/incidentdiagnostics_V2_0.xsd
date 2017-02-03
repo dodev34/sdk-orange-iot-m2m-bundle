@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified" targetNamespace="http://incidentdiagnostics.types.malima.francetelecom.com"
+  xmlns:tns="http://incidentdiagnostics.types.malima.francetelecom.com" xmlns:cm="http://common.types.malima.francetelecom.com"
+  xmlns:net="http://networkstatus.types.malima.francetelecom.com" xmlns="http://www.w3.org/2001/XMLSchema">
+
+  <annotation>
+    <documentation>
+      This schema defines the Incident Diagnostics services types.
+    </documentation>
+  </annotation>
+
+  <!-- Common types external schema -->
+  <import namespace="http://common.types.malima.francetelecom.com" schemaLocation="common.xsd" />
+  <import namespace="http://networkstatus.types.malima.francetelecom.com" schemaLocation="networkstatus.xsd" />
+
+  <!-- Get incident diagnostics request input parameters -->
+  <group name="GetIncidentDiagnosticsIn">
+    <sequence>
+      <!-- A line identifier -->
+      <element minOccurs="1" maxOccurs="1" name="lineIdentifier" type="cm:LineIdentifier" />
+      <element minOccurs="0" maxOccurs="1" name="showExtendedFeatures" type="boolean" />
+    </sequence>
+  </group>
+
+  <!-- Get incident diagnostics request output parameters -->
+  <group name="GetIncidentDiagnosticsOutV2">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="incidentDiagnosticsStatus" type="tns:IncidentDiagnosticsV2Status" />
+      <element minOccurs="0" maxOccurs="1" name="geolocationInformation" type="tns:GeolocationOutV2" />
+      <element minOccurs="0" maxOccurs="1" name="networkStatusResponse" type="tns:NetworkStatusOut" />
+    </sequence>
+  </group>
+
+  <!-- Geolocation data -->
+  <complexType name="GeolocationOutV2">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="geolocationErrorCode" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="geolocationErrorMessage" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="geolocationDate" type="dateTime" />
+      <element minOccurs="0" maxOccurs="1" name="geolocationData" type="cm:GeolocationData" />
+    </sequence>
+  </complexType>
+
+  <!-- Network Status output parameters -->
+  <complexType name="NetworkStatusOut">
+    <sequence>
+      <!-- Status -->
+      <element minOccurs="1" maxOccurs="1" name="status" type="net:NetStatStatus" />
+      <element minOccurs="0" maxOccurs="1" name="errorMessage" type="string" />
+      <!-- Coverage data -->
+      <element minOccurs="0" maxOccurs="unbounded" name="areaCoverage" type="net:AreaCoverage" />
+      <element minOccurs="0" maxOccurs="unbounded" name="areaCoverageDescription" type="string" />
+      <!-- Breakdown data -->
+      <element minOccurs="0" maxOccurs="unbounded" name="breakdownReport" type="net:BreakdownReport" />
+      <element minOccurs="0" maxOccurs="unbounded" name="breakdownReportDescription" type="string" />
+      <!-- networkResolutionMessage -->
+      <element minOccurs="0" maxOccurs="unbounded" name="networkResolutionMessage" type="string" />
+      <!-- areaCoverageCode -->
+      <element minOccurs="0" maxOccurs="unbounded" name="areaCoverageCode" type="int" />
+      <!-- breakdownReportCode -->
+      <element minOccurs="0" maxOccurs="unbounded" name="breakdownReportCode" type="int" />
+    </sequence>
+  </complexType>
+
+  <!-- Incident Diagnostics status enumeration -->
+  <simpleType name="IncidentDiagnosticsV2Status">
+    <restriction base="string">
+      <enumeration value="OK" />
+      <enumeration value="NO_GEOLOCATION_AVAILABLE" />
+      <enumeration value="ERROR_NO_NETWORK_STATUS_AVAILABLE" />
+      <enumeration value="LIMITED_2G_CONNECTIVITY_ON_ZONE" />
+      <enumeration value="LIMITED_3G_CONNECTIVITY_ON_ZONE" />
+      <enumeration value="LIMITED_3G_2100_CONNECTIVITY_ON_ZONE" />
+      <enumeration value="LIMITED_3G_900_CONNECTIVITY_ON_ZONE" />
+      <enumeration value="LIMITED_CONNECTIVITY_ON_ZONE" />
+      <enumeration value="CURRENT_2G_CONNECTIVITY_PERTURBATED_ON_ZONE" />
+      <enumeration value="CURRENT_3G_CONNECTIVITY_PERTURBATED_ON_ZONE" />
+      <enumeration value="CURRENT_3G_2100_CONNECTIVITY_PERTURBATED_ON_ZONE" />
+      <enumeration value="CURRENT_3G_900_CONNECTIVITY_PERTURBATED_ON_ZONE" />
+      <enumeration value="CURRENT_CONNECTIVITY_PERTURBATED_ON_ZONE" />
+      <enumeration value="LIMITED_HPLUS_CONNECTIVITY_ON_ZONE" />
+      <enumeration value="LIMITED_4G_CONNECTIVITY_ON_ZONE" />
+      <enumeration value="CURRENT_HPLUS_CONNECTIVITY_PERTURBATED_ON_ZONE" />
+      <enumeration value="CURRENT_4G_CONNECTIVITY_PERTURBATED_ON_ZONE" />
+    </restriction>
+  </simpleType>
+
+</schema>

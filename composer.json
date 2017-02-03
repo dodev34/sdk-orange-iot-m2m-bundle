@@ -1,0 +1,29 @@
+{
+  "name": "dodev34/sdk-orange-iot-m2m-bundle",
+  "description": "Manage your SIM cards effectively, carry out remote analysis and reduce costs. Starter-kits available for trials.",
+  "authors": [
+    {
+      "name": "Michel Dourneau #m12u",
+      "email": "contact@michel-dourneau.fr"
+    }
+  ],
+  "version": "1.0.0",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "M12U\\Bundle\\Sdk\\Orange\\IotM2MBundle\\": ""
+    }
+  },
+  "require": {
+    "php": ">=5.3.0",
+    "psr/log": "~1.0",
+    "symfony/http-kernel": ">=2.8",
+    "symfony/yaml": ">=2.8",
+    "symfony/monolog-bundle": "2.*",
+    "symfony/dependency-injection": ">=2.8"
+  },
+  "require-dev": {
+    "symfony/framework-bundle": ">=2.8"
+  }
+}
