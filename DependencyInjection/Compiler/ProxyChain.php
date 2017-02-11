@@ -1,6 +1,7 @@
 <?php
 
 namespace M12U\Bundle\Sdk\Orange\IotM2MBundle\DependencyInjection\Compiler;
+use M12U\Bundle\Sdk\Orange\IotM2MBundle\Service\ServiceInterface;
 
 /**
  * Class ProxyChain
@@ -26,8 +27,18 @@ class ProxyChain
      * @param null|string $alias
      * @return $this
      */
-    public function addProxy(\M2M_M2mClient $proxy, $alias = null)
+    public function addProxy($proxy, $alias = null)
     {
+
+        if (!($proxy instanceof \M2M_M2mClient) && !($proxy instanceof ServiceInterface)) {
+            $instancesOf = [
+                \M2M_M2mClient::class,
+                ServiceInterface::class,
+            ];
+            throw new \InvalidArgumentException(sprintf(
+                "your proxy must be implements %s", implode(" or ", $instancesOf)));
+        }
+
         /** @var string $key */
         $key = is_null($alias) ? get_class($proxy) : $alias;
         $this->proxis[$key] = $proxy;

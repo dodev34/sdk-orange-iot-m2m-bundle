@@ -4,31 +4,20 @@ M2M_ConnectivityDirectoryClient
 ````
 <?php
 
-use getConnectivityDirectory;
-use LineIdentifierCollection;
-use getUpdateSimStatusResult
+// 1° retrieve service provider
+$provider = $this->container->get('m12u.sdk.orange.iot_m2m.provider_proxy');
 
-// create your request
-$oGetConnectivityDirectory = new getConnectivityDirectory();
-$oGetConnectivityDirectory->lineIdentifiers = new LineIdentifierCollection();
-$oGetConnectivityDirectory->lineIdentifiers->subscriptionNumber = array(
-        'your subscription number'
-);
-$oGetConnectivityDirectory->showGroup = null;
-$oGetConnectivityDirectory->showStatusReason = null;
-$oGetConnectivityDirectory->showHierarchyDetail = null;
-$oGetConnectivityDirectory->showDeviceInfo = true;
-$oGetConnectivityDirectory->showIccid = true;
-$oGetConnectivityDirectory->showImsi = true;
-$oGetConnectivityDirectory->showCustomInformations = true;
+// 2° retrieve your service
+$service = $provider->get('connectivity_directory');
 
-// get client proxy from service provider
-$proxyProvider = $this->container->get('m12u.sdk.orange.iot_m2m.provider_proxy');
-$service = $providerProxy->get('connectivity_directory');
-
-// call webservice
+// finily, call your service
 try {
-    $response = $service->call_getConnectivityDirectory( $oGetConnectivityDirectory );
+    $parameters = [
+        'subscriptionNumber' => 'your subscription number',
+        'lineIdentifier' => ['array of your lines indentifier]
+    ];
+    
+    $response = $service->getConnectivityDirectory($parameters);
 } catch (\Exception $e) {
     
 }

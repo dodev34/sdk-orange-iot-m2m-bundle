@@ -4,6 +4,7 @@ namespace M12U\Bundle\Sdk\Orange\IotBundle\Tests\Services;
 
 use M12U\Bundle\Sdk\Orange\IotM2MBundle\Provider\ProxyProvider;
 
+use M12U\Bundle\Sdk\Orange\IotM2MBundle\Service\ConnectivityDirectory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use M2M_SimLifecycleManagementClient;
@@ -70,10 +71,10 @@ class ProxyTest extends PHPUnit_Framework_TestCase
 
         // service : connectivity_directory
         $connectivityDirectory = $proxyProvider->get('connectivity_directory');
-        $this->assertInstanceOf(M2M_ConnectivityDirectoryClient::class, $connectivityDirectory,
+        $this->assertInstanceOf(ConnectivityDirectory::class, $connectivityDirectory,
             sprintf("Service '%s' must be '%s'",
                 (is_object($connectivityDirectory) ? get_class($connectivityDirectory) : $connectivityDirectory),
-                M2M_ConnectivityDirectoryClient::class))
+                ConnectivityDirectory::class))
         ;
 
         // service : incident_diagnostics

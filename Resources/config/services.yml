@@ -7,43 +7,56 @@ parameters:
     m12u.sdk.orange.iot_m2m.proxy.session_history.class: M2M_SessionHistoryV2Client
     m12u.sdk.orange.iot_m2m.proxy.customer_alarm.class: M2M_CustomerAlarmV2Client
 
+    m12u.sdk.orange.iot_m2m.service.connectivity_directory.class: M12U\Bundle\Sdk\Orange\IotM2MBundle\Service\ConnectivityDirectory
+
 services:
+    #
     m12u.sdk.orange.iot_m2m.proxy.sim_lifecycle_management:
         class: '%m12u.sdk.orange.iot_m2m.proxy.sim_lifecycle_management.class%'
         arguments: ['@m12u.sdk.orange.iot_m2m.service_configurator']
         tags:
             - { name: m12u.sdk.orange.iot_m2m.proxy, alias: 'sim_lifecycle_management' }
 
+    #
     m12u.sdk.orange.iot_m2m.proxy.network_status:
         class: '%m12u.sdk.orange.iot_m2m.proxy.network_status.class%'
         arguments: ['@m12u.sdk.orange.iot_m2m.service_configurator']
         tags:
             - { name: m12u.sdk.orange.iot_m2m.proxy, alias: 'network_status' }
 
+    #
     m12u.sdk.orange.iot_m2m.proxy.device_info:
         class: '%m12u.sdk.orange.iot_m2m.proxy.device_info.class%'
         arguments: ['@m12u.sdk.orange.iot_m2m.service_configurator']
         tags:
             - { name: m12u.sdk.orange.iot_m2m.proxy, alias: 'device_info' }
 
+    # ConnectivityDirectory
     m12u.sdk.orange.iot_m2m.proxy.connectivity_directory:
         class: '%m12u.sdk.orange.iot_m2m.proxy.connectivity_directory.class%'
         arguments: ['@m12u.sdk.orange.iot_m2m.service_configurator']
+
+    m12u.sdk.orange.iot_m2m.service.connectivity_directory:
+        class: '%m12u.sdk.orange.iot_m2m.service.connectivity_directory.class%'
+        arguments: ['@m12u.sdk.orange.iot_m2m.proxy.connectivity_directory']
         tags:
             - { name: m12u.sdk.orange.iot_m2m.proxy, alias: 'connectivity_directory' }
 
+    #
     m12u.sdk.orange.iot_m2m.proxy.incident_diagnostics:
         class: '%m12u.sdk.orange.iot_m2m.proxy.incident_diagnostics.class%'
         arguments: ['@m12u.sdk.orange.iot_m2m.service_configurator']
         tags:
             - { name: m12u.sdk.orange.iot_m2m.proxy, alias: 'incident_diagnostics' }
 
+    #
     m12u.sdk.orange.iot_m2m.proxy.session_history:
         class: '%m12u.sdk.orange.iot_m2m.proxy.session_history.class%'
         arguments: ['@m12u.sdk.orange.iot_m2m.service_configurator']
         tags:
             - { name: m12u.sdk.orange.iot_m2m.proxy, alias: 'session_history' }
 
+    #
     m12u.sdk.orange.iot_m2m.proxy.customer_alarm:
         class: '%m12u.sdk.orange.iot_m2m.proxy.customer_alarm.class%'
         arguments: ['@m12u.sdk.orange.iot_m2m.service_configurator']
