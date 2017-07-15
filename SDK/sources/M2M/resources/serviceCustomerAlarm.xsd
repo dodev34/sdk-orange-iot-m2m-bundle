@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:tns="http://serviceCustomeAlarm.types.malima.francetelecom.com" 
+        xmlns:cm="http://common.types.malima.francetelecom.com" 
+        xmlns="http://www.w3.org/2001/XMLSchema" 
+        targetNamespace="http://serviceCustomeAlarm.types.malima.francetelecom.com" 
+        elementFormDefault="qualified">
+        
+	<annotation>
+		<documentation>
+            This schema defines the service custoler alarm services types.
+        </documentation>
+	</annotation>
+	<!-- External schemas import -->
+	<import namespace="http://common.types.malima.francetelecom.com" schemaLocation="common.xsd"/>
+	
+	<!-- Create Trigger request input parameters -->
+	<group name="CreateTriggerIn">
+		<sequence>
+			<!-- scope -->
+			<element minOccurs="1" maxOccurs="1" name="scope" type="tns:Scope"/>
+			<!-- Trigger criteria -->
+			<element minOccurs="1" maxOccurs="1" name="triggerCriteria" type="tns:TriggerCriteria"/>
+			<!-- notification -->
+			<element minOccurs="1" maxOccurs="1" name="notification" type="boolean"/>
+			<!-- level -->
+			<element minOccurs="1" maxOccurs="1" name="level" type="tns:Level"/>
+			<!-- groupId -->
+			<element minOccurs="0" maxOccurs="1" name="groupId" type="tns:GroupId"/>
+			<!-- comment -->
+			<element minOccurs="0" maxOccurs="1" name="comment" type="tns:TriggerComment" />
+		</sequence>
+	</group>
+	
+	<!-- scope -->
+	<complexType name="Scope">
+		<choice>
+			<!-- Line identifiers -->
+			<element minOccurs="1" maxOccurs="1" name="lineIdentifier" type="cm:LineIdentifier"/>
+			<!-- customer environment number  -->
+			<element minOccurs="1" maxOccurs="1" name="customerEnvironnementNumber" type="cm:CustomerEnvironmentNumber"/>
+		</choice>
+	</complexType>
+	
+	<!-- TriggerCriteria -->
+	<complexType name="TriggerCriteria">
+		<choice>
+			<element minOccurs="1" maxOccurs="1" name="trafficTimeStampCriteria" type="tns:TrafficTimeStampCriteria"/>
+			<element minOccurs="1" maxOccurs="1" name="trafficLocationCriteria" type="tns:TrafficLocationCriteria"/>
+			<element minOccurs="1" maxOccurs="1" name="trafficGlobalThresholdCriteria" type="tns:TrafficGlobalThresholdCriteria"/>
+			<element minOccurs="1" maxOccurs="1" name="trafficUnitaryThresholdCriteria" type="tns:TrafficUnitaryThresholdCriteria"/>
+			<element minOccurs="1" maxOccurs="1" name="trafficBearerCriteria" type="tns:TrafficBearerCriteria"/>
+			<element minOccurs="1" maxOccurs="1" name="updateImeiCriteria" type="tns:UpdateImeiCriteria"/>
+		</choice>
+	</complexType>
+	
+	<!-- Traffic time stamp criteria -->
+	<complexType name="TrafficTimeStampCriteria">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="allowedPeriods" type="tns:AllowedPeriods"/>
+		</sequence>
+	</complexType>
+	
+	<!-- traffic location criteria -->
+	<complexType name="TrafficLocationCriteria">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="allowedCountriesAndOperators" type="tns:AllowedCountriesAndOperators"/>
+		</sequence>
+	</complexType>
+	
+	
+	
+	
+	
+	<!-- country -->
+	<complexType name="Country">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="countryCode" type="tns:CountryCode"/>
+			<element minOccurs="0" maxOccurs="1" name="operators" type="tns:Operators"/>
+		</sequence>
+	</complexType>
+	
+	<!-- country code -->
+	<simpleType name="CountryCode">
+		<restriction base="int">
+			<minInclusive value="0"/>
+			<maxInclusive value="32767"/>
+		</restriction>
+	</simpleType>
+	
+	<!-- operators -->
+	<complexType name="Operators">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="operatorCode" type="tns:OperatorCode"/>
+		</sequence>
+	</complexType>
+	
+	<!-- Operator code -->	
+	<simpleType name="OperatorCode">
+		<restriction base="string">
+			<maxLength value="5"/>
+		</restriction>
+	</simpleType>
+	
+	<!-- TrafficGlobalThresholdCriteria -->
+	<complexType name="TrafficGlobalThresholdCriteria">
+		<choice>
+			<element minOccurs="1" maxOccurs="1" name="roaming" type="tns:Roaming"/>
+			<element minOccurs="1" maxOccurs="1" name="local" type="tns:Local"/>
+		</choice>
+	</complexType>
+	
+	<!-- TrafficUnitaryThresholdCriteria -->
+	<complexType name="TrafficUnitaryThresholdCriteria">
+		<choice>
+			<element minOccurs="1" maxOccurs="1" name="roaming" type="tns:Roaming"/>
+			<element minOccurs="1" maxOccurs="1" name="local" type="tns:Local"/>
+		</choice>
+	</complexType>
+	
+	<!-- Roaming -->
+	<complexType name="Roaming">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="trafficRestriction" type="tns:TrafficRestriction"/>
+		</sequence>
+	</complexType>
+	
+	<!--  local  -->
+	<complexType name="Local">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="trafficRestriction" type="tns:TrafficRestriction"/>
+		</sequence>
+	</complexType>
+	
+	<!-- Traffic restriction -->
+	<complexType name="TrafficRestriction">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="value" type="int"/>
+			<element minOccurs="1" maxOccurs="1" name="bearer" type="tns:Bearer"/>
+		</sequence>
+	</complexType>
+	
+	<!-- TrafficBearerCriteria -->
+	<complexType name="TrafficBearerCriteria">
+	 	<sequence>
+	 		<element minOccurs="1" maxOccurs="1" name="allowedBearers" type="tns:AllowedBearers" />
+	 	</sequence>
+	</complexType>
+	
+	<!-- AllowedBearers -->
+	<complexType name="AllowedBearers">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="bearer" type="tns:Bearer" />
+		</sequence>
+	</complexType>
+	
+	<!-- update imei criteria -->
+	<complexType name="UpdateImeiCriteria"/>	
+
+	<!-- Create Trigger request output parameters -->
+	<group name="CreateTriggerOut">
+		<sequence>
+			<!-- scope -->
+			<element minOccurs="1" maxOccurs="1" name="triggerIdentifier" type="cm:TriggerIdentifier"/>
+		</sequence>
+	</group>
+	
+	<!-- Delete Trigger request intput parameters -->
+	<group name="DeleteTriggerIn">
+		<sequence>
+			<!-- trigger identifier -->
+			<element minOccurs="1" maxOccurs="1" name="triggerIdentifier" type="cm:TriggerIdentifier"/>
+		</sequence>
+	</group>
+	
+	<!-- Delete Trigger request output parameters -->
+	<group name="DeleteTriggerOut">
+		<sequence>
+			<!-- trigger identifier -->
+			<element minOccurs="1" maxOccurs="1" name="deletedTriggerIdentifier" type="cm:TriggerIdentifier"/>
+		</sequence>
+	</group>
+	
+	<!-- update trigger request input parameters -->
+	<group name="UpdateTriggerIn">
+		<sequence>
+			<!-- trigger identifier -->
+			<element minOccurs="1" maxOccurs="1" name="triggerIdentifier" type="cm:TriggerIdentifier"/>
+			<!-- Trigger criteria -->
+			<element minOccurs="1" maxOccurs="1" name="triggerCriteria" type="tns:TriggerCriteria"/>
+			<!-- notification -->
+			<element minOccurs="1" maxOccurs="1" name="notification" type="boolean"/>
+			<!-- level -->
+			<element minOccurs="1" maxOccurs="1" name="level" type="tns:Level"/>
+			<!-- groupId -->
+			<element minOccurs="0" maxOccurs="1" name="groupId" type="tns:GroupId" />
+			<!-- comment -->
+			<element minOccurs="0" maxOccurs="1" name="comment" type="tns:TriggerComment" />
+			<!-- trigger status -->
+			<element minOccurs="1" maxOccurs="1" name="status" type="tns:TriggerStatus"/>
+		</sequence>
+	</group>
+	
+
+	<!-- update trigger request input parameters -->
+	<group name="UpdateTriggerOut">
+		<sequence>
+			<!-- trigger identifier -->
+			<element minOccurs="1" maxOccurs="1" name="updatedTriggerIdentifier" type="cm:TriggerIdentifier"/>
+		</sequence>
+	</group>
+	
+	<!-- List triggers request input parameters -->
+	<group name="ListTriggersIn">
+		<choice>
+			<!-- trigger identifier -->
+			<element minOccurs="1" maxOccurs="1" name="triggerIdentifiers" type="tns:TriggerIdentifiers"/>
+			<!-- line identifier -->
+			<element minOccurs="1" maxOccurs="1" name="lineIdentifiers" type="cm:LineIdentifierCollection"/>
+			<!-- customer environment identifier -->
+			<element minOccurs="1" maxOccurs="1" name="customerEnvironmentNumber" type="cm:CustomerEnvironmentNumber"/>
+		</choice>
+	</group>
+	
+	<!-- trigger identifiers -->
+	<complexType name="TriggerIdentifiers">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="triggerIdentifier" type="cm:TriggerIdentifier"/>
+		</sequence>
+	</complexType>
+
+
+	<!-- List triggers request output parameters -->
+	<group name="ListTriggersOut">
+		<sequence>
+			<!-- trigger identifier -->
+			<element minOccurs="0" maxOccurs="1" name="triggers" type="tns:Triggers"/>
+			<!-- Unknown triggers -->
+			<element minOccurs="0" maxOccurs="1" name="unknownTriggers" type="tns:UnknownTriggers"/>
+			<!-- Unknown identifiers -->
+            <element minOccurs="0" maxOccurs="1" name="unknownLineIdentifiers" type="cm:LineIdentifierCollection" />
+		</sequence>
+	</group>
+	
+	<!-- trigger list -->
+	<complexType name="Triggers">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="trigger" type="tns:Trigger"/>
+		</sequence>
+	</complexType>
+	
+	<!-- trigge -->
+	<complexType name="Trigger">
+		<sequence>
+			<!-- trigger scope -->
+			<element minOccurs="1" maxOccurs="1" name="scope" type="tns:TriggerScope"/>
+			<!-- trigger identifier -->
+			<element minOccurs="1" maxOccurs="1" name="triggerIdentifier" type="cm:TriggerIdentifier"/>
+			<!-- trigger type -->
+			<element minOccurs="1" maxOccurs="1" name="triggerType" type="tns:TriggerType"/>
+			<!-- trigger criteria -->
+			<element minOccurs="1" maxOccurs="1" name="triggerCriteria" type="tns:TriggerCriteria"/>
+			<!-- notification -->
+			<element minOccurs="1" maxOccurs="1" name="notification" type="boolean"/>
+			<!-- level -->
+			<element minOccurs="1" maxOccurs="1" name="level" type="tns:Level"/>
+			<!-- groupId -->
+			<element minOccurs="0" maxOccurs="1" name="groupId" type="tns:GroupId"/>
+			<!-- comment -->
+			<element minOccurs="0" maxOccurs="1" name="comment" type="tns:TriggerComment"/>
+			<!-- trigger status -->
+			<element minOccurs="1" maxOccurs="1" name="status" type="tns:TriggerStatus"/>
+		</sequence>
+	</complexType>
+	
+	<!-- trigger scope -->
+	<complexType name="TriggerScope">
+		<choice>
+			<element minOccurs="1" maxOccurs="1" name="subscriptionNumber" type="string"/>
+			<element minOccurs="1" maxOccurs="1" name="customerEnvironmentNumber" type="cm:CustomerEnvironmentNumber"/>
+		</choice>
+	</complexType>
+	
+	<!-- unknown trigger identifiers list -->
+	<complexType name="UnknownTriggers">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="triggerIdentifier" type="cm:TriggerIdentifier"/>
+		</sequence>
+	</complexType>
+	
+	<!-- get alarms request input parameters -->
+	<group name="GetAlarmsIn">
+		<sequence>
+			<!-- alarm identifiers -->
+			<element minOccurs="1" maxOccurs="1" name="alarmIdentifiers" type="tns:AlarmIdentifiers"/>
+		</sequence>
+	</group>
+	
+	<!-- alarm identifiers list -->
+	<complexType name="AlarmIdentifiers">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="alarmIdentifier" type="cm:AlarmIdentifier"/>
+		</sequence>
+	</complexType>
+	
+	<!-- get alarms request input parameters -->
+	<group name="GetAlarmsOut">
+		<sequence>
+			<!-- alarms -->
+			<element minOccurs="0" maxOccurs="1" name="alarms" type="tns:Alarms"/>
+			<element minOccurs="0" maxOccurs="1" name="unknownAlarmIdentifiers" type="tns:UnknownAlarmIdentifiers"/>
+		</sequence>
+	</group>
+	
+	<!-- alarms list -->
+	<complexType name="Alarms">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="alarm" type="tns:Alarm"/>
+		</sequence>
+	</complexType>
+	
+	<!-- alarm definition -->
+	<complexType name="Alarm">
+		<sequence>
+			<!-- Alarm identifier -->
+			<element minOccurs="1" maxOccurs="1" name="alarmIdentifier" type="cm:AlarmIdentifier"/>
+			<!-- Creation date -->
+			<element minOccurs="1" maxOccurs="1" name="creationDate" type="dateTime"/>
+			<!-- alarm level -->
+			<element minOccurs="1" maxOccurs="1" name="level" type="tns:Level"/>
+			<!-- customer environment -->
+			<element minOccurs="1" maxOccurs="1" name="customerEnvironmentNumber" type="cm:CustomerEnvironmentNumber"/>
+			<!-- subscription number -->
+			<element minOccurs="0" maxOccurs="1" name="subscriptionNumber" type="string"/>
+			<!-- notification date -->
+			<element minOccurs="0" maxOccurs="1" name="notificationDate" type="dateTime"/>
+			<!-- notification result code -->
+			<element minOccurs="0" maxOccurs="1" name="notificationResultCode" type="int"/>
+			<!-- notified URL -->
+			<element minOccurs="0" maxOccurs="1" name="notifiedURL" type="string"/>
+			<!-- notification message -->
+			<element minOccurs="0" maxOccurs="1" name="notificationMessage" type="string"/>
+			
+			<choice>
+				<element minOccurs="1" maxOccurs="1" name="nbAlarmExceeded" type="tns:NbAlarmExceeded"/>	
+				<element minOccurs="1" maxOccurs="1" name="triggeredAlarm" type="tns:TriggeredAlarm"/>
+			</choice>
+			
+		</sequence>
+	</complexType>
+	
+	<!-- alarm exceeded -->
+	<complexType name="NbAlarmExceeded">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="quota" type="int"/>
+			<element minOccurs="1" maxOccurs="1" name="triggerIdentifier" type="cm:TriggerIdentifier"/>
+		</sequence>
+	</complexType>
+	
+	<!-- triggererd alarm -->
+	<complexType name="TriggeredAlarm">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="triggerIdentifier" type="cm:TriggerIdentifier"/>
+			<element minOccurs="1" maxOccurs="1" name="notificationRequired" type="boolean"/>
+			<element minOccurs="0" maxOccurs="1" name="triggerComment" type="tns:TriggerComment"/>
+			<element minOccurs="0" maxOccurs="1" name="triggerGroupId" type="tns:GroupId"/>
+			<element minOccurs="1" maxOccurs="1" name="triggerType" type="tns:TriggerType" />
+			<element minOccurs="1" maxOccurs="1" name="triggerCriteria" type="tns:AlarmTriggerCriteria"/>
+		</sequence>
+	</complexType>
+	
+	<!-- triggered alarm type -->
+	<complexType name="AlarmTriggerCriteria">
+		<choice>
+			<element minOccurs="1" maxOccurs="1" name="trafficTimeStampCriteria" type="tns:AlarmTrafficTimeStampCriteria"/>
+			<element minOccurs="1" maxOccurs="1" name="trafficLocationCriteria" type="tns:AlarmTrafficLocationCriteria"/>
+			<element minOccurs="1" maxOccurs="1" name="trafficUnitaryThresholdCriteria" type="tns:AlarmTrafficUnitaryThresholdCriteria"/>
+			<element minOccurs="1" maxOccurs="1" name="trafficGlobalThresholdCriteria" type="tns:AlarmTrafficGlobalThresholdCriteria"/>
+			<element minOccurs="1" maxOccurs="1" name="trafficBearerCriteria" type="tns:AlarmTrafficBearerCriteria"/>
+			<element minOccurs="1" maxOccurs="1" name="updateImeiCriteria" type="tns:AlarmUpdateImeiCriteria"/>
+		</choice>
+	</complexType>
+	
+	<!-- triggered timestamp alarm -->
+	<complexType name="AlarmTrafficTimeStampCriteria">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="firstEventDate" type="dateTime"/>
+			<element minOccurs="1" maxOccurs="1" name="lastEventDate" type="dateTime"/>
+			<element minOccurs="1" maxOccurs="1" name="eventCount" type="int"/>
+			<element minOccurs="1" maxOccurs="1" name="allowedPeriods" type="tns:AllowedPeriods"/>
+		</sequence>
+	</complexType>
+	
+	<!-- triggered traffic location alarm -->
+	<complexType name="AlarmTrafficLocationCriteria">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="firstEventDate" type="dateTime"/>
+			<element minOccurs="1" maxOccurs="1" name="lastEventDate" type="dateTime"/>
+			<element minOccurs="1" maxOccurs="1" name="eventCount" type="int"/>
+			<element minOccurs="1" maxOccurs="1" name="allowedCountriesAndOperators" type="tns:AllowedCountriesAndOperators"/>
+			<element minOccurs="1" maxOccurs="1" name="forbiddenCountriesAndOperators" type="tns:ForbiddenCountriesAndOperators"/>
+		</sequence>
+	</complexType>
+	
+	<!-- triggered unitary thershold alarm -->
+	<complexType name="AlarmTrafficUnitaryThresholdCriteria">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="bearerType" type="tns:Bearer"/>
+			<element minOccurs="1" maxOccurs="1" name="roaming" type="boolean"/>
+			<element minOccurs="1" maxOccurs="1" name="thresholdValue" type="int"/>
+			<element minOccurs="1" maxOccurs="1" name="triggeringValue" type="int"/>
+		</sequence>
+	</complexType>
+	
+	<!-- triggered global thershold alarm -->
+	<complexType name="AlarmTrafficGlobalThresholdCriteria">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="bearerType" type="tns:Bearer"/>
+			<element minOccurs="1" maxOccurs="1" name="roaming" type="boolean"/>
+			<element minOccurs="1" maxOccurs="1" name="thresholdValue" type="int"/>
+			<element minOccurs="1" maxOccurs="1" name="triggeringValue" type="int"/>
+		</sequence>
+	</complexType>
+	
+	<!-- triggered bearer alarm -->
+	<complexType name="AlarmTrafficBearerCriteria">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="firstEventDate" type="dateTime"/>
+			<element minOccurs="1" maxOccurs="1" name="lastEventDate" type="dateTime"/>
+			<element minOccurs="1" maxOccurs="1" name="eventCount" type="int"/>
+			<element minOccurs="1" maxOccurs="1" name="forbiddenBearerTypes" type="tns:ForbiddenBearerTypes"/>
+			<element minOccurs="1" maxOccurs="1" name="allowedBearerTypes" type="tns:AllowedBearerTypes"/>
+		</sequence>
+	</complexType>
+
+	<!-- foridden bearer type list -->
+	<complexType name="ForbiddenBearerTypes">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="bearerType" type="tns:Bearer"/>
+		</sequence>
+	</complexType>
+	
+	<!-- allowed bearer type list -->
+	<complexType name="AllowedBearerTypes">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="bearerType" type="tns:Bearer"/>
+		</sequence>
+	</complexType>
+	
+	<!-- update imei alarm -->
+	<complexType name="AlarmUpdateImeiCriteria">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="oldImei" type="string"/>
+			<element minOccurs="1" maxOccurs="1" name="lastOldImeiDate" type="dateTime"/>
+			<element minOccurs="1" maxOccurs="1" name="newImei" type="string"/>
+			<element minOccurs="1" maxOccurs="1" name="firstNewImeiDate" type="dateTime"/>
+		</sequence>
+	</complexType>
+	
+	<!-- search alarms request input parameters -->
+	<group name="SearchAlarmsIn">
+		<sequence>
+			<choice>
+				<!-- search alarm by targets -->
+				<element minOccurs="1" maxOccurs="1" name="searchByTargets" type="tns:SearchAlarmsByTargets"/>
+				<!-- search alarm by triggers -->
+				<element minOccurs="1" maxOccurs="1" name="searchByTriggers" type="tns:SearchAlarmsByTriggers"/>
+			</choice>
+			
+			<element minOccurs="0" maxOccurs="1" name="beginDate" type="dateTime"/>
+			<element minOccurs="0" maxOccurs="1" name="endDate" type="dateTime"/>
+			<element minOccurs="0" maxOccurs="1" name="rangeStart" type="tns:RangeStart"/>
+			<element minOccurs="0" maxOccurs="1" name="rangeSize" type="tns:RangeSize"/>
+		</sequence>
+	</group>
+	
+	<!-- range size -->
+	<simpleType name="RangeSize">
+		<restriction base="int">
+			<minInclusive value="1"/>
+		</restriction>
+	</simpleType>
+	
+	<!-- range start -->
+	<simpleType name="RangeStart">
+		<restriction base="int">
+			<minInclusive value="0"/>
+		</restriction>
+	</simpleType>
+	
+	<!-- search alarm by target  -->
+	<complexType name="SearchAlarmsByTargets">
+		<sequence>
+			<choice>
+				<element minOccurs="1" maxOccurs="1" name="lineIdentifiers" type="cm:LineIdentifierCollection"/>
+				<element minOccurs="1" maxOccurs="1" name="customerEnvironmentNumber" type="cm:CustomerEnvironmentNumber"/>
+			</choice>
+			<element minOccurs="0" maxOccurs="1" name="groupId" type="tns:GroupId"/>
+			<element minOccurs="0" maxOccurs="1" name="triggerType" type="tns:TriggerType"/>
+			<element minOccurs="0" maxOccurs="1" name="level" type="tns:Level"/>
+		</sequence>
+	</complexType>
+	
+	<!-- search alarms by triggers identifiers -->
+	<complexType name="SearchAlarmsByTriggers">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="triggerIdentifiers" type="tns:TriggerIdentifiers"/>
+		</sequence>
+	</complexType>
+	
+	<!-- search alarms request input parameters -->
+	<group name="SearchAlarmsOut">
+		<sequence>
+			<element minOccurs="0" maxOccurs="1" name="alarms" type="tns:Alarms"/>
+			<element minOccurs="0" maxOccurs="1" name="unknownLineIdentifiers" type="cm:LineIdentifierCollection"/>
+			<element minOccurs="0" maxOccurs="1" name="unknownTriggerIdentifiers" type="tns:TriggerIdentifiers"/>
+			<element minOccurs="1" maxOccurs="1" name="resultsNumberExceeded" type="boolean"/>
+			<element minOccurs="1" maxOccurs="1" name="totalResultsNumber" type="int"/>
+		</sequence>
+	</group>
+	
+	<!-- unknown alarm identifier list  -->
+	<complexType name="UnknownAlarmIdentifiers">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="alarmIdentifier" type="cm:AlarmIdentifier"/>
+		</sequence>
+	</complexType>
+
+	<!-- trigger type -->
+	<simpleType name="TriggerType">
+		<restriction base="string">
+			<enumeration value="TRAFFIC_TIMESTAMP"/>
+			<enumeration value="TRAFFIC_LOCATION"/>
+			<enumeration value="TRAFFIC_BEARER"/>
+			<enumeration value="TRAFFIC_UNITARY_THRESHOLD"/>
+			<enumeration value="TRAFFIC_GLOBAL_THRESHOLD"/>
+			<enumeration value="UPDATE_IMEI"/>
+		</restriction>
+	</simpleType>
+	
+	
+	
+	<!-- Bearer -->
+	<simpleType name="Bearer">
+		<restriction base="string">
+			<enumeration value="FAX"/>
+			<enumeration value="FIXED_SERVICE_COMPLEMENT"/>
+			<enumeration value="GPRS_EDGE"/>
+			<enumeration value="MMS"/>
+			<enumeration value="MULTIMEDIA_PURCHASE"/>
+			<enumeration value="SMS"/>
+			<enumeration value="UMTS"/>
+			<enumeration value="UNKNOWN"/>
+			<enumeration value="VALUE_BASED_COMMUNICATION"/>
+			<enumeration value="VOICE"/>
+			<enumeration value="WIFI"/>
+		</restriction>
+	</simpleType>
+	
+	<!-- GroupId -->
+	<simpleType name="GroupId">
+		<restriction base="int">
+			<minInclusive value="0"/>
+		</restriction>
+	</simpleType>
+	
+	<!-- Allowed periods  -->
+	<complexType name="AllowedPeriods">
+		<complexContent>
+			<extension  base="tns:TwoPeriods">
+				<attribute name="scale" type="tns:Scale" use="required"/>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- Two periods -->
+	<complexType name="TwoPeriods">
+		<sequence>
+			<element minOccurs="1" maxOccurs="2" name="period" type="tns:Period" />
+		</sequence>
+	</complexType>
+	
+	<!-- period -->
+	<complexType name="Period">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="begin" type="int"/>
+			<element minOccurs="1" maxOccurs="1" name="end" type="int"/>
+		</sequence>
+	</complexType>
+	
+	<!-- period scale -->
+	<simpleType name="Scale">
+		<restriction base="string">
+			<!-- hour -->
+			<enumeration value="HOUR_PER_DAY"/>
+			<!-- day -->
+			<enumeration value="DAY_PER_MONTH"/>
+		</restriction>
+	</simpleType>
+	
+	<!-- notification level -->
+	<simpleType name="Level">
+		<restriction base="string">
+			<enumeration value="HIGH"/>
+			<enumeration value="MEDIUM"/>
+			<enumeration value="LOW"/>
+		</restriction>
+	</simpleType>
+	
+	<!-- trigger comment -->
+	<simpleType name="TriggerComment">
+		<restriction base="string">
+			<maxLength value="128"/>
+		</restriction>
+	</simpleType>
+	
+	<!-- Trigger status -->
+	<simpleType name="TriggerStatus">
+		<restriction base="string">
+			<enumeration value="ENABLE"/>
+			<enumeration value="DISABLE"/>
+			<enumeration value="ALARM_SENT"/>
+		</restriction>
+	</simpleType>
+	
+	<!-- Allowed countries and oprators -->
+	<complexType name="AllowedCountriesAndOperators">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="country" type="tns:Country"/>
+		</sequence>
+	</complexType>
+	
+	<!-- forbidden countries and oprators -->
+	<complexType name="ForbiddenCountriesAndOperators">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="country" type="tns:Country"/>
+		</sequence>
+	</complexType>
+
+</schema>

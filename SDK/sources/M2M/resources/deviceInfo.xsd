@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified"
+	targetNamespace="http://deviceInfo.types.malima.francetelecom.com"
+	xmlns:tns="http://deviceInfo.types.malima.francetelecom.com"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+
+    <annotation>
+		<documentation>
+			This schema defines the Device Info services types.
+		</documentation>
+	</annotation>
+
+	<group name="SubmitSimSupIn">
+		<sequence>
+			<!-- line identifier -->
+			<element minOccurs="1" maxOccurs="1" name="lineIdentifiers" type="tns:LineIdentifierCollection" />
+		</sequence>
+	</group>
+
+	<group name="SubmitSimSupOut">
+		<sequence>
+			<element minOccurs="0" maxOccurs="1" name="ticketNumber" type="int"/>
+			<element minOccurs="0" maxOccurs="1" name="unknownLineIdentifiers" type="tns:LineIdentifierCollection" />
+			<element minOccurs="0" maxOccurs="unbounded" name="validationError" type="tns:ValidationError" />
+		</sequence>
+	</group>
+	
+	<group name="SubmitSimSupLocIn">
+		<sequence>
+			<!-- line identifier -->
+			<element minOccurs="1" maxOccurs="1" name="lineIdentifiers" type="tns:LineIdentifierCollection" />
+		</sequence>
+	</group>
+
+	<group name="SubmitSimSupLocOut">
+		<sequence>
+			<element minOccurs="0" maxOccurs="1" name="ticketNumber" type="int"/>
+			<element minOccurs="0" maxOccurs="1" name="unknownLineIdentifiers" type="tns:LineIdentifierCollection" />
+			<element minOccurs="0" maxOccurs="unbounded" name="validationError" type="tns:ValidationError" />
+		</sequence>
+	</group>
+	
+	<group name="GetSimReportIn">
+		<sequence>
+			<!-- line identifier -->
+			<element minOccurs="1" maxOccurs="1" name="ticketNumber" type="int" />
+		</sequence>
+	</group>
+
+	<group name="GetSimReportOut">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="globalProcessingStatus" type="tns:TicketStatusType"/>
+			<element minOccurs="0" maxOccurs="1" name="errorCode" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="errorMessage" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="unknownLineIdentifiers" type="tns:LineIdentifierCollection" />
+			<element minOccurs="0" maxOccurs="unbounded" name="line" type="tns:Line" />
+		</sequence>
+	</group>
+	
+	<group name="GetStatisticsIn">
+		<sequence>
+			<!-- period -->
+			<element minOccurs="1" maxOccurs="unbounded" name="period" type="tns:Period" />
+			<!-- line identifier -->
+			<element minOccurs="0" maxOccurs="1" name="lineIdentifiers" type="tns:LineIdentifierCollection" />
+		</sequence>
+	</group>
+	
+	<group name="GetStatisticsOut">
+		<sequence>
+			<element minOccurs="0" maxOccurs="1" name="unknownLineIdentifiers" type="tns:LineIdentifierCollection" />
+			<element minOccurs="0" maxOccurs="unbounded" name="lineValidationError" type="tns:ValidationError" />
+			<element minOccurs="0" maxOccurs="unbounded" name="periodValidationError" type="tns:PeriodValidationError" />
+			<element minOccurs="0" maxOccurs="unbounded" name="periodReport" type="tns:PeriodReport" />
+		</sequence>
+	</group>
+	
+	<complexType name="ValidationError">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="lineIdentifiers" type="tns:LineIdentifierCollection"/>
+			<element minOccurs="1" maxOccurs="1" name="error" type="tns:Error" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="PeriodValidationError">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="periods" type="tns:PeriodCollection"/>
+			<element minOccurs="1" maxOccurs="1" name="error" type="tns:Error" />
+		</sequence>
+	</complexType>	
+	
+	<complexType name="Error">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="code" type="string" use="required"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+	
+	<complexType name="LineIdentifier">
+		<choice>
+			<element minOccurs="1" maxOccurs="1" name="subscriptionNumber" type="string" />
+ 			<element minOccurs="1" maxOccurs="1" name="simSerialNumber" type="string" />
+ 			<element minOccurs="1" maxOccurs="1" name="deviceImei" type="string" />
+ 			<element minOccurs="1" maxOccurs="1" name="deviceSerialNumber" type="string" />
+ 			<element minOccurs="1" maxOccurs="1" name="deviceUniqueId" type="string" />
+ 			<element minOccurs="1" maxOccurs="1" name="machineSerialNumber" type="string" />
+			<element minOccurs="1" maxOccurs="1" name="msisdnVoice" type="tns:Msisdn"/>
+			<element minOccurs="1" maxOccurs="1" name="msisdnData" type="tns:Msisdn"/>
+			<element minOccurs="1" maxOccurs="1" name="msisdnFax" type="tns:Msisdn"/>
+		</choice>
+	</complexType>
+
+
+	<!-- Line Identifier Collection -->
+	<complexType name="LineIdentifierCollection">
+		<choice>
+			<element minOccurs="1" maxOccurs="unbounded" name="subscriptionNumber" type="string" />
+			<element minOccurs="1" maxOccurs="unbounded" name="simSerialNumber"	type="string" />
+			<element minOccurs="1" maxOccurs="unbounded" name="deviceImei" type="string" />
+			<element minOccurs="1" maxOccurs="unbounded" name="deviceSerialNumber" type="string" />
+			<element minOccurs="1" maxOccurs="unbounded" name="deviceUniqueId" type="string" />
+			<element minOccurs="1" maxOccurs="unbounded" name="machineSerialNumber"	type="string" />
+			<element minOccurs="1" maxOccurs="unbounded" name="msisdnVoice"	type="tns:Msisdn" />
+			<element minOccurs="1" maxOccurs="unbounded" name="msisdnData" type="tns:Msisdn" />
+			<element minOccurs="1" maxOccurs="unbounded" name="msisdnFax" type="tns:Msisdn" />
+		</choice>
+	</complexType>
+	
+	<complexType name="Line">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="inputLineIdentifier" type="tns:LineIdentifier"/>
+			<element minOccurs="1" maxOccurs="1" name="processingStatus" type="tns:TaskStatusType"/>
+			<element minOccurs="0" maxOccurs="1" name="progressMessage" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="errorCode" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="errorMessage" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="errorDate" type="dateTime" />
+			<element minOccurs="0" maxOccurs="1" name="updateDate" type="dateTime" />
+			<element minOccurs="0" maxOccurs="1" name="supervision" type="tns:Supervision" />
+			<element minOccurs="0" maxOccurs="1" name="geolocation" type="tns:Geolocation" />
+		</sequence>
+	</complexType>
+
+
+	<!-- msisdn type -->
+	<complexType name="Msisdn">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="cc" type="string" />
+			<element minOccurs="1" maxOccurs="1" name="sn" type="string" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Supervision">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="connectivity" type="boolean" />
+			<element minOccurs="0" maxOccurs="unbounded" name="signalQuality" type="tns:SignalQuality" />
+			<element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+			<element minOccurs="0" maxOccurs="1" name="lastKnownIdentity" type="tns:LastKnownIdentity" />
+			<element minOccurs="0" maxOccurs="1" name="ip" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="sessionTime" type="dateTime" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="Geolocation">
+		<sequence>
+			<element minOccurs="0" maxOccurs="1" name="roaming" type="boolean" />
+			<element minOccurs="0" maxOccurs="1" name="cellId" type="tns:CellId" />
+			<element minOccurs="0" maxOccurs="1" name="geographicPosition" type="tns:GeographicPosition" />
+			<element minOccurs="0" maxOccurs="1" name="lastKnownGeographicPosition" type="tns:GeographicPosition" />
+			
+		</sequence>
+	</complexType>
+	
+	<complexType name="SignalQuality">
+		<sequence>
+			<element minOccurs="0" maxOccurs="1" name="bearerType" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="errorSignalStrength" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="signalStrength" type="tns:SignalStrength" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="SignalStrength">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="value" type="int" />
+			<element minOccurs="1" maxOccurs="1" name="unit" type="string" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="Identity">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="imei" type="string" />
+			<element minOccurs="1" maxOccurs="1" name="tac" type="string" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="LastKnownIdentity">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="imei" type="string" />
+			<element minOccurs="1" maxOccurs="1" name="timeStamp" type="dateTime" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Accuracy">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="value" type="int" />
+			<element minOccurs="1" maxOccurs="1" name="unit" type="string" />
+		</sequence>
+	</complexType>
+
+	<complexType name="CellId">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="mcc" type="int" />
+			<element minOccurs="1" maxOccurs="1" name="mnc" type="int" />
+			<element minOccurs="0" maxOccurs="1" name="lac" type="int" />
+			<element minOccurs="0" maxOccurs="1" name="cellId" type="int" />
+			<element minOccurs="0" maxOccurs="1" name="extendedCellId" type="int" />
+		</sequence>
+	</complexType>
+
+	<complexType name="GeographicPosition">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="latitude" type="float" />
+			<element minOccurs="1" maxOccurs="1" name="longitude" type="float" />
+			<element minOccurs="1" maxOccurs="1" name="timeStamp" type="dateTime" />
+			<element minOccurs="1" maxOccurs="1" name="accuracy" type="tns:Accuracy" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="PeriodCollection">
+		<choice>
+			<element minOccurs="1" maxOccurs="unbounded" name="period" type="tns:Period" />
+		</choice>
+	</complexType>
+	
+	<complexType name="Period">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="startDate" type="date" />
+			<element minOccurs="1" maxOccurs="1" name="endDate" type="date" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="PeriodReport">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="startDate" type="date" />
+			<element minOccurs="1" maxOccurs="1" name="endDate" type="date" />
+			<choice>
+				<element minOccurs="1" maxOccurs="1" name="cenIdentifier" type="string" />
+	 			<element minOccurs="1" maxOccurs="1" name="lineIdentifier" type="tns:LineIdentifier" />
+			</choice>
+			<element minOccurs="0" maxOccurs="1" name="errorCode" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="errorMessage" type="string" />
+			<element minOccurs="0" maxOccurs="unbounded" name="statistics" type="tns:Statistics" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="Statistics">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="tariffCode" type="string" />
+			<element minOccurs="1" maxOccurs="1" name="nbSmsMo" type="int" />
+			<element minOccurs="1" maxOccurs="1" name="nbSmsMt" type="int" />
+			<element minOccurs="1" maxOccurs="1" name="nbNotification" type="int" />
+			<element minOccurs="1" maxOccurs="1" name="nbRequestsOk" type="int" />
+			<element minOccurs="1" maxOccurs="1" name="nbRequestsKo" type="int" />
+			<element minOccurs="1" maxOccurs="1" name="nbReportsOk" type="int" />
+			<element minOccurs="1" maxOccurs="1" name="nbReportsKo" type="int" />
+			<element minOccurs="1" maxOccurs="1" name="nbTimeout" type="int" />
+		</sequence>
+	</complexType>
+
+	<!-- Ticket status type -->
+	<simpleType name="TicketStatusType">
+        <restriction base="string">
+            <!-- Waiting status -->
+            <enumeration value="WAITING" />
+            <!-- Work in progress status -->
+            <enumeration value="WORK_IN_PROGRESS" />
+            <!-- Terminated status -->
+            <enumeration value="TERMINATED" />
+            <!-- Terminated with errors status -->
+            <enumeration value="ERROR" />
+        </restriction>
+    </simpleType>
+
+	<!-- Task status type -->
+	<simpleType name="TaskStatusType">
+        <restriction base="string">
+            <!-- Waiting status -->
+            <enumeration value="WAITING" />
+            <!-- Work in progress status -->
+            <enumeration value="WORK_IN_PROGRESS" />
+            <!-- Waiting for external validation status -->
+            <enumeration value="WAITING_FOR_EXT_SYSTEM_PROCESSING" />
+            <!-- Terminated status -->
+            <enumeration value="TERMINATED" />
+            <!-- Terminated with errors status -->
+            <enumeration value="ERROR" />
+        </restriction>
+    </simpleType>
+
+	<!-- EXCEPTION -->
+	<!-- Malima generic error -->
+	<element name="MalimaError">
+		<complexType>
+			<sequence>
+				<element minOccurs="1" maxOccurs="1" name="code" type="string" />
+				<element minOccurs="1" maxOccurs="1" name="message" type="string" />
+			</sequence>
+		</complexType>
+	</element>
+
+	<!-- Occurs when the line identifiers number threshold is exceeded -->
+	<element name="TooManyLineIdentifiersError">
+		<complexType>
+			<sequence>
+				<element minOccurs="1" maxOccurs="1" name="maxAllowedLineIdentifiersNumber" type="int" />
+			</sequence>
+		</complexType>
+	</element>
+	
+	<!-- Occurs when the ticket number is unknown -->
+	<element name="UnknownTicketError">
+		<complexType>
+			<sequence>
+				<element minOccurs="1" maxOccurs="1" name="ticketNumber" type="int" />
+			</sequence>
+		</complexType>
+	</element>
+	
+	<!-- Occurs if the ticket has been already retrieved -->
+	<element name="ResultAlreadyRetrievedError">
+		<complexType>
+			<sequence>
+				<element minOccurs="1" maxOccurs="1" name="retrievalDate" type="dateTime" />
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>
+

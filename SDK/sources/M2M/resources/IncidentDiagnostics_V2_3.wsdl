@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="IncidentDiagnostics" targetNamespace="http://webservice.malima.francetelecom.com/v2"
+  xmlns:tns="http://webservice.malima.francetelecom.com/v2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:ex="http://exception.malima.francetelecom.com">
+
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    --------------------------------------------------------------------
+    Contract interface documentation
+    ----------------------------------
+    Document release: V2.3
+    Author (Entity): F. Francheteau (ITLabs)
+    Creation date: 19/10/2010
+    Description: Malima Incident Diagnostics service V2
+    --------------------------------------------------------------------
+    Changes history
+    ----------------------------------
+    Version Date Comments
+    V1.0 19/10/2010 Creation
+    V2.1 24/05/2013 Harmonization with IOSW service version
+    V2.2 05/05/2014 Service evolution on coverage information
+    V2.3 23/05/2014 Add enums in CommunicationType
+    +       Add enums in IncidentDiagnosticsV2Status
+    +       Change cardinality of networkResolutionMessage
+    +       Modify port name in B2B WSDL => to uniform in major version
+    --------------------------------------------------------------------
+  </wsdl:documentation>
+
+  <wsdl:types>
+    <schema elementFormDefault="qualified" targetNamespace="http://webservice.malima.francetelecom.com/v2"
+      xmlns:id="http://incidentdiagnostics.types.malima.francetelecom.com" xmlns="http://www.w3.org/2001/XMLSchema">
+
+      <!-- External schemas import -->
+      <import namespace="http://incidentdiagnostics.types.malima.francetelecom.com" schemaLocation="incidentdiagnostics_V2_0.xsd" />
+      <import namespace="http://exception.malima.francetelecom.com" schemaLocation="exceptions.xsd" />
+
+      <!-- Get incident diagnostics request -->
+      <element name="getIncidentDiagnostics">
+        <complexType>
+          <sequence>
+            <group minOccurs="1" maxOccurs="1" ref="id:GetIncidentDiagnosticsIn" />
+          </sequence>
+        </complexType>
+      </element>
+
+      <!-- Get incident diagnostics response -->
+      <element name="getIncidentDiagnosticsResponse">
+        <complexType>
+          <sequence>
+            <group minOccurs="1" maxOccurs="1" ref="id:GetIncidentDiagnosticsOutV2" />
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </wsdl:types>
+
+
+  <!-- Get incident diagnostics -->
+  <wsdl:message name="getIncidentDiagnosticsRequest">
+    <wsdl:part name="getIncidentDiagnostics" element="tns:getIncidentDiagnostics" />
+  </wsdl:message>
+  <wsdl:message name="getIncidentDiagnosticsResponse">
+    <wsdl:part name="getIncidentDiagnostics" element="tns:getIncidentDiagnosticsResponse" />
+  </wsdl:message>
+
+
+  <!-- Faults -->
+  <wsdl:message name="malimaErrorFault">
+    <wsdl:part name="parameters" element="ex:MalimaError" />
+  </wsdl:message>
+  <wsdl:message name="geolocServiceErrorFault">
+    <wsdl:part name="parameters" element="ex:GeolocServiceError" />
+  </wsdl:message>
+  <wsdl:message name="networkStatusServiceErrorFault">
+    <wsdl:part name="parameters" element="ex:NetworkStatusServiceError" />
+  </wsdl:message>
+
+
+  <wsdl:portType name="IIncidentDiagnostics">
+
+    <!-- Get incident diagnostics -->
+    <wsdl:operation name="getIncidentDiagnostics">
+      <wsdl:input name="getIncidentDiagnosticsRequest" message="tns:getIncidentDiagnosticsRequest" />
+      <wsdl:output name="getIncidentDiagnosticsResponse" message="tns:getIncidentDiagnosticsResponse" />
+      <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+      <wsdl:fault name="geolocServiceError" message="tns:geolocServiceErrorFault" />
+      <wsdl:fault name="networkStatusServiceError" message="tns:networkStatusServiceErrorFault" />
+    </wsdl:operation>
+
+  </wsdl:portType>
+
+
+  <wsdl:binding name="IncidentDiagnosticsSoapBinding" type="tns:IIncidentDiagnostics">
+
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+    <!-- Get incident diagnostics -->
+    <wsdl:operation name="getIncidentDiagnostics">
+      <soap:operation />
+      <wsdl:input name="getIncidentDiagnosticsRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getIncidentDiagnosticsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="malimaError">
+        <soap:fault name="malimaError" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="geolocServiceError">
+        <soap:fault name="geolocServiceError" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="networkStatusServiceError">
+        <soap:fault name="networkStatusServiceError" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+  </wsdl:binding>
+
+
+  <wsdl:service name="IncidentDiagnostics">
+    <wsdl:port name="IncidentDiagnosticsV2SoapBinding" binding="tns:IncidentDiagnosticsSoapBinding">
+      <soap:address location="http://localhost:9000/malima-ws/ws/incidentDiagnostics/v2" />
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

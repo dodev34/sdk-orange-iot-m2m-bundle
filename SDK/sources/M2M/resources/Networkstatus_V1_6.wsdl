@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="NetworkStatus" targetNamespace="http://webservice.malima.francetelecom.com/v1"
+  xmlns:tns="http://webservice.malima.francetelecom.com/v1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:ex="http://exception.malima.francetelecom.com">
+
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    --------------------------------------------------------------------
+    Contract interface documentation
+    ----------------------------------
+    Document release: V1.6
+    Author (Entity): A. Mouchère (ITLabs), D. Foricher (ITLabs)
+    Creation date: 26/11/2009
+    Description: Malima Network Status service
+    --------------------------------------------------------------------
+    Changes history
+    ----------------------------------
+    Version Date Comments
+    V1.0 26/11/2009 Creation
+    V1.4 24/05/2013 Harmonization with IOSW service version
+    V1.5 05/05/2014 Service evolution on coverage information
+    V1.6 23/05/2014 Add enums in CommunicationType
+    +       Change cardinality of networkResolutionMessage
+    --------------------------------------------------------------------
+  </wsdl:documentation>
+
+  <wsdl:types>
+    <schema elementFormDefault="qualified" targetNamespace="http://webservice.malima.francetelecom.com/v1"
+      xmlns:ns="http://networkstatus.types.malima.francetelecom.com" xmlns="http://www.w3.org/2001/XMLSchema">
+
+      <!-- External schemas import -->
+      <import namespace="http://networkstatus.types.malima.francetelecom.com" schemaLocation="networkstatus.xsd" />
+      <import namespace="http://exception.malima.francetelecom.com" schemaLocation="exceptions.xsd" />
+
+      <!-- Network Status request -->
+      <element name="getNetworkStatus">
+        <complexType>
+          <sequence>
+            <group minOccurs="1" maxOccurs="1" ref="ns:GetNetworkStatusIn" />
+          </sequence>
+        </complexType>
+      </element>
+
+      <!-- Network Status response element -->
+      <element name="getNetworkStatusResponse">
+        <complexType>
+          <sequence>
+            <group minOccurs="1" maxOccurs="1" ref="ns:GetNetworkStatusOut" />
+          </sequence>
+        </complexType>
+      </element>
+
+    </schema>
+  </wsdl:types>
+
+  <!-- Get Network Status request -->
+  <wsdl:message name="getNetworkStatusRequest">
+    <wsdl:part name="getNetworkStatus" element="tns:getNetworkStatus" />
+  </wsdl:message>
+  <wsdl:message name="getNetworkStatusResponse">
+    <wsdl:part name="getNetworkStatus" element="tns:getNetworkStatusResponse" />
+  </wsdl:message>
+
+
+  <!-- Faults -->
+  <wsdl:message name="malimaErrorFault">
+    <wsdl:part name="parameters" element="ex:MalimaError" />
+  </wsdl:message>
+  <wsdl:message name="networkStatusServiceErrorFault">
+    <wsdl:part name="parameters" element="ex:NetworkStatusServiceError" />
+  </wsdl:message>
+
+
+  <wsdl:portType name="INetworkStatus">
+
+    <!-- Get Network Status -->
+    <wsdl:operation name="getNetworkStatus">
+      <wsdl:input name="getNetworkStatusRequest" message="tns:getNetworkStatusRequest" />
+      <wsdl:output name="getNetworkStatusResponse" message="tns:getNetworkStatusResponse" />
+      <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+      <wsdl:fault name="networkStatusServiceError" message="tns:networkStatusServiceErrorFault" />
+    </wsdl:operation>
+
+  </wsdl:portType>
+
+
+  <wsdl:binding name="NetworkStatusSoapBinding" type="tns:INetworkStatus">
+
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+    <!-- Get Network Status -->
+    <wsdl:operation name="getNetworkStatus">
+      <soap:operation />
+      <wsdl:input name="getNetworkStatusRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getNetworkStatusResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="malimaError">
+        <soap:fault name="malimaError" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="networkStatusServiceError">
+        <soap:fault name="networkStatusServiceError" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+  </wsdl:binding>
+
+  <wsdl:service name="NetworkStatus">
+    <wsdl:port name="NetworkStatusSoapBinding" binding="tns:NetworkStatusSoapBinding">
+      <soap:address location="http://localhost:9000/malima-ws/ws/networkstatus" />
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>
+	

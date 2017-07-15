@@ -1,0 +1,478 @@
+<?php
+
+// PHP classes corresponding to the data types in defined in WSDL
+
+if(!class_exists("getSubscriptionStatus")){
+class getSubscriptionStatus {
+
+    /**
+     * @var (object)LineIdentifier
+     */
+    public $lineIdentifier;
+
+}}
+
+if(!class_exists("LineIdentifier")){
+class LineIdentifier {
+
+    // You may set only one from the following set
+    // ---------------Start Choice----------------
+
+    /**
+     * @var string
+     */
+    public $subscriptionNumber;
+
+    /**
+     * @var string
+     */
+    public $simSerialNumber;
+
+    /**
+     * @var string
+     */
+    public $deviceImei;
+
+    /**
+     * @var string
+     */
+    public $deviceSerialNumber;
+
+    /**
+     * @var string
+     */
+    public $deviceUniqueId;
+
+    /**
+     * @var string
+     */
+    public $machineSerialNumber;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnVoice;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnData;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnFax;
+    // ----------------End Choice---------------
+
+
+}}
+
+if(!class_exists("Msisdn")){
+class Msisdn {
+
+    /**
+     * @var string
+     */
+    public $cc;
+
+    /**
+     * @var string
+     */
+    public $sn;
+
+}}
+
+if(!class_exists("getSubscriptionStatusResponse")){
+class getSubscriptionStatusResponse {
+
+    /**
+     * @var string
+     */
+    public $customerEnvironmentIdentifier;
+
+    /**
+     * @var (object)Sim
+     */
+    public $sim;
+
+    /**
+     * @var (object)Subscription
+     */
+    public $subscription;
+
+    /**
+     * @var (object)DeviceWithUpdateDate
+     */
+    public $device;
+
+    /**
+     * @var (object)MachineWithUpdateDate
+     */
+    public $machine;
+
+    /**
+     * @var array[0, unbounded] of (object)CustomerIdentifier
+     */
+    public $customerIdentifier;
+
+}}
+
+if(!class_exists("Sim")){
+class Sim {
+
+    /**
+     * @var string
+     */
+    public $serialNumber;
+
+    /**
+     * @var string
+     */
+    public $puk1;
+
+    /**
+     * @var string
+     */
+    public $puk2;
+
+    /**
+     * @var string
+     */
+    public $imei;
+
+    /**
+     * @var string
+     *     NOTE: status should follow the following restrictions
+     *     You can have one of the following value
+     *     PRE_ACTIVATED
+     *     ACTIVATED_FOR_TEST
+     *     ACTIVATED
+     *     SLEEPING
+     *     SUSPENDED
+     *     CANCELLED
+     */
+    public $status;
+
+    /**
+     * @var string
+     */
+    public $suspensionReason;
+
+    /**
+     * @var dateTime
+     */
+    public $lastStatusRefreshDate;
+
+    /**
+     * @var dateTime
+     */
+    public $lastStatusChangeDate;
+
+    /**
+     * @var string
+     */
+    public $requestedStatus;
+
+    /**
+     * @var dateTime
+     */
+    public $statusChangeRequestDate;
+
+}}
+
+if(!class_exists("Subscription")){
+class Subscription {
+
+    /**
+     * @var string
+     */
+    public $identifier;
+
+    /**
+     * @var (object)SubscriptionDescription
+     */
+    public $description;
+
+    /**
+     * @var dateTime
+     */
+    public $creationDate;
+
+    /**
+     * @var dateTime
+     */
+    public $connectionDate;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnData;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnVoice;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnFax;
+
+}}
+
+if(!class_exists("SubscriptionDescription")){
+class SubscriptionDescription {
+
+    /**
+     * @var string
+     */
+    public $value;
+
+    /**
+     * @var string
+     */
+    public $user;
+
+    /**
+     * @var string
+     */
+    public $userRef;
+
+    /**
+     * @var array[0, unbounded] of string
+     */
+    public $service;
+
+}}
+
+if(!class_exists("Device")){
+class Device {
+
+    /**
+     * @var string
+     *     NOTE: uniqueIdentifier should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 30
+     */
+    public $uniqueIdentifier;
+
+    /**
+     * @var string
+     *     NOTE: serialNumber should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $serialNumber;
+
+    /**
+     * @var (object)Contact
+     */
+    public $contact;
+
+    /**
+     * @var (object)CommunicationModule
+     */
+    public $communicationModule;
+
+    /**
+     * @var string
+     *     NOTE: deviceLocation should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $deviceLocation;
+
+    /**
+     * @var string
+     *     NOTE: category should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 30
+     */
+    public $category;
+
+    /**
+     * @var string
+     *     NOTE: description should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $description;
+
+    /**
+     * @var string
+     *     NOTE: address should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $address;
+
+    /**
+     * @var string
+     *     NOTE: deviceHolder should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $deviceHolder;
+
+}}
+
+if(!class_exists("Contact")){
+class Contact {
+
+    /**
+     * @var string
+     *     NOTE: name should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $name;
+
+    /**
+     * @var string
+     *     NOTE: email should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $email;
+
+    /**
+     * @var string
+     *     NOTE: phone should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 30
+     */
+    public $phone;
+
+}}
+
+if(!class_exists("CommunicationModule")){
+class CommunicationModule {
+
+    /**
+     * @var string
+     *     NOTE: brand should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 30
+     */
+    public $brand;
+
+    /**
+     * @var string
+     *     NOTE: model should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $model;
+
+}}
+
+if(!class_exists("DeviceWithUpdateDate")){
+class DeviceWithUpdateDate extends Device {
+
+    /**
+     * @var dateTime
+     */
+    public $updateDate;
+
+}}
+
+if(!class_exists("Machine")){
+class Machine {
+
+    /**
+     * @var string
+     *     NOTE: serialNumber should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $serialNumber;
+
+    /**
+     * @var string
+     *     NOTE: name should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $name;
+
+    /**
+     * @var string
+     *     NOTE: description should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $description;
+
+}}
+
+if(!class_exists("MachineWithUpdateDate")){
+class MachineWithUpdateDate extends Machine {
+
+    /**
+     * @var dateTime
+     */
+    public $updateDate;
+
+}}
+
+if(!class_exists("CustomerIdentifier")){
+class CustomerIdentifier {
+
+    /**
+     * @var string
+     */
+    public $type;
+
+    /**
+     * @var string
+     */
+    public $identifier;
+
+}}
+
+// define the class map
+/*
+$class_map = array(
+    "getSubscriptionStatus" => "getSubscriptionStatus",
+    "LineIdentifier" => "LineIdentifier",
+    "Msisdn" => "Msisdn",
+    "getSubscriptionStatusResponse" => "getSubscriptionStatusResponse",
+    "Sim" => "Sim",
+    "Subscription" => "Subscription",
+    "SubscriptionDescription" => "SubscriptionDescription",
+    "Device" => "Device",
+    "Contact" => "Contact",
+    "CommunicationModule" => "CommunicationModule",
+    "DeviceWithUpdateDate" => "DeviceWithUpdateDate",
+    "Machine" => "Machine",
+    "MachineWithUpdateDate" => "MachineWithUpdateDate",
+    "CustomerIdentifier" => "CustomerIdentifier");
+
+try {
+
+    // create client in WSDL mode
+    $client = new WSClient(array ("wsdl" =>"SubscriptionStatus_V1_4.wsdl",
+        "classmap" => $class_map));
+
+    // get proxy object reference form client 
+    $proxy = $client->getProxy();
+
+    // create input object and set values
+    $input = new getSubscriptionStatus();
+    //TODO: fill in the class fields of $input to match your business logic
+
+    // call the operation
+    $response = $proxy->getSubscriptionStatus($input);
+    //TODO: Implement business logic to consume $response, which is of type getSubscriptionStatusResponse
+
+} catch (Exception $e) {
+    // in case of an error, process the fault
+    if ($e instanceof WSFault) {
+        printf("Soap Fault: %s\n", $e->Reason);
+    } else {
+        printf("Message = %s\n", $e->getMessage());
+    }
+}
+ */
+?>
+

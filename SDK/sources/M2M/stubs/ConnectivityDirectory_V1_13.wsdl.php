@@ -1,0 +1,1316 @@
+<?php
+
+// PHP classes corresponding to the data types in defined in WSDL
+
+if(!class_exists("getConnectivityDirectory")){
+class getConnectivityDirectory {
+
+    // You may set only one from the following set
+    // ---------------Start Choice----------------
+
+    /**
+     * @var (object)LineIdentifierCollection
+     */
+    public $lineIdentifiers;
+
+    /**
+     * @var array[1, unbounded] of string
+     */
+    public $imsi;
+    // ----------------End Choice---------------
+
+
+    /**
+     * @var boolean
+     */
+    public $showHierarchyDetail;
+
+    /**
+     * @var boolean
+     */
+    public $showDeviceInfo;
+
+    /**
+     * @var boolean
+     */
+    public $showIccid;
+
+    /**
+     * @var boolean
+     */
+    public $showImsi;
+
+}}
+
+if(!class_exists("LineIdentifierCollection")){
+class LineIdentifierCollection {
+
+    // You may set only one from the following set
+    // ---------------Start Choice----------------
+
+    /**
+     * @var array[1, unbounded] of string
+     */
+    public $subscriptionNumber;
+
+    /**
+     * @var array[1, unbounded] of string
+     */
+    public $simSerialNumber;
+
+    /**
+     * @var array[1, unbounded] of string
+     */
+    public $deviceImei;
+
+    /**
+     * @var array[1, unbounded] of string
+     */
+    public $deviceSerialNumber;
+
+    /**
+     * @var array[1, unbounded] of string
+     */
+    public $deviceUniqueId;
+
+    /**
+     * @var array[1, unbounded] of string
+     */
+    public $machineSerialNumber;
+
+    /**
+     * @var array[1, unbounded] of (object)Msisdn
+     */
+    public $msisdnVoice;
+
+    /**
+     * @var array[1, unbounded] of (object)Msisdn
+     */
+    public $msisdnData;
+
+    /**
+     * @var array[1, unbounded] of (object)Msisdn
+     */
+    public $msisdnFax;
+    // ----------------End Choice---------------
+
+
+}}
+
+if(!class_exists("Msisdn")){
+class Msisdn {
+
+    /**
+     * @var string
+     */
+    public $cc;
+
+    /**
+     * @var string
+     */
+    public $sn;
+
+}}
+
+if(!class_exists("getConnectivityDirectoryResponse")){
+class getConnectivityDirectoryResponse {
+
+    /**
+     * @var array[0, unbounded] of (object)ConnectivityDirectory
+     */
+    public $connectivityDirectory;
+
+    /**
+     * @var (object)LineIdentifierCollection
+     */
+    public $unknownLinesIdentifiers;
+
+    /**
+     * @var (object)Imsi
+     */
+    public $unknownImsi;
+
+}}
+
+if(!class_exists("ConnectivityDirectory")){
+class ConnectivityDirectory {
+
+    /**
+     * @var string
+     */
+    public $customerEnvironmentIdentifier;
+
+    /**
+     * @var string
+     */
+    public $customerEnvironmentName;
+
+    /**
+     * @var string
+     */
+    public $imsi;
+
+    /**
+     * @var string
+     */
+    public $iccid;
+
+    /**
+     * @var (object)Sim
+     */
+    public $sim;
+
+    /**
+     * @var (object)Subscription
+     */
+    public $subscription;
+
+    /**
+     * @var (object)ConnectivityDirectoryDevice
+     */
+    public $device;
+
+    /**
+     * @var (object)ConnectivityDirectoryMachine
+     */
+    public $machine;
+
+    /**
+     * @var array[0, unbounded] of (object)CustomerIdentifier
+     */
+    public $customerIdentifier;
+
+    /**
+     * @var (object)ConnectivityDirectoryGeographicPosition
+     */
+    public $geographicPosition;
+
+    /**
+     * @var string
+     */
+    public $deviceInfoCompatibility;
+
+}}
+
+if(!class_exists("Sim")){
+class Sim {
+
+    /**
+     * @var string
+     */
+    public $serialNumber;
+
+    /**
+     * @var string
+     */
+    public $puk1;
+
+    /**
+     * @var string
+     */
+    public $puk2;
+
+    /**
+     * @var string
+     */
+    public $imei;
+
+    /**
+     * @var string
+     *     NOTE: status should follow the following restrictions
+     *     You can have one of the following value
+     *     PRE_ACTIVATED
+     *     ACTIVATED_FOR_TEST
+     *     ACTIVATED
+     *     SLEEPING
+     *     SUSPENDED
+     *     CANCELLED
+     */
+    public $status;
+
+    /**
+     * @var string
+     */
+    public $suspensionReason;
+
+    /**
+     * @var dateTime
+     */
+    public $lastStatusRefreshDate;
+
+    /**
+     * @var dateTime
+     */
+    public $lastStatusChangeDate;
+
+    /**
+     * @var string
+     */
+    public $requestedStatus;
+
+    /**
+     * @var dateTime
+     */
+    public $statusChangeRequestDate;
+
+}}
+
+if(!class_exists("Subscription")){
+class Subscription {
+
+    /**
+     * @var string
+     */
+    public $identifier;
+
+    /**
+     * @var (object)SubscriptionDescription
+     */
+    public $description;
+
+    /**
+     * @var dateTime
+     */
+    public $creationDate;
+
+    /**
+     * @var dateTime
+     */
+    public $connectionDate;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnData;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnVoice;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnFax;
+
+}}
+
+if(!class_exists("SubscriptionDescription")){
+class SubscriptionDescription {
+
+    /**
+     * @var string
+     */
+    public $value;
+
+    /**
+     * @var string
+     */
+    public $user;
+
+    /**
+     * @var string
+     */
+    public $userRef;
+
+    /**
+     * @var array[0, unbounded] of string
+     */
+    public $service;
+
+    /**
+     * @var array[0, unbounded] of (object)CustomInformation
+     */
+    public $customInformation;
+
+}}
+
+if(!class_exists("CustomInformation")){
+class CustomInformation {
+
+    /**
+     * @var string
+     */
+    public $customLabel;
+
+    /**
+     * @var string
+     */
+    public $customValue;
+
+}}
+
+if(!class_exists("Device")){
+class Device {
+
+    /**
+     * @var string
+     *     NOTE: uniqueIdentifier should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 30
+     */
+    public $uniqueIdentifier;
+
+    /**
+     * @var string
+     *     NOTE: serialNumber should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $serialNumber;
+
+    /**
+     * @var (object)Contact
+     */
+    public $contact;
+
+    /**
+     * @var (object)CommunicationModule
+     */
+    public $communicationModule;
+
+    /**
+     * @var string
+     *     NOTE: deviceLocation should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $deviceLocation;
+
+    /**
+     * @var string
+     *     NOTE: category should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 30
+     */
+    public $category;
+
+    /**
+     * @var string
+     *     NOTE: description should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $description;
+
+    /**
+     * @var string
+     *     NOTE: address should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $address;
+
+    /**
+     * @var string
+     *     NOTE: deviceHolder should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $deviceHolder;
+
+}}
+
+if(!class_exists("Contact")){
+class Contact {
+
+    /**
+     * @var string
+     *     NOTE: name should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $name;
+
+    /**
+     * @var string
+     *     NOTE: email should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $email;
+
+    /**
+     * @var string
+     *     NOTE: phone should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 30
+     */
+    public $phone;
+
+}}
+
+if(!class_exists("CommunicationModule")){
+class CommunicationModule {
+
+    /**
+     * @var string
+     *     NOTE: brand should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 30
+     */
+    public $brand;
+
+    /**
+     * @var string
+     *     NOTE: model should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $model;
+
+}}
+
+if(!class_exists("ConnectivityDirectoryDevice")){
+class ConnectivityDirectoryDevice extends Device {
+
+    /**
+     * @var dateTime
+     */
+    public $updateDate;
+
+}}
+
+if(!class_exists("Machine")){
+class Machine {
+
+    /**
+     * @var string
+     *     NOTE: serialNumber should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $serialNumber;
+
+    /**
+     * @var string
+     *     NOTE: name should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $name;
+
+    /**
+     * @var string
+     *     NOTE: description should follow the following restrictions
+     *     Your length of the value should be 
+     *     Less than 150
+     */
+    public $description;
+
+}}
+
+if(!class_exists("ConnectivityDirectoryMachine")){
+class ConnectivityDirectoryMachine extends Machine {
+
+    /**
+     * @var dateTime
+     */
+    public $updateDate;
+
+}}
+
+if(!class_exists("CustomerIdentifier")){
+class CustomerIdentifier {
+
+    /**
+     * @var string
+     */
+    public $type;
+
+    /**
+     * @var string
+     */
+    public $identifier;
+
+}}
+
+if(!class_exists("ConnectivityDirectoryGeographicPosition")){
+class ConnectivityDirectoryGeographicPosition {
+
+    /**
+     * @var float
+     */
+    public $latitude;
+
+    /**
+     * @var float
+     */
+    public $longitude;
+
+    /**
+     * @var dateTime
+     */
+    public $lastGeolocDate;
+
+    /**
+     * @var (object)ConnectivityDirectoryGeographicPositionAccuracy
+     */
+    public $accuracy;
+
+}}
+
+if(!class_exists("ConnectivityDirectoryGeographicPositionAccuracy")){
+class ConnectivityDirectoryGeographicPositionAccuracy {
+
+    /**
+     * @var int
+     */
+    public $value;
+
+    /**
+     * @var string
+     */
+    public $unit;
+
+}}
+
+if(!class_exists("Imsi")){
+class Imsi {
+
+    /**
+     * @var array[1, unbounded] of string
+     */
+    public $imsi;
+
+}}
+
+if(!class_exists("searchInConnectivityDirectory")){
+class searchInConnectivityDirectory {
+
+    /**
+     * @var (object)ConnectivityDirectorySearchCriterion
+     */
+    public $searchCriterion;
+
+    /**
+     * @var boolean
+     */
+    public $showHierarchyDetail;
+
+    /**
+     * @var boolean
+     */
+    public $showStatSimPerSimStatus;
+
+    /**
+     * @var boolean
+     */
+    public $showDeviceInfo;
+
+    /**
+     * @var boolean
+     */
+    public $showImsi;
+
+    /**
+     * @var int
+     */
+    public $rangeSize;
+
+    /**
+     * @var int
+     */
+    public $rangeStart;
+
+    /**
+     * @var array[0, 2] of (object)SortCriterion
+     */
+    public $sortCriterion;
+
+}}
+
+if(!class_exists("ConnectivityDirectorySearchCriterion")){
+class ConnectivityDirectorySearchCriterion {
+
+    /**
+     * @var string
+     */
+    public $simSerialNumber;
+
+    /**
+     * @var array[0, unbounded] of string
+     *     NOTE: simStatus should follow the following restrictions
+     *     You can have one of the following value
+     *     PRE_ACTIVATED
+     *     ACTIVATED_FOR_TEST
+     *     ACTIVATED
+     *     SLEEPING
+     *     SUSPENDED
+     *     CANCELLED
+     */
+    public $simStatus;
+
+    /**
+     * @var string
+     */
+    public $deviceCategory;
+
+    /**
+     * @var string
+     */
+    public $deviceUniqueId;
+
+    /**
+     * @var string
+     */
+    public $deviceSerialNumber;
+
+    /**
+     * @var string
+     */
+    public $deviceHolder;
+
+    /**
+     * @var string
+     */
+    public $deviceImei;
+
+    /**
+     * @var string
+     */
+    public $communicationModuleBrand;
+
+    /**
+     * @var string
+     */
+    public $communicationModuleModel;
+
+    /**
+     * @var string
+     */
+    public $machineSerialNumber;
+
+    /**
+     * @var string
+     */
+    public $machineName;
+
+    /**
+     * @var string
+     */
+    public $subcriptionIdentifier;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnData;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnVoice;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnFax;
+
+    /**
+     * @var string
+     */
+    public $imsi;
+
+    /**
+     * @var dateTime
+     */
+    public $simStatusChangeMinDate;
+
+    /**
+     * @var dateTime
+     */
+    public $simStatusChangeMaxDate;
+
+    /**
+     * @var dateTime
+     */
+    public $simStatusRefreshMinDate;
+
+    /**
+     * @var dateTime
+     */
+    public $simStatusRefreshMaxDate;
+
+    /**
+     * @var string
+     */
+    public $requestedSimStatus;
+
+    /**
+     * @var string
+     */
+    public $user;
+
+    /**
+     * @var string
+     */
+    public $userRef;
+
+}}
+
+if(!class_exists("SortCriterion")){
+class SortCriterion {
+
+    /**
+     * @var string
+     *     NOTE: order should follow the following restrictions
+     *     You can have one of the following value
+     *     ASC
+     *     DESC
+     */
+    public $order;
+
+    /**
+     * @var string
+     *     NOTE: attribute should follow the following restrictions
+     *     You can have one of the following value
+     *     SIM_STATUS
+     *     STATUS_CHANGE_DATE
+     *     SIM_SSN
+     *     CONTACT
+     *     DEVICE_UNIQUE_IDENTIFIER
+     *     SUB_CONNECTION_DATE
+     *     SUB_CREATION_DATE
+     */
+    public $attribute;
+
+}}
+
+if(!class_exists("searchInConnectivityDirectoryResponse")){
+class searchInConnectivityDirectoryResponse {
+
+    /**
+     * @var array[0, unbounded] of (object)ConnectivityDirectory
+     */
+    public $connectivityDirectory;
+
+    /**
+     * @var (object)SimStatusDistribution
+     */
+    public $simStatusDistribution;
+
+    /**
+     * @var boolean
+     */
+    public $resultsNumberExceeded;
+
+    /**
+     * @var int
+     */
+    public $totalResultsNumber;
+
+}}
+
+if(!class_exists("SimStatusDistribution")){
+class SimStatusDistribution {
+
+    /**
+     * @var array[1, unbounded] of (object)SimStatusStatistic
+     */
+    public $totalSimStatusNumber;
+
+}}
+
+if(!class_exists("SimStatusStatistic")){
+class SimStatusStatistic {
+
+    /**
+     * @var string
+     *     NOTE: status should follow the following restrictions
+     *     You can have one of the following value
+     *     PRE_ACTIVATED
+     *     ACTIVATED_FOR_TEST
+     *     ACTIVATED
+     *     SLEEPING
+     *     SUSPENDED
+     *     CANCELLED
+     */
+    public $status;
+
+    // The "value" represents the element 'totalSimStatusNumber' value..
+
+    /**
+     * @var int
+     */
+    public $value;
+
+}}
+
+if(!class_exists("updateConnectivityDirectory")){
+class updateConnectivityDirectory {
+
+    // You may set only one from the following set
+    // ---------------Start Choice----------------
+
+    /**
+     * @var array[1, unbounded] of (object)DataBySubscriptionNumber
+     */
+    public $dataBySubscriptionNumber;
+
+    /**
+     * @var array[1, unbounded] of (object)DataBySimSerialNumber
+     */
+    public $dataBySimSerialNumber;
+
+    /**
+     * @var array[1, unbounded] of (object)DataByDeviceImei
+     */
+    public $dataByDeviceImei;
+
+    /**
+     * @var array[1, unbounded] of (object)DataByDeviceSerialNumber
+     */
+    public $dataByDeviceSerialNumber;
+
+    /**
+     * @var array[1, unbounded] of (object)DataByDeviceUniqueId
+     */
+    public $dataByDeviceUniqueId;
+
+    /**
+     * @var array[1, unbounded] of (object)DataByMachineSerialNumber
+     */
+    public $dataByMachineSerialNumber;
+
+    /**
+     * @var array[1, unbounded] of (object)DataByMsisdnVoice
+     */
+    public $dataByMsisdnVoice;
+
+    /**
+     * @var array[1, unbounded] of (object)DataByMsisdnData
+     */
+    public $dataByMsisdnData;
+
+    /**
+     * @var array[1, unbounded] of (object)DataByMsisdnFax
+     */
+    public $dataByMsisdnFax;
+    // ----------------End Choice---------------
+
+
+}}
+
+if(!class_exists("DataBySubscriptionNumber")){
+class DataBySubscriptionNumber {
+
+    /**
+     * @var string
+     */
+    public $subscriptionNumber;
+
+    /**
+     * @var (object)Machine
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryMachine
+     */
+    public $machineData;
+
+    /**
+     * @var (object)Device
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryDevice
+     */
+    public $deviceData;
+
+}}
+
+if(!class_exists("DataBySimSerialNumber")){
+class DataBySimSerialNumber {
+
+    /**
+     * @var string
+     */
+    public $simSerialNumber;
+
+    /**
+     * @var (object)Machine
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryMachine
+     */
+    public $machineData;
+
+    /**
+     * @var (object)Device
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryDevice
+     */
+    public $deviceData;
+
+}}
+
+if(!class_exists("DataByDeviceImei")){
+class DataByDeviceImei {
+
+    /**
+     * @var string
+     */
+    public $deviceImei;
+
+    /**
+     * @var (object)Machine
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryMachine
+     */
+    public $machineData;
+
+    /**
+     * @var (object)Device
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryDevice
+     */
+    public $deviceData;
+
+}}
+
+if(!class_exists("DataByDeviceSerialNumber")){
+class DataByDeviceSerialNumber {
+
+    /**
+     * @var string
+     */
+    public $deviceSerialNumber;
+
+    /**
+     * @var (object)Machine
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryMachine
+     */
+    public $machineData;
+
+    /**
+     * @var (object)Device
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryDevice
+     */
+    public $deviceData;
+
+}}
+
+if(!class_exists("DataByDeviceUniqueId")){
+class DataByDeviceUniqueId {
+
+    /**
+     * @var string
+     */
+    public $deviceUniqueId;
+
+    /**
+     * @var (object)Machine
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryMachine
+     */
+    public $machineData;
+
+    /**
+     * @var (object)Device
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryDevice
+     */
+    public $deviceData;
+
+}}
+
+if(!class_exists("DataByMachineSerialNumber")){
+class DataByMachineSerialNumber {
+
+    /**
+     * @var string
+     */
+    public $machineSerialNumber;
+
+    /**
+     * @var (object)Machine
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryMachine
+     */
+    public $machineData;
+
+    /**
+     * @var (object)Device
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryDevice
+     */
+    public $deviceData;
+
+}}
+
+if(!class_exists("DataByMsisdnVoice")){
+class DataByMsisdnVoice {
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnVoice;
+
+    /**
+     * @var (object)Machine
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryMachine
+     */
+    public $machineData;
+
+    /**
+     * @var (object)Device
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryDevice
+     */
+    public $deviceData;
+
+}}
+
+if(!class_exists("DataByMsisdnData")){
+class DataByMsisdnData {
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnData;
+
+    /**
+     * @var (object)Machine
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryMachine
+     */
+    public $machineData;
+
+    /**
+     * @var (object)Device
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryDevice
+     */
+    public $deviceData;
+
+}}
+
+if(!class_exists("DataByMsisdnFax")){
+class DataByMsisdnFax {
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnFax;
+
+    /**
+     * @var (object)Machine
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryMachine
+     */
+    public $machineData;
+
+    /**
+     * @var (object)Device
+     *    Or one of following derived class(es)
+     *       ConnectivityDirectoryDevice
+     */
+    public $deviceData;
+
+}}
+
+if(!class_exists("updateConnectivityDirectoryResponse")){
+class updateConnectivityDirectoryResponse {
+
+    /**
+     * @var (object)UpdatesCompletedList
+     */
+    public $updatesCompleted;
+
+    /**
+     * @var (object)UpdatesFailedList
+     */
+    public $updatesFailed;
+
+}}
+
+if(!class_exists("UpdatesCompletedList")){
+class UpdatesCompletedList {
+
+    /**
+     * @var array[0, unbounded] of (object)LineIdentifier
+     */
+    public $lineIdentifier;
+
+}}
+
+if(!class_exists("LineIdentifier")){
+class LineIdentifier {
+
+    // You may set only one from the following set
+    // ---------------Start Choice----------------
+
+    /**
+     * @var string
+     */
+    public $subscriptionNumber;
+
+    /**
+     * @var string
+     */
+    public $simSerialNumber;
+
+    /**
+     * @var string
+     */
+    public $deviceImei;
+
+    /**
+     * @var string
+     */
+    public $deviceSerialNumber;
+
+    /**
+     * @var string
+     */
+    public $deviceUniqueId;
+
+    /**
+     * @var string
+     */
+    public $machineSerialNumber;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnVoice;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnData;
+
+    /**
+     * @var (object)Msisdn
+     */
+    public $msisdnFax;
+    // ----------------End Choice---------------
+
+
+}}
+
+if(!class_exists("UpdatesFailedList")){
+class UpdatesFailedList {
+
+    /**
+     * @var array[0, unbounded] of (object)UpdateFailed
+     */
+    public $fail;
+
+}}
+
+if(!class_exists("UpdateFailed")){
+class UpdateFailed {
+
+    // You may set only one from the following set
+    // ---------------Start Choice----------------
+
+    /**
+     * @var (object)LineIdentifier
+     */
+    public $lineIdentifier;
+
+    /**
+     * @var string
+     *     NOTE: errorCode should follow the following restrictions
+     *     You can have one of the following value
+     *     IDENTIFIER_NOT_FOUND
+     *     BAD_IDENTIFIER_TYPE
+     *     DEVICE_SERIALNUMBER_ALREADY_EXISTS
+     *     DEVICE_UNIQUEID_ALREADY_EXIST
+     *     MACHINE_SERIALNUMBER_ALREADY_EXISTS
+     */
+    public $errorCode;
+
+    /**
+     * @var string
+     */
+    public $errorMessage;
+    // ----------------End Choice---------------
+
+
+}}
+
+// define the class map
+/*
+$class_map = array(
+    "getConnectivityDirectory" => "getConnectivityDirectory",
+    "LineIdentifierCollection" => "LineIdentifierCollection",
+    "Msisdn" => "Msisdn",
+    "getConnectivityDirectoryResponse" => "getConnectivityDirectoryResponse",
+    "ConnectivityDirectory" => "ConnectivityDirectory",
+    "Sim" => "Sim",
+    "Subscription" => "Subscription",
+    "SubscriptionDescription" => "SubscriptionDescription",
+    "CustomInformation" => "CustomInformation",
+    "Device" => "Device",
+    "Contact" => "Contact",
+    "CommunicationModule" => "CommunicationModule",
+    "ConnectivityDirectoryDevice" => "ConnectivityDirectoryDevice",
+    "Machine" => "Machine",
+    "ConnectivityDirectoryMachine" => "ConnectivityDirectoryMachine",
+    "CustomerIdentifier" => "CustomerIdentifier",
+    "ConnectivityDirectoryGeographicPosition" => "ConnectivityDirectoryGeographicPosition",
+    "ConnectivityDirectoryGeographicPositionAccuracy" => "ConnectivityDirectoryGeographicPositionAccuracy",
+    "Imsi" => "Imsi",
+    "searchInConnectivityDirectory" => "searchInConnectivityDirectory",
+    "ConnectivityDirectorySearchCriterion" => "ConnectivityDirectorySearchCriterion",
+    "SortCriterion" => "SortCriterion",
+    "searchInConnectivityDirectoryResponse" => "searchInConnectivityDirectoryResponse",
+    "SimStatusDistribution" => "SimStatusDistribution",
+    "SimStatusStatistic" => "SimStatusStatistic",
+    "updateConnectivityDirectory" => "updateConnectivityDirectory",
+    "DataBySubscriptionNumber" => "DataBySubscriptionNumber",
+    "DataBySimSerialNumber" => "DataBySimSerialNumber",
+    "DataByDeviceImei" => "DataByDeviceImei",
+    "DataByDeviceSerialNumber" => "DataByDeviceSerialNumber",
+    "DataByDeviceUniqueId" => "DataByDeviceUniqueId",
+    "DataByMachineSerialNumber" => "DataByMachineSerialNumber",
+    "DataByMsisdnVoice" => "DataByMsisdnVoice",
+    "DataByMsisdnData" => "DataByMsisdnData",
+    "DataByMsisdnFax" => "DataByMsisdnFax",
+    "updateConnectivityDirectoryResponse" => "updateConnectivityDirectoryResponse",
+    "UpdatesCompletedList" => "UpdatesCompletedList",
+    "LineIdentifier" => "LineIdentifier",
+    "UpdatesFailedList" => "UpdatesFailedList",
+    "UpdateFailed" => "UpdateFailed");
+
+try {
+
+    // create client in WSDL mode
+    $client = new WSClient(array ("wsdl" =>"ConnectivityDirectory_V1_13.wsdl",
+        "classmap" => $class_map));
+
+    // get proxy object reference form client 
+    $proxy = $client->getProxy();
+
+    // create input object and set values
+    $input = new getConnectivityDirectory();
+    //TODO: fill in the class fields of $input to match your business logic
+
+    // call the operation
+    $response = $proxy->getConnectivityDirectory($input);
+    //TODO: Implement business logic to consume $response, which is of type getConnectivityDirectoryResponse
+
+    $input = new searchInConnectivityDirectory();
+    //TODO: fill in the class fields of $input to match your business logic
+
+    // call the operation
+    $response = $proxy->searchInConnectivityDirectory($input);
+    //TODO: Implement business logic to consume $response, which is of type searchInConnectivityDirectoryResponse
+
+    $input = new updateConnectivityDirectory();
+    //TODO: fill in the class fields of $input to match your business logic
+
+    // call the operation
+    $response = $proxy->updateConnectivityDirectory($input);
+    //TODO: Implement business logic to consume $response, which is of type updateConnectivityDirectoryResponse
+
+} catch (Exception $e) {
+    // in case of an error, process the fault
+    if ($e instanceof WSFault) {
+        printf("Soap Fault: %s\n", $e->Reason);
+    } else {
+        printf("Message = %s\n", $e->getMessage());
+    }
+}
+ */
+?>

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ServiceCustomerAlarm" 
+    targetNamespace="http://webservice.malima.francetelecom.com/v1"
+        xmlns:tns="http://webservice.malima.francetelecom.com/v1"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:ex="http://exception.malima.francetelecom.com">
+
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        --------------------------------------------------------------------
+        Contract interface documentation
+        ----------------------------------
+        Document release: V1.1
+        Author (Entity): C. Pinel (ITLabs)
+        Creation date: 03/08/2010
+        Description: Malima Service customer alarm
+        --------------------------------------------------------------------
+        Changes history
+        ----------------------------------
+        Version      Date            Comments
+        V1.0         03/08/2010      Creation
+        V1.1         24/05/2013      Harmonization with IOSW service version
+        --------------------------------------------------------------------
+	</wsdl:documentation>
+
+    <wsdl:types>
+        <schema elementFormDefault="qualified"
+            targetNamespace="http://webservice.malima.francetelecom.com/v1"
+                xmlns:sca="http://serviceCustomeAlarm.types.malima.francetelecom.com"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+
+            <!-- External schemas import -->
+            <import namespace="http://serviceCustomeAlarm.types.malima.francetelecom.com" schemaLocation="serviceCustomerAlarm.xsd" />
+            <import namespace="http://exception.malima.francetelecom.com" schemaLocation="exceptions.xsd" />
+
+            <!-- create trigger request -->
+            <element name="createTrigger">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:CreateTriggerIn" />
+                    </sequence>
+                </complexType>
+            </element>
+            <!-- create trigger response -->
+            <element name="createTriggerResponse">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:CreateTriggerOut" />
+                    </sequence>
+                </complexType>
+            </element>
+            <!-- delete trigger request -->
+            <element name="deleteTrigger">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:DeleteTriggerIn" />
+                    </sequence>
+                </complexType>
+            </element>
+            <!-- delete trigger response -->
+            <element name="deleteTriggerResponse">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:DeleteTriggerOut" />
+                    </sequence>
+                </complexType>
+            </element>
+            <!-- Update trigger request -->
+            <element name="updateTrigger">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:UpdateTriggerIn" />
+                    </sequence>
+                </complexType>
+            </element>
+            <!-- Update trigger request -->
+            <element name="updateTriggerResponse">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:UpdateTriggerOut" />
+                    </sequence>
+                </complexType>
+            </element>
+            <!-- List triggers request -->
+            <element name="listTriggers">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:ListTriggersIn" />
+                    </sequence>
+                </complexType>
+            </element>
+            <!-- list triggers response -->
+            <element name="listTriggersResponse">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:ListTriggersOut" />
+                    </sequence>
+                </complexType>
+            </element>
+            <!-- get alarm request -->
+            <element name="getAlarms">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:GetAlarmsIn" />
+                    </sequence>
+                </complexType>
+            </element>
+            <!-- get alarm response -->
+            <element name="getAlarmsResponse">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:GetAlarmsOut" />
+                    </sequence>
+                </complexType>
+            </element>
+            <!-- search alarm request -->
+            <element name="searchAlarms">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:SearchAlarmsIn" />
+                    </sequence>
+                </complexType>
+            </element>
+            <!-- search alarm response -->
+            <element name="searchAlarmsResponse">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="sca:SearchAlarmsOut" />
+                    </sequence>
+                </complexType>
+            </element>
+           
+        </schema>
+    </wsdl:types>
+
+
+    <!-- create trigger request -->
+    <wsdl:message name="createTriggerRequest">
+        <wsdl:part name="createTrigger" element="tns:createTrigger" />
+    </wsdl:message>
+    <wsdl:message name="createTriggerResponse">
+        <wsdl:part name="createTrigger" element="tns:createTriggerResponse" />
+    </wsdl:message>
+    
+    <!-- delete trigger request -->
+    <wsdl:message name="deleteTriggerRequest">
+        <wsdl:part name="deleteTrigger" element="tns:deleteTrigger" />
+    </wsdl:message>
+    <wsdl:message name="deleteTriggerResponse">
+        <wsdl:part name="deleteTrigger" element="tns:deleteTriggerResponse" />
+    </wsdl:message>
+    
+    <!-- update trigger request -->
+    <wsdl:message name="updateTriggerRequest">
+        <wsdl:part name="updateTrigger" element="tns:updateTrigger" />
+    </wsdl:message>
+    <wsdl:message name="updateTriggerResponse">
+        <wsdl:part name="updateTrigger" element="tns:updateTriggerResponse" />
+    </wsdl:message>
+    
+    <!-- list triggers request -->
+    <wsdl:message name="listTriggersRequest">
+        <wsdl:part name="listTriggers" element="tns:listTriggers" />
+    </wsdl:message>
+    <wsdl:message name="listTriggersResponse">
+        <wsdl:part name="listTriggers" element="tns:listTriggersResponse" />
+    </wsdl:message>
+    
+    <!-- getAlarms -->
+ 	<wsdl:message name="getAlarmsRequest">
+        <wsdl:part name="getAlarms" element="tns:getAlarms" />
+    </wsdl:message>
+    <wsdl:message name="getAlarmsResponse">
+        <wsdl:part name="getAlarms" element="tns:getAlarmsResponse" />
+    </wsdl:message>
+    
+    <!-- searchAlarms -->
+ 	<wsdl:message name="searchAlarmsRequest">
+        <wsdl:part name="searchAlarms" element="tns:searchAlarms" />
+    </wsdl:message>
+    <wsdl:message name="searchAlarmsResponse">
+        <wsdl:part name="searchAlarms" element="tns:searchAlarmsResponse" />
+    </wsdl:message>
+
+    <!-- Faults -->
+    <wsdl:message name="unknownLineIdentifierErrorFault">
+        <wsdl:part name="parameters" element="ex:UnknownLineIdentifierError" />
+    </wsdl:message>
+    <wsdl:message name="unknownCustomerEnvironnementNumberErrorFault">
+    	<wsdl:part name="parameters" element="ex:UnknownCustomerEnvironnementNumberError"/>
+    </wsdl:message>
+    <wsdl:message name="malimaErrorFault">
+        <wsdl:part name="parameters" element="ex:MalimaError" />
+    </wsdl:message>
+    <wsdl:message name="triggerErrorFault">
+        <wsdl:part name="parameters" element="ex:TriggerError" />
+    </wsdl:message>
+    <wsdl:message name="unknownTriggerIdentifierErrorFault">
+        <wsdl:part name="parameters" element="ex:UnknownTriggerIdentifierError"/>
+    </wsdl:message>
+    <wsdl:message name="tooManyResultsErrorFault">
+    	<wsdl:part name="parameters" element="ex:TooManyResultsError"/>
+    </wsdl:message>
+    <wsdl:message name="tooManyAlarmIdentifiersErrorFault">
+    	<wsdl:part name="parameters" element="ex:TooManyAlarmIdentifiersError"/>
+    </wsdl:message>
+    <wsdl:message name="alarmErrorFault">
+    	<wsdl:part name="parameters" element="ex:AlarmError"/>
+    </wsdl:message>
+    <wsdl:message name="triggerLimitExceededErrorFault">
+    	<wsdl:part name="parameters" element="ex:TriggerLimitExceededError"/>
+    </wsdl:message>
+   
+   
+    <wsdl:portType name="IServiceCustomerAlarm">
+        <!-- create trigger request -->
+        <wsdl:operation name="createTrigger">
+            <wsdl:input name="createTriggerRequest" message="tns:createTriggerRequest" />
+            <wsdl:output name="createTriggerResponse" message="tns:createTriggerResponse" />
+            <wsdl:fault name="unknownLineIdentifierError" message="tns:unknownLineIdentifierErrorFault"/>
+            <wsdl:fault name="unknownCustomerEnvironnementNumberError" message="tns:unknownCustomerEnvironnementNumberErrorFault"/>
+            <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+            <wsdl:fault name="triggerError" message="tns:triggerErrorFault" />
+            <wsdl:fault name="triggerLimitExceededError" message="tns:triggerLimitExceededErrorFault" />
+        </wsdl:operation>
+        
+        <!-- delete trigger request -->
+        <wsdl:operation name="deleteTrigger">
+            <wsdl:input name="deleteTriggerRequest" message="tns:deleteTriggerRequest" />
+            <wsdl:output name="deleteTriggerResponse" message="tns:deleteTriggerResponse" />
+            <wsdl:fault name="malimaError" message="tns:malimaErrorFault"/>
+            <wsdl:fault name="unknownTriggerIdentifierError" message="tns:unknownTriggerIdentifierErrorFault"/>
+        </wsdl:operation>
+        
+        <!-- update trigger request -->
+        <wsdl:operation name="updateTrigger">
+            <wsdl:input name="updateTriggerRequest" message="tns:updateTriggerRequest" />
+            <wsdl:output name="updateTriggerResponse" message="tns:updateTriggerResponse" />
+            <wsdl:fault name="unknownTriggerIdentifierError" message="tns:unknownTriggerIdentifierErrorFault"/>
+            <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+            <wsdl:fault name="triggerError" message="tns:triggerErrorFault" />
+        </wsdl:operation>
+        
+        <!-- list triggers request -->
+        <wsdl:operation name="listTriggers">
+            <wsdl:input name="listTriggersRequest" message="tns:listTriggersRequest" />
+            <wsdl:output name="listTriggersResponse" message="tns:listTriggersResponse" />
+            <wsdl:fault name="unknownCustomerEnvironnementNumberError" message="tns:unknownCustomerEnvironnementNumberErrorFault"/>
+            <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+            <wsdl:fault name="tooManyResultsError" message="tns:tooManyResultsErrorFault" />
+        </wsdl:operation>
+        
+	    <!-- get alarms request -->
+        <wsdl:operation name="getAlarms">
+            <wsdl:input name="getAlarmsRequest" message="tns:getAlarmsRequest" />
+            <wsdl:output name="getAlarmsResponse" message="tns:getAlarmsResponse" />
+            <wsdl:fault name="tooManyAlarmIdentifiersError" message="tns:tooManyAlarmIdentifiersErrorFault"/>
+            <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+        </wsdl:operation>
+        
+        <!-- search alarms request -->
+        <wsdl:operation name="searchAlarms">
+            <wsdl:input name="searchAlarmsRequest" message="tns:searchAlarmsRequest" />
+            <wsdl:output name="searchAlarmsResponse" message="tns:searchAlarmsResponse" />
+            <wsdl:fault name="unknownCustomerEnvironnementNumberError" message="tns:unknownCustomerEnvironnementNumberErrorFault"/>
+            <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+            <wsdl:fault name="tooManyResultsError" message="tns:tooManyResultsErrorFault" />
+        </wsdl:operation>
+
+    </wsdl:portType>
+
+
+    <wsdl:binding name="ServiceCustomerAlarmSoapBinding" type="tns:IServiceCustomerAlarm">
+        
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <!-- create trigger request -->
+        <wsdl:operation name="createTrigger">
+            <soap:operation />
+            <wsdl:input name="createTriggerRequest">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="createTriggerResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="unknownLineIdentifierError">
+                <soap:fault name="unknownLineIdentifierError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="unknownCustomerEnvironnementNumberError">
+                <soap:fault name="unknownCustomerEnvironnementNumberError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="triggerError">
+                <soap:fault name="triggerError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="triggerLimitExceededError">
+                <soap:fault name="triggerLimitExceededError" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        
+        
+        <!-- delete trigger request -->
+        <wsdl:operation name="deleteTrigger">
+            <soap:operation />
+            <wsdl:input name="deleteTriggerRequest">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="deleteTriggerResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="unknownTriggerIdentifierError">
+                <soap:fault name="unknownTriggerIdentifierError" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        
+        <!-- update trigger request -->
+        <wsdl:operation name="updateTrigger">
+            <soap:operation />
+            <wsdl:input name="updateTriggerRequest">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="updateTriggerResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="unknownTriggerIdentifierError">
+                <soap:fault name="unknownTriggerIdentifierError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="triggerError">
+                <soap:fault name="triggerError" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        
+        <!-- list triggers request -->
+        <wsdl:operation name="listTriggers">
+            <soap:operation />
+            <wsdl:input name="listTriggersRequest">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="listTriggersResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="unknownCustomerEnvironnementNumberError">
+                <soap:fault name="unknownCustomerEnvironnementNumberError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="tooManyResultsError">
+                <soap:fault name="tooManyResultsError" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        
+        <!-- get alarms request -->
+        <wsdl:operation name="getAlarms">
+            <soap:operation />
+            <wsdl:input name="getAlarmsRequest">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="getAlarmsResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="tooManyAlarmIdentifiersError">
+                <soap:fault name="tooManyAlarmIdentifiersError" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        
+        <!-- search alarms request -->
+        <wsdl:operation name="searchAlarms">
+            <soap:operation />
+            <wsdl:input name="searchAlarmsRequest">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="searchAlarmsResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="unknownCustomerEnvironnementNumberError">
+                <soap:fault name="unknownCustomerEnvironnementNumberError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="tooManyResultsError">
+                <soap:fault name="tooManyResultsError" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+
+    </wsdl:binding>
+
+
+    <wsdl:service name="ServiceCustomerAlarm">
+        <wsdl:port name="ServiceCustomerAlarmSoapBinding" binding="tns:ServiceCustomerAlarmSoapBinding">
+            <soap:address location="http://localhost:9000/malima-ws/ws/serviceCustomerAlarm" />
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

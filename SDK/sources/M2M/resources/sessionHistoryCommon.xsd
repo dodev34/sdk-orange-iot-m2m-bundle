@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified"
+	targetNamespace="http://common.sessionHistory.types.malima.francetelecom.com"
+    	xmlns:tns="http://common.sessionHistory.types.malima.francetelecom.com"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:cm="http://common.types.malima.francetelecom.com">
+
+    <annotation>
+        <documentation>
+            This schema defines the types common to SessionHistory services
+        </documentation>
+    </annotation>
+	
+	<!-- Common types external schema -->
+    <import namespace="http://common.types.malima.francetelecom.com" schemaLocation="common.xsd" />
+	
+	<!-- Submit Session History Request input parameters -->
+    <group name="SubmitSessionHistoryRequestIn">
+        <sequence>
+            <!-- Line identifiers -->
+            <element minOccurs="1" maxOccurs="1" name="lineIdentifier" type="cm:LineIdentifier" />
+            <!-- Period start date/time  -->
+            <element minOccurs="1" maxOccurs="1" name="periodStartDateTime" type="dateTime" />
+            <!-- Period end date/time  -->
+            <element minOccurs="1" maxOccurs="1" name="periodEndDateTime" type="dateTime" />
+        </sequence>
+    </group>
+
+    <!-- Submit Session History Request output parameters -->
+    <group name="SubmitSessionHistoryRequestOut">
+      	<sequence>
+           	<!-- Ticket number -->
+       		<element minOccurs="1" maxOccurs="1" name="ticketNumber" type="int" />
+        </sequence>
+    </group>
+
+    <!-- Get Session History input parameters -->
+    <group name="GetSessionHistoryIn">
+        <sequence>
+            <!-- Session History ticket number -->
+            <element minOccurs="1" maxOccurs="1" name="ticketNumber" type="int" />
+        </sequence>
+    </group>
+    
+    
+    
+    <!-- SIM data -->
+    <complexType name="Sim">
+        <sequence>
+            <!-- Sim status -->
+            <element minOccurs="1" maxOccurs="1" name="status" type="cm:SimStatus" />
+            <!-- Sim status update date -->
+            <element minOccurs="1" maxOccurs="1" name="lastStatusRefreshDate" type="dateTime" />
+            <!-- Sim serial number -->
+            <element minOccurs="0" maxOccurs="1" name="serialNumber" type="string" />
+            <!-- Imei -->
+            <element minOccurs="0" maxOccurs="1" name="imei" type="string" />
+        </sequence>
+    </complexType>
+    
+    <!-- Device data -->
+    <complexType name="Device">
+        <sequence>
+            <!-- Device identifier -->
+            <element minOccurs="0" maxOccurs="1" name="uniqueIdentifier" type="string" />
+            <!-- Device serial number -->
+            <element minOccurs="0" maxOccurs="1" name="serialNumber" type="string" />
+        </sequence>
+    </complexType>
+    
+
+    <!-- Line data -->
+    <complexType name="Line">
+        <sequence>
+            <!-- Customer identifiers -->
+            <element minOccurs="0" maxOccurs="unbounded" name="customerIdentifier" type="cm:CustomerIdentifier" />
+            <!-- Subscription -->
+            <element minOccurs="1" maxOccurs="1" name="subscription" type="cm:Subscription" />
+            <!-- Sim -->
+            <element minOccurs="0" maxOccurs="1" name="sim" type="tns:Sim" />
+            <!-- Device -->
+            <element minOccurs="0" maxOccurs="1" name="device" type="tns:Device" />
+            <!-- Machine identifier -->
+            <element minOccurs="0" maxOccurs="1" name="machineIdentifier" type="string" />
+        </sequence>
+    </complexType>
+    
+    <simpleType name="communicationWay">
+		<restriction base="string">
+            <enumeration value="MOBILE_ORIGINATED" />
+            <enumeration value="MOBILE_TERMINATED" />
+        </restriction>
+    </simpleType>   
+</schema>
+

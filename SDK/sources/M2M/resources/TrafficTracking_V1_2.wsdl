@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="TrafficTracking" 
+    targetNamespace="http://webservice.malima.francetelecom.com/v1"
+        xmlns:tns="http://webservice.malima.francetelecom.com/v1"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:ex="http://exception.malima.francetelecom.com">
+        
+ 	<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        --------------------------------------------------------------------
+        Contract interface documentation
+        ----------------------------------
+        Document release: V1.0
+        Author (Entity): F. Francheteau (ITLabs)
+        Creation date: 02/07/2010
+        Description: Malima Traffic Tracking service
+        --------------------------------------------------------------------
+        Changes history
+        ----------------------------------
+        Version      Date            Comments
+        V1.0         02/07/2010      Creation
+        V1.1         04/04/2013      Add Local+roaming
+        --------------------------------------------------------------------
+	</wsdl:documentation>
+	
+	<wsdl:types>
+        <schema elementFormDefault="qualified"
+            targetNamespace="http://webservice.malima.francetelecom.com/v1"
+                xmlns:tt="http://trafficTracking.types.malima.francetelecom.com"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+
+            <!-- External schemas import -->
+            <import namespace="http://trafficTracking.types.malima.francetelecom.com" schemaLocation="trafficTracking.xsd" />
+            <import namespace="http://exception.malima.francetelecom.com" schemaLocation="exceptions.xsd" />
+
+            <!-- Submit Traffic Tracking request -->
+            <element name="submitTrafficTrackingRequest">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="tt:SubmitTrafficTrackingRequestIn" />
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="submitTrafficTrackingRequestResponse">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="tt:SubmitTrafficTrackingRequestOut" />
+                    </sequence>
+                </complexType>
+            </element>
+
+            <!-- Get Traffic Tracking -->
+            <element name="getTrafficTracking">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="tt:GetTrafficTrackingIn" />
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getTrafficTrackingResponse">
+                <complexType>
+                    <sequence>
+                        <group minOccurs="1" maxOccurs="1" ref="tt:GetTrafficTrackingOut" />
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+    </wsdl:types>
+    
+    <!-- Submit Traffic Tracking request -->
+    <wsdl:message name="submitTrafficTrackingRequestRequest">
+        <wsdl:part name="submitTrafficTrackingRequest" element="tns:submitTrafficTrackingRequest" />
+    </wsdl:message>
+    <wsdl:message name="submitTrafficTrackingRequestResponse">
+        <wsdl:part name="submitTrafficTrackingRequest" element="tns:submitTrafficTrackingRequestResponse" />
+    </wsdl:message>
+    
+    <!-- Get Traffic Tracking -->
+    <wsdl:message name="getTrafficTrackingRequest">
+        <wsdl:part name="getTrafficTracking" element="tns:getTrafficTracking" />
+    </wsdl:message>
+    <wsdl:message name="getTrafficTrackingResponse">
+        <wsdl:part name="getTrafficTracking" element="tns:getTrafficTrackingResponse" />
+    </wsdl:message>
+    
+    <!-- Faults -->
+    <wsdl:message name="malimaErrorFault">
+        <wsdl:part name="parameters" element="ex:MalimaError" />
+    </wsdl:message>
+    <wsdl:message name="tooManyLineIdentifiersFault">
+        <wsdl:part name="parameters" element="ex:TooManyLineIdentifiersError"/>
+    </wsdl:message>
+    <wsdl:message name="unknownTicketFault">
+        <wsdl:part name="parameters" element="ex:UnknownTicketError"/>
+    </wsdl:message>
+    <wsdl:message name="resultAlreadyRetrievedFault">
+        <wsdl:part name="parameters" element="ex:ResultAlreadyRetrievedError"/>
+    </wsdl:message>
+    <wsdl:message name="invalidPeriodErrorFault">
+        <wsdl:part name="parameters" element="ex:InvalidPeriodError"/>
+    </wsdl:message>
+    
+    
+    <wsdl:portType name="ITrafficTracking">
+        <!-- Submit Traffic Tracking request -->
+        <wsdl:operation name="submitTrafficTrackingRequest">
+            <wsdl:input name="submitTrafficTrackingRequestRequest" message="tns:submitTrafficTrackingRequestRequest" />
+            <wsdl:output name="submitTrafficTrackingRequestResponse" message="tns:submitTrafficTrackingRequestResponse" />
+            <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+            <wsdl:fault name="tooManyLineIdentifiersError" message="tns:tooManyLineIdentifiersFault"/>
+            <wsdl:fault name="InvalidPeriodError" message="tns:invalidPeriodErrorFault"/>
+        </wsdl:operation>
+
+        <!-- Get Traffic Tracking -->
+        <wsdl:operation name="getTrafficTracking">
+            <wsdl:input name="getTrafficTrackingRequest" message="tns:getTrafficTrackingRequest" />
+            <wsdl:output name="getTrafficTrackingResponse" message="tns:getTrafficTrackingResponse" />
+            <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+            <wsdl:fault name="unknownTicketError" message="tns:unknownTicketFault" />
+            <wsdl:fault name="resultAlreadyRetrievedError" message="tns:resultAlreadyRetrievedFault" />
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:binding name="TrafficTrackingSoapBinding" type="tns:ITrafficTracking">
+    
+    	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    	
+    	<!-- Submit Traffic Tracking request -->
+        <wsdl:operation name="submitTrafficTrackingRequest">
+            <soap:operation />
+            <wsdl:input name="submitTrafficTrackingRequestRequest">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="submitTrafficTrackingRequestResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="tooManyLineIdentifiersError">
+                <soap:fault name="tooManyLineIdentifiersError" use="literal" />
+            </wsdl:fault>
+           	<wsdl:fault name="InvalidPeriodError">
+                <soap:fault name="InvalidPeriodError" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        
+        <!-- Get Traffic Tracking -->
+        <wsdl:operation name="getTrafficTracking">
+            <soap:operation />
+            <wsdl:input name="getTrafficTrackingRequest">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="getTrafficTrackingResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="unknownTicketError">
+                <soap:fault name="unknownTicketError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="resultAlreadyRetrievedError">
+                <soap:fault name="resultAlreadyRetrievedError" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        
+    </wsdl:binding>
+    
+    <wsdl:service name="TrafficTracking">
+        <wsdl:port name="TrafficTrackingSoapBinding" binding="tns:TrafficTrackingSoapBinding">
+            <soap:address location="http://localhost:9000/malima-ws/ws/trafficTracking" />
+        </wsdl:port>
+    </wsdl:service>
+        
+</wsdl:definitions>

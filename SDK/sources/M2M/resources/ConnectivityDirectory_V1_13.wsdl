@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ConnectivityDirectory" targetNamespace="http://webservice.malima.francetelecom.com/v1"
+  xmlns:tns="http://webservice.malima.francetelecom.com/v1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:ex="http://exception.malima.francetelecom.com">
+
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    --------------------------------------------------------------------
+    Contract interface documentation
+    ----------------------------------
+    Document release: V1.13
+    Author (Entity): L. Naudet (OrangeLabs), D. Foricher (ITLabs)
+    Creation date: 26/10/2009
+    Description: Malima Connectivity Directory service
+    --------------------------------------------------------------------
+    Changes history
+    ----------------------------------
+    Version Date Comments
+    V0.1 26/10/2009 Beta version
+    V1.0 20/11/2009 Malima services harmonization
+    V1.1 26/07/2012 Add SimStatus Distribution in SearchInCD
+    V1.4 24/05/2013 Harmonization with IOSW service version
+    V1.6 17/06/2013 Harmonization with IOSW service version
+    V1.7 11/10/2013 Add Imsi in GetCD
+    V1.8 29/10/2013 Change UnknownsImsi choice to sequence
+    V1.9 18/11/2013 Change cardinality for GetConnectivityDirectoryIn
+    V1.10 29/01/2014 GetCD and SearchInCD : add device info data
+    V1.11 10/04/2014 Evol CDDYN S1F7
+    + move the imsi element under “connectivityDirectory” in the SearchInCD response
+    + adapt comments for showHierarchyDetail, showIccid and showImsi to showDeviceInfo comment
+    V1.12 20/05/2014 Fixed error on imsi name in ConnectivityDirectorySearchCriterion
+	V1.13 11/06/2014 Change order in SearchInConnectivityDirectoryIn and GetConnectivityDirectoryIn
+    --------------------------------------------------------------------
+  </wsdl:documentation>
+
+  <wsdl:types>
+    <schema elementFormDefault="qualified" targetNamespace="http://webservice.malima.francetelecom.com/v1"
+      xmlns:cd="http://connectivityDirectory.types.malima.francetelecom.com" xmlns="http://www.w3.org/2001/XMLSchema">
+
+      <!-- External schemas import -->
+      <import namespace="http://connectivityDirectory.types.malima.francetelecom.com" schemaLocation="connectivityDirectory.xsd" />
+      <import namespace="http://exception.malima.francetelecom.com" schemaLocation="exceptions.xsd" />
+
+      <!-- Get Connectivity Directory -->
+      <element name="getConnectivityDirectory">
+        <complexType>
+          <sequence>
+            <group minOccurs="1" maxOccurs="1" ref="cd:GetConnectivityDirectoryIn" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getConnectivityDirectoryResponse">
+        <complexType>
+          <sequence>
+            <group minOccurs="1" maxOccurs="1" ref="cd:GetConnectivityDirectoryOut" />
+          </sequence>
+        </complexType>
+      </element>
+
+      <!-- Search in Connectivity Directory -->
+      <element name="searchInConnectivityDirectory">
+        <complexType>
+          <sequence>
+            <group minOccurs="1" maxOccurs="1" ref="cd:SearchInConnectivityDirectoryIn" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="searchInConnectivityDirectoryResponse">
+        <complexType>
+          <sequence>
+            <group minOccurs="1" maxOccurs="1" ref="cd:SearchInConnectivityDirectoryOut" />
+          </sequence>
+        </complexType>
+      </element>
+
+      <!-- Update Connectivity Directory -->
+      <element name="updateConnectivityDirectory">
+        <complexType>
+          <sequence>
+            <group minOccurs="1" maxOccurs="1" ref="cd:UpdateConnectivityDirectoryIn" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="updateConnectivityDirectoryResponse">
+        <complexType>
+          <sequence>
+            <group minOccurs="1" maxOccurs="1" ref="cd:UpdateConnectivityDirectoryOut" />
+          </sequence>
+        </complexType>
+      </element>
+
+    </schema>
+  </wsdl:types>
+
+
+  <!-- Get Connectivity Directory -->
+  <wsdl:message name="getConnectivityDirectoryRequest">
+    <wsdl:part name="getConnectivityDirectory" element="tns:getConnectivityDirectory" />
+  </wsdl:message>
+  <wsdl:message name="getConnectivityDirectoryResponse">
+    <wsdl:part name="getConnectivityDirectory" element="tns:getConnectivityDirectoryResponse" />
+  </wsdl:message>
+
+  <!-- Search in Connectivity Directory -->
+  <wsdl:message name="searchInConnectivityDirectoryRequest">
+    <wsdl:part name="searchInConnectivityDirectory" element="tns:searchInConnectivityDirectory" />
+  </wsdl:message>
+  <wsdl:message name="searchInConnectivityDirectoryResponse">
+    <wsdl:part name="searchInConnectivityDirectory" element="tns:searchInConnectivityDirectoryResponse" />
+  </wsdl:message>
+
+  <!-- Update Connectivity Directory -->
+  <wsdl:message name="updateConnectivityDirectoryRequest">
+    <wsdl:part name="updateConnectivityDirectory" element="tns:updateConnectivityDirectory" />
+  </wsdl:message>
+  <wsdl:message name="updateConnectivityDirectoryResponse">
+    <wsdl:part name="updateConnectivityDirectory" element="tns:updateConnectivityDirectoryResponse" />
+  </wsdl:message>
+
+  <!-- Faults -->
+  <wsdl:message name="malimaErrorFault">
+    <wsdl:part name="parameters" element="ex:MalimaError" />
+  </wsdl:message>
+  <wsdl:message name="tooManyLineIdentifiersFault">
+    <wsdl:part name="parameters" element="ex:TooManyLineIdentifiersError" />
+  </wsdl:message>
+
+  <wsdl:portType name="IConnectivityDirectory">
+
+    <!-- Get Connectivity Directory -->
+    <wsdl:operation name="getConnectivityDirectory">
+      <wsdl:input name="getConnectivityDirectoryRequest" message="tns:getConnectivityDirectoryRequest" />
+      <wsdl:output name="getConnectivityDirectoryResponse" message="tns:getConnectivityDirectoryResponse" />
+      <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+      <wsdl:fault name="tooManyLineIdentifiersError" message="tns:tooManyLineIdentifiersFault" />
+    </wsdl:operation>
+
+    <!-- Search in Connectivity Directory -->
+    <wsdl:operation name="searchInConnectivityDirectory">
+      <wsdl:input name="searchInConnectivityDirectoryRequest" message="tns:searchInConnectivityDirectoryRequest" />
+      <wsdl:output name="searchInConnectivityDirectoryResponse" message="tns:searchInConnectivityDirectoryResponse" />
+      <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+    </wsdl:operation>
+
+    <!-- Update Connectivity Directory -->
+    <wsdl:operation name="updateConnectivityDirectory">
+      <wsdl:input name="updateConnectivityDirectoryRequest" message="tns:updateConnectivityDirectoryRequest" />
+      <wsdl:output name="updateConnectivityDirectoryResponse" message="tns:updateConnectivityDirectoryResponse" />
+      <wsdl:fault name="malimaError" message="tns:malimaErrorFault" />
+    </wsdl:operation>
+
+  </wsdl:portType>
+
+
+  <wsdl:binding name="ConnectivityDirectorySoapBinding" type="tns:IConnectivityDirectory">
+
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+    <!-- Get Connectivity Directory -->
+    <wsdl:operation name="getConnectivityDirectory">
+      <soap:operation />
+      <wsdl:input name="getConnectivityDirectoryRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getConnectivityDirectoryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="malimaError">
+        <soap:fault name="malimaError" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="tooManyLineIdentifiersError">
+        <soap:fault name="tooManyLineIdentifiersError" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <!-- Search in Connectivity Directory -->
+    <wsdl:operation name="searchInConnectivityDirectory">
+      <soap:operation />
+      <wsdl:input name="searchInConnectivityDirectoryRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="searchInConnectivityDirectoryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="malimaError">
+        <soap:fault name="malimaError" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <!-- Update Connectivity Directory -->
+    <wsdl:operation name="updateConnectivityDirectory">
+      <soap:operation />
+      <wsdl:input name="updateConnectivityDirectoryRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateConnectivityDirectoryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="malimaError">
+        <soap:fault name="malimaError" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+  </wsdl:binding>
+
+
+  <wsdl:service name="ConnectivityDirectory">
+    <wsdl:port name="ConnectivityDirectorySoapBinding" binding="tns:ConnectivityDirectorySoapBinding">
+      <soap:address location="http://localhost:9000/malima-ws/ws/connectivityDirectory" />
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

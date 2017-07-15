@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                    </ul>
+                    </li>
+                    <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                    <i class="icon-list-alt"></i>&#160;Errors
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                    <i class="icon-list-alt"></i>&#160;Markers
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-931291987"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-931291987" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/submitSimSup.html">submitSimSup</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/submitSimSupResponse.html">submitSimSupResponse</a></li>
+                                                    <li class="class"><a href="../classes/ValidationError.html">ValidationError</a></li>
+                                                    <li class="class"><a href="../classes/Error.html">Error</a></li>
+                                                    <li class="class"><a href="../classes/submitSimSupLoc.html">submitSimSupLoc</a></li>
+                                                    <li class="class"><a href="../classes/submitSimSupLocResponse.html">submitSimSupLocResponse</a></li>
+                                                    <li class="class"><a href="../classes/getSimReport.html">getSimReport</a></li>
+                                                    <li class="class"><a href="../classes/getSimReportResponse.html">getSimReportResponse</a></li>
+                                                    <li class="class"><a href="../classes/Line.html">Line</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Supervision.html">Supervision</a></li>
+                                                    <li class="class"><a href="../classes/SignalQuality.html">SignalQuality</a></li>
+                                                    <li class="class"><a href="../classes/SignalStrength.html">SignalStrength</a></li>
+                                                    <li class="class"><a href="../classes/Identity.html">Identity</a></li>
+                                                    <li class="class"><a href="../classes/LastKnownIdentity.html">LastKnownIdentity</a></li>
+                                                    <li class="class"><a href="../classes/Geolocation.html">Geolocation</a></li>
+                                                    <li class="class"><a href="../classes/CellId.html">CellId</a></li>
+                                                    <li class="class"><a href="../classes/GeographicPosition.html">GeographicPosition</a></li>
+                                                    <li class="class"><a href="../classes/Accuracy.html">Accuracy</a></li>
+                                                    <li class="class"><a href="../classes/getStatistics.html">getStatistics</a></li>
+                                                    <li class="class"><a href="../classes/Period.html">Period</a></li>
+                                                    <li class="class"><a href="../classes/getStatisticsResponse.html">getStatisticsResponse</a></li>
+                                                    <li class="class"><a href="../classes/PeriodValidationError.html">PeriodValidationError</a></li>
+                                                    <li class="class"><a href="../classes/PeriodCollection.html">PeriodCollection</a></li>
+                                                    <li class="class"><a href="../classes/PeriodReport.html">PeriodReport</a></li>
+                                                    <li class="class"><a href="../classes/Statistics.html">Statistics</a></li>
+                                                    <li class="class"><a href="../classes/M2M_SessionHistoryV2Client.html">M2M_SessionHistoryV2Client</a></li>
+                                                    <li class="class"><a href="../classes/Initialization.html">Initialization</a></li>
+                                                    <li class="class"><a href="../classes/getNetworkStatus.html">getNetworkStatus</a></li>
+                                                    <li class="class"><a href="../classes/Coordinates.html">Coordinates</a></li>
+                                                    <li class="class"><a href="../classes/getNetworkStatusResponse.html">getNetworkStatusResponse</a></li>
+                                                    <li class="class"><a href="../classes/AreaCoverage.html">AreaCoverage</a></li>
+                                                    <li class="class"><a href="../classes/BreakdownReport.html">BreakdownReport</a></li>
+                                                    <li class="class"><a href="../classes/ForecastCoverage.html">ForecastCoverage</a></li>
+                                                    <li class="class"><a href="../classes/createTrigger.html">createTrigger</a></li>
+                                                    <li class="class"><a href="../classes/Scope.html">Scope</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/TriggerCriteria.html">TriggerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficTimeStampCriteria.html">TrafficTimeStampCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TwoPeriods.html">TwoPeriods</a></li>
+                                                    <li class="class"><a href="../classes/Period.html">Period</a></li>
+                                                    <li class="class"><a href="../classes/AllowedPeriods.html">AllowedPeriods</a></li>
+                                                    <li class="class"><a href="../classes/TrafficLocationCriteria.html">TrafficLocationCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AllowedCountriesAndOperators.html">AllowedCountriesAndOperators</a></li>
+                                                    <li class="class"><a href="../classes/Country.html">Country</a></li>
+                                                    <li class="class"><a href="../classes/Operators.html">Operators</a></li>
+                                                    <li class="class"><a href="../classes/TrafficGlobalThresholdCriteria.html">TrafficGlobalThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/Roaming.html">Roaming</a></li>
+                                                    <li class="class"><a href="../classes/TrafficRestriction.html">TrafficRestriction</a></li>
+                                                    <li class="class"><a href="../classes/Local.html">Local</a></li>
+                                                    <li class="class"><a href="../classes/AllOrigin.html">AllOrigin</a></li>
+                                                    <li class="class"><a href="../classes/TrafficUnitaryThresholdCriteria.html">TrafficUnitaryThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficBearerCriteria.html">TrafficBearerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AllowedBearers.html">AllowedBearers</a></li>
+                                                    <li class="class"><a href="../classes/UpdateImeiCriteria.html">UpdateImeiCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficLazyMachineCriteria.html">TrafficLazyMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficSilentMachineCriteria.html">TrafficSilentMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficCrazyMachineCriteria.html">TrafficCrazyMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/SubscriptionStatusChangeCriteria.html">SubscriptionStatusChangeCriteria</a></li>
+                                                    <li class="class"><a href="../classes/WatchedM2MSubscriptionStatuses.html">WatchedM2MSubscriptionStatuses</a></li>
+                                                    <li class="class"><a href="../classes/SubscriptionOptionChangeCriteria.html">SubscriptionOptionChangeCriteria</a></li>
+                                                    <li class="class"><a href="../classes/WatchedSubscriptionOptions.html">WatchedSubscriptionOptions</a></li>
+                                                    <li class="class"><a href="../classes/OptionChangeTypes.html">OptionChangeTypes</a></li>
+                                                    <li class="class"><a href="../classes/createTriggerResponse.html">createTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/deleteTrigger.html">deleteTrigger</a></li>
+                                                    <li class="class"><a href="../classes/deleteTriggerResponse.html">deleteTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/updateTrigger.html">updateTrigger</a></li>
+                                                    <li class="class"><a href="../classes/updateTriggerResponse.html">updateTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/listTriggers.html">listTriggers</a></li>
+                                                    <li class="class"><a href="../classes/TriggerIdentifiers.html">TriggerIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/listTriggersResponse.html">listTriggersResponse</a></li>
+                                                    <li class="class"><a href="../classes/Triggers.html">Triggers</a></li>
+                                                    <li class="class"><a href="../classes/Trigger.html">Trigger</a></li>
+                                                    <li class="class"><a href="../classes/TriggerScope.html">TriggerScope</a></li>
+                                                    <li class="class"><a href="../classes/UnknownTriggers.html">UnknownTriggers</a></li>
+                                                    <li class="class"><a href="../classes/getAlarms.html">getAlarms</a></li>
+                                                    <li class="class"><a href="../classes/AlarmIdentifiers.html">AlarmIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/getAlarmsResponse.html">getAlarmsResponse</a></li>
+                                                    <li class="class"><a href="../classes/Alarms.html">Alarms</a></li>
+                                                    <li class="class"><a href="../classes/Alarm.html">Alarm</a></li>
+                                                    <li class="class"><a href="../classes/NbAlarmExceeded.html">NbAlarmExceeded</a></li>
+                                                    <li class="class"><a href="../classes/TriggeredAlarm.html">TriggeredAlarm</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTriggerCriteria.html">AlarmTriggerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficTimeStampCriteria.html">AlarmTrafficTimeStampCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficLocationCriteria.html">AlarmTrafficLocationCriteria</a></li>
+                                                    <li class="class"><a href="../classes/ForbiddenCountriesAndOperators.html">ForbiddenCountriesAndOperators</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficUnitaryThresholdCriteria.html">AlarmTrafficUnitaryThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficGlobalThresholdCriteria.html">AlarmTrafficGlobalThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficBearerCriteria.html">AlarmTrafficBearerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/ForbiddenBearerTypes.html">ForbiddenBearerTypes</a></li>
+                                                    <li class="class"><a href="../classes/AllowedBearerTypes.html">AllowedBearerTypes</a></li>
+                                                    <li class="class"><a href="../classes/AlarmUpdateImeiCriteria.html">AlarmUpdateImeiCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficLazyMachineCriteria.html">AlarmTrafficLazyMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficSilentMachineCriteria.html">AlarmTrafficSilentMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficCrazyMachineCriteria.html">AlarmTrafficCrazyMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmSubscriptionStatusChangeCriteria.html">AlarmSubscriptionStatusChangeCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmSubscriptionOptionChangeCriteria.html">AlarmSubscriptionOptionChangeCriteria</a></li>
+                                                    <li class="class"><a href="../classes/UnknownAlarmIdentifiers.html">UnknownAlarmIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/searchAlarms.html">searchAlarms</a></li>
+                                                    <li class="class"><a href="../classes/SearchAlarmsByTargets.html">SearchAlarmsByTargets</a></li>
+                                                    <li class="class"><a href="../classes/SearchAlarmsByTriggers.html">SearchAlarmsByTriggers</a></li>
+                                                    <li class="class"><a href="../classes/searchAlarmsResponse.html">searchAlarmsResponse</a></li>
+                                                    <li class="class"><a href="../classes/manageAlarms.html">manageAlarms</a></li>
+                                                    <li class="class"><a href="../classes/AlarmInformations.html">AlarmInformations</a></li>
+                                                    <li class="class"><a href="../classes/AlarmInformation.html">AlarmInformation</a></li>
+                                                    <li class="class"><a href="../classes/manageAlarmsResponse.html">manageAlarmsResponse</a></li>
+                                                    <li class="class"><a href="../classes/M2M_Credentials.html">M2M_Credentials</a></li>
+                                                    <li class="class"><a href="../classes/M2M_TrafficTrackingClient.html">M2M_TrafficTrackingClient</a></li>
+                                                    <li class="class"><a href="../classes/getIncidentDiagnostics.html">getIncidentDiagnostics</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/getIncidentDiagnosticsResponse.html">getIncidentDiagnosticsResponse</a></li>
+                                                    <li class="class"><a href="../classes/GeolocationOutV2.html">GeolocationOutV2</a></li>
+                                                    <li class="class"><a href="../classes/GeolocationData.html">GeolocationData</a></li>
+                                                    <li class="class"><a href="../classes/GeolocationDataFormat.html">GeolocationDataFormat</a></li>
+                                                    <li class="class"><a href="../classes/Coordinates.html">Coordinates</a></li>
+                                                    <li class="class"><a href="../classes/NetworkStatusOut.html">NetworkStatusOut</a></li>
+                                                    <li class="class"><a href="../classes/AreaCoverage.html">AreaCoverage</a></li>
+                                                    <li class="class"><a href="../classes/BreakdownReport.html">BreakdownReport</a></li>
+                                                    <li class="class"><a href="../classes/M2M_Utility.html">M2M_Utility</a></li>
+                                                    <li class="class"><a href="../classes/M2M_M2mClientException.html">M2M_M2mClientException</a></li>
+                                                    <li class="class"><a href="../classes/M2M_CustomerAlarmV2Client.html">M2M_CustomerAlarmV2Client</a></li>
+                                                    <li class="class"><a href="../classes/M2M_IniParser.html">M2M_IniParser</a></li>
+                                                    <li class="class"><a href="../classes/getNetworkStatus.html">getNetworkStatus</a></li>
+                                                    <li class="class"><a href="../classes/Coordinates.html">Coordinates</a></li>
+                                                    <li class="class"><a href="../classes/getNetworkStatusResponse.html">getNetworkStatusResponse</a></li>
+                                                    <li class="class"><a href="../classes/AreaCoverage.html">AreaCoverage</a></li>
+                                                    <li class="class"><a href="../classes/BreakdownReport.html">BreakdownReport</a></li>
+                                                    <li class="class"><a href="../classes/ForecastCoverage.html">ForecastCoverage</a></li>
+                                                    <li class="class"><a href="../classes/submitTrafficTrackingRequest.html">submitTrafficTrackingRequest</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/submitTrafficTrackingRequestResponse.html">submitTrafficTrackingRequestResponse</a></li>
+                                                    <li class="class"><a href="../classes/getTrafficTracking.html">getTrafficTracking</a></li>
+                                                    <li class="class"><a href="../classes/getTrafficTrackingResponse.html">getTrafficTrackingResponse</a></li>
+                                                    <li class="class"><a href="../classes/CustomerIdentifier.html">CustomerIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Line.html">Line</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/LineTrafficTracking.html">LineTrafficTracking</a></li>
+                                                    <li class="class"><a href="../classes/Volume.html">Volume</a></li>
+                                                    <li class="class"><a href="../classes/M2M_NetworkStatusClient.html">M2M_NetworkStatusClient</a></li>
+                                                    <li class="class"><a href="../classes/getConnectivityDirectory.html">getConnectivityDirectory</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/getConnectivityDirectoryResponse.html">getConnectivityDirectoryResponse</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectory.html">ConnectivityDirectory</a></li>
+                                                    <li class="class"><a href="../classes/Sim.html">Sim</a></li>
+                                                    <li class="class"><a href="../classes/Subscription.html">Subscription</a></li>
+                                                    <li class="class"><a href="../classes/SubscriptionDescription.html">SubscriptionDescription</a></li>
+                                                    <li class="class"><a href="../classes/Device.html">Device</a></li>
+                                                    <li class="class"><a href="../classes/Contact.html">Contact</a></li>
+                                                    <li class="class"><a href="../classes/CommunicationModule.html">CommunicationModule</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectoryDevice.html">ConnectivityDirectoryDevice</a></li>
+                                                    <li class="class"><a href="../classes/Machine.html">Machine</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectoryMachine.html">ConnectivityDirectoryMachine</a></li>
+                                                    <li class="class"><a href="../classes/CustomerIdentifier.html">CustomerIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectoryGeographicPosition.html">ConnectivityDirectoryGeographicPosition</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectoryGeographicPositionAccuracy.html">ConnectivityDirectoryGeographicPositionAccuracy</a></li>
+                                                    <li class="class"><a href="../classes/Imsi.html">Imsi</a></li>
+                                                    <li class="class"><a href="../classes/searchInConnectivityDirectory.html">searchInConnectivityDirectory</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectorySearchCriterion.html">ConnectivityDirectorySearchCriterion</a></li>
+                                                    <li class="class"><a href="../classes/SortCriterion.html">SortCriterion</a></li>
+                                                    <li class="class"><a href="../classes/searchInConnectivityDirectoryResponse.html">searchInConnectivityDirectoryResponse</a></li>
+                                                    <li class="class"><a href="../classes/SimStatusDistribution.html">SimStatusDistribution</a></li>
+                                                    <li class="class"><a href="../classes/SimStatusStatistic.html">SimStatusStatistic</a></li>
+                                                    <li class="class"><a href="../classes/updateConnectivityDirectory.html">updateConnectivityDirectory</a></li>
+                                                    <li class="class"><a href="../classes/DataBySubscriptionNumber.html">DataBySubscriptionNumber</a></li>
+                                                    <li class="class"><a href="../classes/DataBySimSerialNumber.html">DataBySimSerialNumber</a></li>
+                                                    <li class="class"><a href="../classes/DataByDeviceImei.html">DataByDeviceImei</a></li>
+                                                    <li class="class"><a href="../classes/DataByDeviceSerialNumber.html">DataByDeviceSerialNumber</a></li>
+                                                    <li class="class"><a href="../classes/DataByDeviceUniqueId.html">DataByDeviceUniqueId</a></li>
+                                                    <li class="class"><a href="../classes/DataByMachineSerialNumber.html">DataByMachineSerialNumber</a></li>
+                                                    <li class="class"><a href="../classes/DataByMsisdnVoice.html">DataByMsisdnVoice</a></li>
+                                                    <li class="class"><a href="../classes/DataByMsisdnData.html">DataByMsisdnData</a></li>
+                                                    <li class="class"><a href="../classes/DataByMsisdnFax.html">DataByMsisdnFax</a></li>
+                                                    <li class="class"><a href="../classes/updateConnectivityDirectoryResponse.html">updateConnectivityDirectoryResponse</a></li>
+                                                    <li class="class"><a href="../classes/UpdatesCompletedList.html">UpdatesCompletedList</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/UpdatesFailedList.html">UpdatesFailedList</a></li>
+                                                    <li class="class"><a href="../classes/UpdateFailed.html">UpdateFailed</a></li>
+                                                    <li class="class"><a href="../classes/M2M_ServiceConfigurator.html">M2M_ServiceConfigurator</a></li>
+                                                    <li class="class"><a href="../classes/submitSimSup.html">submitSimSup</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/submitSimSupResponse.html">submitSimSupResponse</a></li>
+                                                    <li class="class"><a href="../classes/ValidationError.html">ValidationError</a></li>
+                                                    <li class="class"><a href="../classes/Error.html">Error</a></li>
+                                                    <li class="class"><a href="../classes/submitSimSupLoc.html">submitSimSupLoc</a></li>
+                                                    <li class="class"><a href="../classes/submitSimSupLocResponse.html">submitSimSupLocResponse</a></li>
+                                                    <li class="class"><a href="../classes/getSimReport.html">getSimReport</a></li>
+                                                    <li class="class"><a href="../classes/getSimReportResponse.html">getSimReportResponse</a></li>
+                                                    <li class="class"><a href="../classes/Line.html">Line</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Supervision.html">Supervision</a></li>
+                                                    <li class="class"><a href="../classes/SignalQuality.html">SignalQuality</a></li>
+                                                    <li class="class"><a href="../classes/SignalStrength.html">SignalStrength</a></li>
+                                                    <li class="class"><a href="../classes/Identity.html">Identity</a></li>
+                                                    <li class="class"><a href="../classes/LastKnownIdentity.html">LastKnownIdentity</a></li>
+                                                    <li class="class"><a href="../classes/Geolocation.html">Geolocation</a></li>
+                                                    <li class="class"><a href="../classes/CellId.html">CellId</a></li>
+                                                    <li class="class"><a href="../classes/GeographicPosition.html">GeographicPosition</a></li>
+                                                    <li class="class"><a href="../classes/Accuracy.html">Accuracy</a></li>
+                                                    <li class="class"><a href="../classes/getStatistics.html">getStatistics</a></li>
+                                                    <li class="class"><a href="../classes/Period.html">Period</a></li>
+                                                    <li class="class"><a href="../classes/getStatisticsResponse.html">getStatisticsResponse</a></li>
+                                                    <li class="class"><a href="../classes/PeriodValidationError.html">PeriodValidationError</a></li>
+                                                    <li class="class"><a href="../classes/PeriodCollection.html">PeriodCollection</a></li>
+                                                    <li class="class"><a href="../classes/PeriodReport.html">PeriodReport</a></li>
+                                                    <li class="class"><a href="../classes/Statistics.html">Statistics</a></li>
+                                                    <li class="class"><a href="../classes/createTrigger.html">createTrigger</a></li>
+                                                    <li class="class"><a href="../classes/Scope.html">Scope</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/TriggerCriteria.html">TriggerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficTimeStampCriteria.html">TrafficTimeStampCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TwoPeriods.html">TwoPeriods</a></li>
+                                                    <li class="class"><a href="../classes/Period.html">Period</a></li>
+                                                    <li class="class"><a href="../classes/AllowedPeriods.html">AllowedPeriods</a></li>
+                                                    <li class="class"><a href="../classes/TrafficLocationCriteria.html">TrafficLocationCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AllowedCountriesAndOperators.html">AllowedCountriesAndOperators</a></li>
+                                                    <li class="class"><a href="../classes/Country.html">Country</a></li>
+                                                    <li class="class"><a href="../classes/Operators.html">Operators</a></li>
+                                                    <li class="class"><a href="../classes/TrafficGlobalThresholdCriteria.html">TrafficGlobalThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/Roaming.html">Roaming</a></li>
+                                                    <li class="class"><a href="../classes/TrafficRestriction.html">TrafficRestriction</a></li>
+                                                    <li class="class"><a href="../classes/Local.html">Local</a></li>
+                                                    <li class="class"><a href="../classes/TrafficUnitaryThresholdCriteria.html">TrafficUnitaryThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficBearerCriteria.html">TrafficBearerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AllowedBearers.html">AllowedBearers</a></li>
+                                                    <li class="class"><a href="../classes/UpdateImeiCriteria.html">UpdateImeiCriteria</a></li>
+                                                    <li class="class"><a href="../classes/createTriggerResponse.html">createTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/deleteTrigger.html">deleteTrigger</a></li>
+                                                    <li class="class"><a href="../classes/deleteTriggerResponse.html">deleteTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/updateTrigger.html">updateTrigger</a></li>
+                                                    <li class="class"><a href="../classes/updateTriggerResponse.html">updateTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/listTriggers.html">listTriggers</a></li>
+                                                    <li class="class"><a href="../classes/TriggerIdentifiers.html">TriggerIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/listTriggersResponse.html">listTriggersResponse</a></li>
+                                                    <li class="class"><a href="../classes/Triggers.html">Triggers</a></li>
+                                                    <li class="class"><a href="../classes/Trigger.html">Trigger</a></li>
+                                                    <li class="class"><a href="../classes/TriggerScope.html">TriggerScope</a></li>
+                                                    <li class="class"><a href="../classes/UnknownTriggers.html">UnknownTriggers</a></li>
+                                                    <li class="class"><a href="../classes/getAlarms.html">getAlarms</a></li>
+                                                    <li class="class"><a href="../classes/AlarmIdentifiers.html">AlarmIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/getAlarmsResponse.html">getAlarmsResponse</a></li>
+                                                    <li class="class"><a href="../classes/Alarms.html">Alarms</a></li>
+                                                    <li class="class"><a href="../classes/Alarm.html">Alarm</a></li>
+                                                    <li class="class"><a href="../classes/NbAlarmExceeded.html">NbAlarmExceeded</a></li>
+                                                    <li class="class"><a href="../classes/TriggeredAlarm.html">TriggeredAlarm</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTriggerCriteria.html">AlarmTriggerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficTimeStampCriteria.html">AlarmTrafficTimeStampCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficLocationCriteria.html">AlarmTrafficLocationCriteria</a></li>
+                                                    <li class="class"><a href="../classes/ForbiddenCountriesAndOperators.html">ForbiddenCountriesAndOperators</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficUnitaryThresholdCriteria.html">AlarmTrafficUnitaryThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficGlobalThresholdCriteria.html">AlarmTrafficGlobalThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficBearerCriteria.html">AlarmTrafficBearerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/ForbiddenBearerTypes.html">ForbiddenBearerTypes</a></li>
+                                                    <li class="class"><a href="../classes/AllowedBearerTypes.html">AllowedBearerTypes</a></li>
+                                                    <li class="class"><a href="../classes/AlarmUpdateImeiCriteria.html">AlarmUpdateImeiCriteria</a></li>
+                                                    <li class="class"><a href="../classes/UnknownAlarmIdentifiers.html">UnknownAlarmIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/searchAlarms.html">searchAlarms</a></li>
+                                                    <li class="class"><a href="../classes/SearchAlarmsByTargets.html">SearchAlarmsByTargets</a></li>
+                                                    <li class="class"><a href="../classes/SearchAlarmsByTriggers.html">SearchAlarmsByTriggers</a></li>
+                                                    <li class="class"><a href="../classes/searchAlarmsResponse.html">searchAlarmsResponse</a></li>
+                                                    <li class="class"><a href="../classes/M2M_ServiceCustomerAlarmClient.html">M2M_ServiceCustomerAlarmClient</a></li>
+                                                    <li class="class"><a href="../classes/M2M_ConnectivityDirectoryClient.html">M2M_ConnectivityDirectoryClient</a></li>
+                                                    <li class="class"><a href="../classes/getSubscriptionStatus.html">getSubscriptionStatus</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/getSubscriptionStatusResponse.html">getSubscriptionStatusResponse</a></li>
+                                                    <li class="class"><a href="../classes/Sim.html">Sim</a></li>
+                                                    <li class="class"><a href="../classes/Subscription.html">Subscription</a></li>
+                                                    <li class="class"><a href="../classes/SubscriptionDescription.html">SubscriptionDescription</a></li>
+                                                    <li class="class"><a href="../classes/Device.html">Device</a></li>
+                                                    <li class="class"><a href="../classes/Contact.html">Contact</a></li>
+                                                    <li class="class"><a href="../classes/CommunicationModule.html">CommunicationModule</a></li>
+                                                    <li class="class"><a href="../classes/DeviceWithUpdateDate.html">DeviceWithUpdateDate</a></li>
+                                                    <li class="class"><a href="../classes/Machine.html">Machine</a></li>
+                                                    <li class="class"><a href="../classes/MachineWithUpdateDate.html">MachineWithUpdateDate</a></li>
+                                                    <li class="class"><a href="../classes/CustomerIdentifier.html">CustomerIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/M2M_FileStream.html">M2M_FileStream</a></li>
+                                                    <li class="class"><a href="../classes/InitializationException.html">InitializationException</a></li>
+                                                    <li class="class"><a href="../classes/M2m_ProxyException.html">M2m_ProxyException</a></li>
+                                                    <li class="class"><a href="../classes/M2M_SubscriptionStatusClient.html">M2M_SubscriptionStatusClient</a></li>
+                                                    <li class="class"><a href="../classes/submitUpdateSimStatusRequest.html">submitUpdateSimStatusRequest</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/submitUpdateSimStatusRequestResponse.html">submitUpdateSimStatusRequestResponse</a></li>
+                                                    <li class="class"><a href="../classes/getUpdateSimStatusResult.html">getUpdateSimStatusResult</a></li>
+                                                    <li class="class"><a href="../classes/getUpdateSimStatusResultResponse.html">getUpdateSimStatusResultResponse</a></li>
+                                                    <li class="class"><a href="../classes/StatusUpdate.html">StatusUpdate</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/getSubscriptionStatus.html">getSubscriptionStatus</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/getSubscriptionStatusResponse.html">getSubscriptionStatusResponse</a></li>
+                                                    <li class="class"><a href="../classes/Sim.html">Sim</a></li>
+                                                    <li class="class"><a href="../classes/Subscription.html">Subscription</a></li>
+                                                    <li class="class"><a href="../classes/SubscriptionDescription.html">SubscriptionDescription</a></li>
+                                                    <li class="class"><a href="../classes/Device.html">Device</a></li>
+                                                    <li class="class"><a href="../classes/Contact.html">Contact</a></li>
+                                                    <li class="class"><a href="../classes/CommunicationModule.html">CommunicationModule</a></li>
+                                                    <li class="class"><a href="../classes/DeviceWithUpdateDate.html">DeviceWithUpdateDate</a></li>
+                                                    <li class="class"><a href="../classes/Machine.html">Machine</a></li>
+                                                    <li class="class"><a href="../classes/MachineWithUpdateDate.html">MachineWithUpdateDate</a></li>
+                                                    <li class="class"><a href="../classes/CustomerIdentifier.html">CustomerIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/M2M_IniParserException.html">M2M_IniParserException</a></li>
+                                                    <li class="class"><a href="../classes/createTrigger.html">createTrigger</a></li>
+                                                    <li class="class"><a href="../classes/Scope.html">Scope</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/TriggerCriteria.html">TriggerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficTimeStampCriteria.html">TrafficTimeStampCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TwoPeriods.html">TwoPeriods</a></li>
+                                                    <li class="class"><a href="../classes/Period.html">Period</a></li>
+                                                    <li class="class"><a href="../classes/AllowedPeriods.html">AllowedPeriods</a></li>
+                                                    <li class="class"><a href="../classes/TrafficLocationCriteria.html">TrafficLocationCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AllowedCountriesAndOperators.html">AllowedCountriesAndOperators</a></li>
+                                                    <li class="class"><a href="../classes/Country.html">Country</a></li>
+                                                    <li class="class"><a href="../classes/Operators.html">Operators</a></li>
+                                                    <li class="class"><a href="../classes/TrafficGlobalThresholdCriteria.html">TrafficGlobalThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/Roaming.html">Roaming</a></li>
+                                                    <li class="class"><a href="../classes/TrafficRestriction.html">TrafficRestriction</a></li>
+                                                    <li class="class"><a href="../classes/Local.html">Local</a></li>
+                                                    <li class="class"><a href="../classes/AllOrigin.html">AllOrigin</a></li>
+                                                    <li class="class"><a href="../classes/TrafficUnitaryThresholdCriteria.html">TrafficUnitaryThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficBearerCriteria.html">TrafficBearerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AllowedBearers.html">AllowedBearers</a></li>
+                                                    <li class="class"><a href="../classes/UpdateImeiCriteria.html">UpdateImeiCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficLazyMachineCriteria.html">TrafficLazyMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficSilentMachineCriteria.html">TrafficSilentMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficCrazyMachineCriteria.html">TrafficCrazyMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/SubscriptionStatusChangeCriteria.html">SubscriptionStatusChangeCriteria</a></li>
+                                                    <li class="class"><a href="../classes/WatchedM2MSubscriptionStatuses.html">WatchedM2MSubscriptionStatuses</a></li>
+                                                    <li class="class"><a href="../classes/SubscriptionOptionChangeCriteria.html">SubscriptionOptionChangeCriteria</a></li>
+                                                    <li class="class"><a href="../classes/WatchedSubscriptionOptions.html">WatchedSubscriptionOptions</a></li>
+                                                    <li class="class"><a href="../classes/OptionChangeTypes.html">OptionChangeTypes</a></li>
+                                                    <li class="class"><a href="../classes/createTriggerResponse.html">createTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/deleteTrigger.html">deleteTrigger</a></li>
+                                                    <li class="class"><a href="../classes/deleteTriggerResponse.html">deleteTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/updateTrigger.html">updateTrigger</a></li>
+                                                    <li class="class"><a href="../classes/updateTriggerResponse.html">updateTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/listTriggers.html">listTriggers</a></li>
+                                                    <li class="class"><a href="../classes/TriggerIdentifiers.html">TriggerIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/listTriggersResponse.html">listTriggersResponse</a></li>
+                                                    <li class="class"><a href="../classes/Triggers.html">Triggers</a></li>
+                                                    <li class="class"><a href="../classes/Trigger.html">Trigger</a></li>
+                                                    <li class="class"><a href="../classes/TriggerScope.html">TriggerScope</a></li>
+                                                    <li class="class"><a href="../classes/UnknownTriggers.html">UnknownTriggers</a></li>
+                                                    <li class="class"><a href="../classes/getAlarms.html">getAlarms</a></li>
+                                                    <li class="class"><a href="../classes/AlarmIdentifiers.html">AlarmIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/getAlarmsResponse.html">getAlarmsResponse</a></li>
+                                                    <li class="class"><a href="../classes/Alarms.html">Alarms</a></li>
+                                                    <li class="class"><a href="../classes/Alarm.html">Alarm</a></li>
+                                                    <li class="class"><a href="../classes/NbAlarmExceeded.html">NbAlarmExceeded</a></li>
+                                                    <li class="class"><a href="../classes/TriggeredAlarm.html">TriggeredAlarm</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTriggerCriteria.html">AlarmTriggerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficTimeStampCriteria.html">AlarmTrafficTimeStampCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficLocationCriteria.html">AlarmTrafficLocationCriteria</a></li>
+                                                    <li class="class"><a href="../classes/ForbiddenCountriesAndOperators.html">ForbiddenCountriesAndOperators</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficUnitaryThresholdCriteria.html">AlarmTrafficUnitaryThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficGlobalThresholdCriteria.html">AlarmTrafficGlobalThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficBearerCriteria.html">AlarmTrafficBearerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/ForbiddenBearerTypes.html">ForbiddenBearerTypes</a></li>
+                                                    <li class="class"><a href="../classes/AllowedBearerTypes.html">AllowedBearerTypes</a></li>
+                                                    <li class="class"><a href="../classes/AlarmUpdateImeiCriteria.html">AlarmUpdateImeiCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficLazyMachineCriteria.html">AlarmTrafficLazyMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficSilentMachineCriteria.html">AlarmTrafficSilentMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficCrazyMachineCriteria.html">AlarmTrafficCrazyMachineCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmSubscriptionStatusChangeCriteria.html">AlarmSubscriptionStatusChangeCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmSubscriptionOptionChangeCriteria.html">AlarmSubscriptionOptionChangeCriteria</a></li>
+                                                    <li class="class"><a href="../classes/UnknownAlarmIdentifiers.html">UnknownAlarmIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/searchAlarms.html">searchAlarms</a></li>
+                                                    <li class="class"><a href="../classes/SearchAlarmsByTargets.html">SearchAlarmsByTargets</a></li>
+                                                    <li class="class"><a href="../classes/SearchAlarmsByTriggers.html">SearchAlarmsByTriggers</a></li>
+                                                    <li class="class"><a href="../classes/searchAlarmsResponse.html">searchAlarmsResponse</a></li>
+                                                    <li class="class"><a href="../classes/manageAlarms.html">manageAlarms</a></li>
+                                                    <li class="class"><a href="../classes/AlarmInformations.html">AlarmInformations</a></li>
+                                                    <li class="class"><a href="../classes/AlarmInformation.html">AlarmInformation</a></li>
+                                                    <li class="class"><a href="../classes/manageAlarmsResponse.html">manageAlarmsResponse</a></li>
+                                                    <li class="class"><a href="../classes/submitSessionHistoryRequest.html">submitSessionHistoryRequest</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/submitSessionHistoryRequestResponse.html">submitSessionHistoryRequestResponse</a></li>
+                                                    <li class="class"><a href="../classes/getSessionHistory.html">getSessionHistory</a></li>
+                                                    <li class="class"><a href="../classes/getSessionHistoryResponse.html">getSessionHistoryResponse</a></li>
+                                                    <li class="class"><a href="../classes/Line.html">Line</a></li>
+                                                    <li class="class"><a href="../classes/CustomerIdentifier.html">CustomerIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Subscription.html">Subscription</a></li>
+                                                    <li class="class"><a href="../classes/SubscriptionDescription.html">SubscriptionDescription</a></li>
+                                                    <li class="class"><a href="../classes/Sim.html">Sim</a></li>
+                                                    <li class="class"><a href="../classes/Device.html">Device</a></li>
+                                                    <li class="class"><a href="../classes/Sessions2.html">Sessions2</a></li>
+                                                    <li class="class"><a href="../classes/Session2.html">Session2</a></li>
+                                                    <li class="class"><a href="../classes/M2M_IncidentDiagnosticsV2Client.html">M2M_IncidentDiagnosticsV2Client</a></li>
+                                                    <li class="class"><a href="../classes/submitUpdateSimStatusRequest.html">submitUpdateSimStatusRequest</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/submitUpdateSimStatusRequestResponse.html">submitUpdateSimStatusRequestResponse</a></li>
+                                                    <li class="class"><a href="../classes/getUpdateSimStatusResult.html">getUpdateSimStatusResult</a></li>
+                                                    <li class="class"><a href="../classes/getUpdateSimStatusResultResponse.html">getUpdateSimStatusResultResponse</a></li>
+                                                    <li class="class"><a href="../classes/StatusUpdate.html">StatusUpdate</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/submitSessionHistoryRequest.html">submitSessionHistoryRequest</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/submitSessionHistoryRequestResponse.html">submitSessionHistoryRequestResponse</a></li>
+                                                    <li class="class"><a href="../classes/getSessionHistory.html">getSessionHistory</a></li>
+                                                    <li class="class"><a href="../classes/getSessionHistoryResponse.html">getSessionHistoryResponse</a></li>
+                                                    <li class="class"><a href="../classes/Line.html">Line</a></li>
+                                                    <li class="class"><a href="../classes/CustomerIdentifier.html">CustomerIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Subscription.html">Subscription</a></li>
+                                                    <li class="class"><a href="../classes/SubscriptionDescription.html">SubscriptionDescription</a></li>
+                                                    <li class="class"><a href="../classes/Sim.html">Sim</a></li>
+                                                    <li class="class"><a href="../classes/Device.html">Device</a></li>
+                                                    <li class="class"><a href="../classes/Sessions2.html">Sessions2</a></li>
+                                                    <li class="class"><a href="../classes/Session2.html">Session2</a></li>
+                                                    <li class="class"><a href="../classes/getIncidentDiagnostics.html">getIncidentDiagnostics</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/getIncidentDiagnosticsResponse.html">getIncidentDiagnosticsResponse</a></li>
+                                                    <li class="class"><a href="../classes/GeolocationOutV2.html">GeolocationOutV2</a></li>
+                                                    <li class="class"><a href="../classes/GeolocationData.html">GeolocationData</a></li>
+                                                    <li class="class"><a href="../classes/GeolocationDataFormat.html">GeolocationDataFormat</a></li>
+                                                    <li class="class"><a href="../classes/Coordinates.html">Coordinates</a></li>
+                                                    <li class="class"><a href="../classes/NetworkStatusOut.html">NetworkStatusOut</a></li>
+                                                    <li class="class"><a href="../classes/AreaCoverage.html">AreaCoverage</a></li>
+                                                    <li class="class"><a href="../classes/BreakdownReport.html">BreakdownReport</a></li>
+                                                    <li class="class"><a href="../classes/getConnectivityDirectory.html">getConnectivityDirectory</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/getConnectivityDirectoryResponse.html">getConnectivityDirectoryResponse</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectory.html">ConnectivityDirectory</a></li>
+                                                    <li class="class"><a href="../classes/Sim.html">Sim</a></li>
+                                                    <li class="class"><a href="../classes/Subscription.html">Subscription</a></li>
+                                                    <li class="class"><a href="../classes/SubscriptionDescription.html">SubscriptionDescription</a></li>
+                                                    <li class="class"><a href="../classes/Device.html">Device</a></li>
+                                                    <li class="class"><a href="../classes/Contact.html">Contact</a></li>
+                                                    <li class="class"><a href="../classes/CommunicationModule.html">CommunicationModule</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectoryDevice.html">ConnectivityDirectoryDevice</a></li>
+                                                    <li class="class"><a href="../classes/Machine.html">Machine</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectoryMachine.html">ConnectivityDirectoryMachine</a></li>
+                                                    <li class="class"><a href="../classes/CustomerIdentifier.html">CustomerIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectoryGeographicPosition.html">ConnectivityDirectoryGeographicPosition</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectoryGeographicPositionAccuracy.html">ConnectivityDirectoryGeographicPositionAccuracy</a></li>
+                                                    <li class="class"><a href="../classes/Imsi.html">Imsi</a></li>
+                                                    <li class="class"><a href="../classes/searchInConnectivityDirectory.html">searchInConnectivityDirectory</a></li>
+                                                    <li class="class"><a href="../classes/ConnectivityDirectorySearchCriterion.html">ConnectivityDirectorySearchCriterion</a></li>
+                                                    <li class="class"><a href="../classes/SortCriterion.html">SortCriterion</a></li>
+                                                    <li class="class"><a href="../classes/searchInConnectivityDirectoryResponse.html">searchInConnectivityDirectoryResponse</a></li>
+                                                    <li class="class"><a href="../classes/SimStatusDistribution.html">SimStatusDistribution</a></li>
+                                                    <li class="class"><a href="../classes/SimStatusStatistic.html">SimStatusStatistic</a></li>
+                                                    <li class="class"><a href="../classes/updateConnectivityDirectory.html">updateConnectivityDirectory</a></li>
+                                                    <li class="class"><a href="../classes/DataBySubscriptionNumber.html">DataBySubscriptionNumber</a></li>
+                                                    <li class="class"><a href="../classes/DataBySimSerialNumber.html">DataBySimSerialNumber</a></li>
+                                                    <li class="class"><a href="../classes/DataByDeviceImei.html">DataByDeviceImei</a></li>
+                                                    <li class="class"><a href="../classes/DataByDeviceSerialNumber.html">DataByDeviceSerialNumber</a></li>
+                                                    <li class="class"><a href="../classes/DataByDeviceUniqueId.html">DataByDeviceUniqueId</a></li>
+                                                    <li class="class"><a href="../classes/DataByMachineSerialNumber.html">DataByMachineSerialNumber</a></li>
+                                                    <li class="class"><a href="../classes/DataByMsisdnVoice.html">DataByMsisdnVoice</a></li>
+                                                    <li class="class"><a href="../classes/DataByMsisdnData.html">DataByMsisdnData</a></li>
+                                                    <li class="class"><a href="../classes/DataByMsisdnFax.html">DataByMsisdnFax</a></li>
+                                                    <li class="class"><a href="../classes/updateConnectivityDirectoryResponse.html">updateConnectivityDirectoryResponse</a></li>
+                                                    <li class="class"><a href="../classes/UpdatesCompletedList.html">UpdatesCompletedList</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/UpdatesFailedList.html">UpdatesFailedList</a></li>
+                                                    <li class="class"><a href="../classes/UpdateFailed.html">UpdateFailed</a></li>
+                                                    <li class="class"><a href="../classes/M2M_Proxy.html">M2M_Proxy</a></li>
+                                                    <li class="class"><a href="../classes/M2M_M2mClient.html">M2M_M2mClient</a></li>
+                                                    <li class="class"><a href="../classes/M2M_SimLifecycleManagementClient.html">M2M_SimLifecycleManagementClient</a></li>
+                                                    <li class="class"><a href="../classes/submitTrafficTrackingRequest.html">submitTrafficTrackingRequest</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/submitTrafficTrackingRequestResponse.html">submitTrafficTrackingRequestResponse</a></li>
+                                                    <li class="class"><a href="../classes/getTrafficTracking.html">getTrafficTracking</a></li>
+                                                    <li class="class"><a href="../classes/getTrafficTrackingResponse.html">getTrafficTrackingResponse</a></li>
+                                                    <li class="class"><a href="../classes/CustomerIdentifier.html">CustomerIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Line.html">Line</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/LineTrafficTracking.html">LineTrafficTracking</a></li>
+                                                    <li class="class"><a href="../classes/Volume.html">Volume</a></li>
+                                                    <li class="class"><a href="../classes/createTrigger.html">createTrigger</a></li>
+                                                    <li class="class"><a href="../classes/Scope.html">Scope</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifier.html">LineIdentifier</a></li>
+                                                    <li class="class"><a href="../classes/Msisdn.html">Msisdn</a></li>
+                                                    <li class="class"><a href="../classes/TriggerCriteria.html">TriggerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficTimeStampCriteria.html">TrafficTimeStampCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TwoPeriods.html">TwoPeriods</a></li>
+                                                    <li class="class"><a href="../classes/Period.html">Period</a></li>
+                                                    <li class="class"><a href="../classes/AllowedPeriods.html">AllowedPeriods</a></li>
+                                                    <li class="class"><a href="../classes/TrafficLocationCriteria.html">TrafficLocationCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AllowedCountriesAndOperators.html">AllowedCountriesAndOperators</a></li>
+                                                    <li class="class"><a href="../classes/Country.html">Country</a></li>
+                                                    <li class="class"><a href="../classes/Operators.html">Operators</a></li>
+                                                    <li class="class"><a href="../classes/TrafficGlobalThresholdCriteria.html">TrafficGlobalThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/Roaming.html">Roaming</a></li>
+                                                    <li class="class"><a href="../classes/TrafficRestriction.html">TrafficRestriction</a></li>
+                                                    <li class="class"><a href="../classes/Local.html">Local</a></li>
+                                                    <li class="class"><a href="../classes/TrafficUnitaryThresholdCriteria.html">TrafficUnitaryThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/TrafficBearerCriteria.html">TrafficBearerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AllowedBearers.html">AllowedBearers</a></li>
+                                                    <li class="class"><a href="../classes/UpdateImeiCriteria.html">UpdateImeiCriteria</a></li>
+                                                    <li class="class"><a href="../classes/createTriggerResponse.html">createTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/deleteTrigger.html">deleteTrigger</a></li>
+                                                    <li class="class"><a href="../classes/deleteTriggerResponse.html">deleteTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/updateTrigger.html">updateTrigger</a></li>
+                                                    <li class="class"><a href="../classes/updateTriggerResponse.html">updateTriggerResponse</a></li>
+                                                    <li class="class"><a href="../classes/listTriggers.html">listTriggers</a></li>
+                                                    <li class="class"><a href="../classes/TriggerIdentifiers.html">TriggerIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/LineIdentifierCollection.html">LineIdentifierCollection</a></li>
+                                                    <li class="class"><a href="../classes/listTriggersResponse.html">listTriggersResponse</a></li>
+                                                    <li class="class"><a href="../classes/Triggers.html">Triggers</a></li>
+                                                    <li class="class"><a href="../classes/Trigger.html">Trigger</a></li>
+                                                    <li class="class"><a href="../classes/TriggerScope.html">TriggerScope</a></li>
+                                                    <li class="class"><a href="../classes/UnknownTriggers.html">UnknownTriggers</a></li>
+                                                    <li class="class"><a href="../classes/getAlarms.html">getAlarms</a></li>
+                                                    <li class="class"><a href="../classes/AlarmIdentifiers.html">AlarmIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/getAlarmsResponse.html">getAlarmsResponse</a></li>
+                                                    <li class="class"><a href="../classes/Alarms.html">Alarms</a></li>
+                                                    <li class="class"><a href="../classes/Alarm.html">Alarm</a></li>
+                                                    <li class="class"><a href="../classes/NbAlarmExceeded.html">NbAlarmExceeded</a></li>
+                                                    <li class="class"><a href="../classes/TriggeredAlarm.html">TriggeredAlarm</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTriggerCriteria.html">AlarmTriggerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficTimeStampCriteria.html">AlarmTrafficTimeStampCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficLocationCriteria.html">AlarmTrafficLocationCriteria</a></li>
+                                                    <li class="class"><a href="../classes/ForbiddenCountriesAndOperators.html">ForbiddenCountriesAndOperators</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficUnitaryThresholdCriteria.html">AlarmTrafficUnitaryThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficGlobalThresholdCriteria.html">AlarmTrafficGlobalThresholdCriteria</a></li>
+                                                    <li class="class"><a href="../classes/AlarmTrafficBearerCriteria.html">AlarmTrafficBearerCriteria</a></li>
+                                                    <li class="class"><a href="../classes/ForbiddenBearerTypes.html">ForbiddenBearerTypes</a></li>
+                                                    <li class="class"><a href="../classes/AllowedBearerTypes.html">AllowedBearerTypes</a></li>
+                                                    <li class="class"><a href="../classes/AlarmUpdateImeiCriteria.html">AlarmUpdateImeiCriteria</a></li>
+                                                    <li class="class"><a href="../classes/UnknownAlarmIdentifiers.html">UnknownAlarmIdentifiers</a></li>
+                                                    <li class="class"><a href="../classes/searchAlarms.html">searchAlarms</a></li>
+                                                    <li class="class"><a href="../classes/SearchAlarmsByTargets.html">SearchAlarmsByTargets</a></li>
+                                                    <li class="class"><a href="../classes/SearchAlarmsByTriggers.html">SearchAlarmsByTriggers</a></li>
+                                                    <li class="class"><a href="../classes/searchAlarmsResponse.html">searchAlarmsResponse</a></li>
+                                                    <li class="class"><a href="../classes/M2M_DeviceInfoClient.html">M2M_DeviceInfoClient</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>getAlarms</h1>
+                    <p><em></em></p>
+                    
+
+
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <em>No public methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/getAlarms.html#property_alarmIdentifiers" class="">$alarmIdentifiers</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/stubs.ServiceCustomerAlarm_V1_1.wsdl.php.html"><div class="path-wrapper">stubs\ServiceCustomerAlarm_V1_1.wsdl.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\getAlarms</div>
+                            </dd>
+
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_alarmIdentifiers" name="property_alarmIdentifiers" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$alarmIdentifiers</h3>
+                <pre class="signature">$alarmIdentifiers : \(object)AlarmIdentifiers</pre>
+                <p><em></em></p>
+                
+
+
+                                <h4>Type</h4>
+                \(object)AlarmIdentifiers
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                            
+                                </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">ServiceCustomerAlarm_V1_1.wsdl.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/stubs\ServiceCustomerAlarm_V1_1.wsdl.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="">Errors</a></li>
+                                    <li><a href="">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on September 5th, 2014 at 11:11.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="DeviceInfo" 
+    targetNamespace="http://webservice.malima.francetelecom.com/v1"
+        xmlns:tns="http://webservice.malima.francetelecom.com/v1"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:dis="http://deviceInfo.types.malima.francetelecom.com"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    	--------------------------------------------------------------------
+        Contract interface documentation
+        ----------------------------------
+        Document release: V1.2
+        Author (Entity): C. PINEL (ITLabs)
+        Creation date: 21/02/2013
+        Description: Device Info service
+        --------------------------------------------------------------------
+        Changes history
+        ----------------------------------
+        Version      Date            Comments
+        V0.1         21/02/2013      Smart Sim WSDL creation
+        V0.2         30/05/2013      Add "get Sim Report" request and response (only for SmartSim Supervision)
+        			 10/06/2013		 replace "lineInError" by "ValidationError" in "SubmitSimSupOut"
+        V0.3		 04/07/2013		 Add "Submit Sup Loc" request and response
+        V1.0		 24/07/2013		 Modification of version of WSDL (IOSW does not accept 0.x)
+        V1.1		 13/08/2013		 Modification of Submit Supervision, Submit Supervision location and Get Sim report to change name of service 
+		                             to DIS and change cardinality of cellId
+									 Modification of Get Sim report response : complete the geolocation node
+        V1.2		 06/09/2013		 Modification of Get Sim report response : complete the supervision node to add APE fields ip and sessionTime
+        							 Add "get statistics" requet and response
+        --------------------------------------------------------------------
+	</wsdl:documentation>
+
+	<wsdl:types>
+		<schema elementFormDefault="qualified"
+            targetNamespace="http://webservice.malima.francetelecom.com/v1"
+                xmlns:dis="http://deviceInfo.types.malima.francetelecom.com"
+				xmlns="http://www.w3.org/2001/XMLSchema">
+			
+			<!-- External schemas import -->
+			<import namespace="http://deviceInfo.types.malima.francetelecom.com" schemaLocation="deviceInfo.xsd"/>
+			
+			<element name="submitSimSup">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="dis:SubmitSimSupIn"/>
+					</sequence>
+				</complexType>	
+			</element>
+			<element name="submitSimSupResponse">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="dis:SubmitSimSupOut" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="submitSimSupLoc">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="dis:SubmitSimSupLocIn"/>
+					</sequence>
+				</complexType>	
+			</element>
+			<element name="submitSimSupLocResponse">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="dis:SubmitSimSupLocOut" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getSimReport">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="dis:GetSimReportIn"/>
+					</sequence>
+				</complexType>	
+			</element>
+			<element name="getSimReportResponse">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="dis:GetSimReportOut" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getStatistics">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="dis:GetStatisticsIn"/>
+					</sequence>
+				</complexType>	
+			</element>
+			<element name="getStatisticsResponse">
+				<complexType>
+					<sequence>
+						<group minOccurs="1" maxOccurs="1" ref="dis:GetStatisticsOut" />
+					</sequence>
+				</complexType>
+			</element>
+		</schema>
+	</wsdl:types>
+	
+	<wsdl:message name="submitSimSupRequest">
+		<wsdl:part name="submitSimSup" element="tns:submitSimSup"/>
+	</wsdl:message>
+	
+	<wsdl:message name="submitSimSupResponse">
+		<wsdl:part name="submitSimSup" element="tns:submitSimSupResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="submitSimSupLocRequest">
+		<wsdl:part name="submitSimSupLoc" element="tns:submitSimSupLoc"/>
+	</wsdl:message>
+	
+	<wsdl:message name="submitSimSupLocResponse">
+		<wsdl:part name="submitSimSupLoc" element="tns:submitSimSupLocResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getSimReportRequest">
+		<wsdl:part name="getSimReport" element="tns:getSimReport"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getSimReportResponse">
+		<wsdl:part name="getSimReport" element="tns:getSimReportResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getStatisticsRequest">
+		<wsdl:part name="getStatistics" element="tns:getStatistics"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getStatisticsResponse">
+		<wsdl:part name="getStatistics" element="tns:getStatisticsResponse"/>
+	</wsdl:message>
+	    
+	<!-- Faults -->
+    <wsdl:message name="malimaErrorFault">
+        <wsdl:part name="parameters" element="dis:MalimaError" />
+    </wsdl:message>
+    <wsdl:message name="tooManyLineIdentifiersErrorFault">
+        <wsdl:part name="parameters" element="dis:TooManyLineIdentifiersError"/>
+    </wsdl:message>
+    <wsdl:message name="unknownTicketFault">
+        <wsdl:part name="parameters" element="dis:UnknownTicketError" />
+    </wsdl:message>
+    <wsdl:message name="resultAlreadyRetrievedFault">
+        <wsdl:part name="parameters" element="dis:ResultAlreadyRetrievedError" />
+    </wsdl:message>
+	
+	<wsdl:portType name="IDeviceInfo">
+
+		<wsdl:operation name="submitSimSup">
+			<wsdl:input name="submitSimSupRequest" message="tns:submitSimSupRequest"/>
+			<wsdl:output name="submitSimSupResponse" message="tns:submitSimSupResponse"/>
+			<wsdl:fault name="malimaError" message="tns:malimaErrorFault"/>
+			<wsdl:fault name="tooManyLineIdentifiersError" message="tns:tooManyLineIdentifiersErrorFault"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="submitSimSupLoc">
+			<wsdl:input name="submitSimSupLocRequest" message="tns:submitSimSupLocRequest"/>
+			<wsdl:output name="submitSimSupLocResponse" message="tns:submitSimSupLocResponse"/>
+			<wsdl:fault name="malimaError" message="tns:malimaErrorFault"/>
+			<wsdl:fault name="tooManyLineIdentifiersError" message="tns:tooManyLineIdentifiersErrorFault"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getSimReport">
+			<wsdl:input name="getSimReportRequest" message="tns:getSimReportRequest"/>
+			<wsdl:output name="getSimReportResponse" message="tns:getSimReportResponse"/>
+			<wsdl:fault name="malimaError" message="tns:malimaErrorFault"/>
+			<wsdl:fault name="unknownTicketError" message="tns:unknownTicketFault"/>
+			<wsdl:fault name="resultAlreadyRetrievedError" message="tns:resultAlreadyRetrievedFault"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getStatistics">
+			<wsdl:input name="getStatisticsRequest" message="tns:getStatisticsRequest"/>
+			<wsdl:output name="getStatisticsResponse" message="tns:getStatisticsResponse"/>
+			<wsdl:fault name="malimaError" message="tns:malimaErrorFault"/>
+			<wsdl:fault name="tooManyLineIdentifiersError" message="tns:tooManyLineIdentifiersErrorFault"/>
+		</wsdl:operation>
+        
+	</wsdl:portType>
+
+
+	<wsdl:binding name="DeviceInfoSoapBinding" type="tns:IDeviceInfo">
+		
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		
+		<wsdl:operation name="submitSimSup">
+			<soap:operation />
+			<wsdl:input name="submitSimSupRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="submitSimSupResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="tooManyLineIdentifiersError">
+                <soap:fault name="tooManyLineIdentifiersError" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="submitSimSupLoc">
+			<soap:operation />
+			<wsdl:input name="submitSimSupLocRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="submitSimSupLocResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="tooManyLineIdentifiersError">
+                <soap:fault name="tooManyLineIdentifiersError" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getSimReport">
+			<soap:operation />
+			<wsdl:input name="getSimReportRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getSimReportResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="unknownTicketError">
+                <soap:fault name="unknownTicketError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="resultAlreadyRetrievedError">
+                <soap:fault name="resultAlreadyRetrievedError" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getStatistics">
+			<soap:operation />
+			<wsdl:input name="getStatisticsRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getStatisticsResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="malimaError">
+                <soap:fault name="malimaError" use="literal" />
+            </wsdl:fault>
+            <wsdl:fault name="tooManyLineIdentifiersError">
+                <soap:fault name="tooManyLineIdentifiersError" use="literal" />
+            </wsdl:fault>
+		</wsdl:operation>
+		
+	</wsdl:binding>
+
+
+	<wsdl:service name="DeviceInfo">
+		<wsdl:port name="DeviceInfoSoapBinding" binding="tns:DeviceInfoSoapBinding">
+			<soap:address location="http://localhost:9000/malima-device-info-service/ws/deviceInfo"/>
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

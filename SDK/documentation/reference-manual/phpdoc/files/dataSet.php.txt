@@ -1,0 +1,56 @@
+<?php
+//Common Datas
+	$sSubscriptionNumber = "your_subscription_number";
+	$sSimSSN= "your_sim_serial_number";
+	$sMsiSdn= "your_msisdn_number";	
+
+// ConnectivityDirectory
+	//SEARCHINCONNECTIVITYDIRECTORY 
+	$sSimStatus = "ACTIVATED";
+	$iRangeSize  = 3;   
+	$iRangeStart = 7; 
+	$sCriterionOrder = "ASC";
+	$sSortCriterionAttribute = "SIM_SSN";	
+	//UPDATECUSTOMERDEVICEDATA
+	/* Device */ 
+	$sUniqueIdentifier = "yourPHPdeviceIdentifier2";
+	$sSerialNumber     = "yourPHPdeviceSerialNumber2";
+	$sDescription      = "yourPHPdeviceDescription";
+	$sAddress          = "yourPHPdeviceAddress";
+	$sCategory         = "yourPHPdeviceCategory";
+	$sDeviceLocation   = "yourPHPdeviceLocation";
+	/*contact*/
+	$sModuleBrand = 'your PHP TM';
+	$sModuleModel = 'your PHP Model'; 
+	/*Machine*/  
+	$sMachineSerialNumber = "yourPHPmachineSerialNumber2";
+	$sMachineName         = "yourPHPmachineName";
+	$sMachineDescription  = "yourPHPmachineDescription";	
+	/*get CD by IMSI*/
+	$sImsi = "your_imsi";
+	
+// SimLyfeCycle
+    $sRequestedStatus = "ACTIVATED_FOR_TEST";
+    $sTestMode = "INTERNATIONAL";
+
+    
+// ServiceCustomerAlarm
+    $sClientAccount="your_customer_account_number";
+    $sTriggerType="TRAFFIC_BEARER";
+    $sBearer="SMS";
+    $sBearer2="GPRS_EDGE";
+    $sCallOrigin="ALL_ORIGIN";
+    $iPeriod=7;
+    $iValue=10;
+    $sComment="your_comment";
+    $sLevel="MEDIUM";
+    $bNotification= true;
+    $iGroupId = 0;
+    $sStatus='DISABLE';
+    $iRangeStartAlarm= 0 ;
+    $iRangeSizeAlarm= 20 ;  
+    $iTriggerIdToBeDeleted= "your_trigger_id_to_be_deleted";
+    $sWatchedOptions="the_option_code";
+    $sOptionChangedTypes="ADD";
+  	$sWatchedStatus="the_sim_status";  
+?>

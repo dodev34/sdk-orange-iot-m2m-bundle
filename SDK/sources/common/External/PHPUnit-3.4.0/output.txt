@@ -1,0 +1,7 @@
+PHPUnit 3.4.0 by Sebastian Bergmann.
+
+......................
+
+Time: 14 seconds
+
+OK (22 tests, 35 assertions)

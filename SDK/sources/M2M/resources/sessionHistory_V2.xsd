@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified"
+	targetNamespace="http://sessionHistory.types.malima.francetelecom.com"
+	xmlns:tns="http://sessionHistory.types.malima.francetelecom.com"
+	xmlns:cmsh="http://common.sessionHistory.types.malima.francetelecom.com"
+	xmlns:cm="http://common.types.malima.francetelecom.com" xmlns="http://www.w3.org/2001/XMLSchema">
+
+	<annotation>
+		<documentation>
+			This schema defines the Session History services types.
+        </documentation>
+	</annotation>
+
+	<!-- Common types external schema -->
+	<import namespace="http://common.types.malima.francetelecom.com" schemaLocation="common.xsd" />
+	<!-- Commom types Session History V1 & V2 -->
+	<import namespace="http://common.sessionHistory.types.malima.francetelecom.com" schemaLocation="sessionHistoryCommon.xsd"/>
+            
+	<!-- Get Session History V2 output parameters -->
+	<group name="GetSessionHistory2Out">
+		<sequence>
+			<!-- Ticket global processing status -->
+			<element minOccurs="1" maxOccurs="1" name="globalProcessingStatus" type="cm:TicketStatusType" />
+			<!-- Error code and message (if globalProcessingStatus is error) -->
+			<element minOccurs="0" maxOccurs="1" name="errorCode" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="errorMessage" type="string" />
+			<!-- Line data -->
+			<element minOccurs="0" maxOccurs="1" name="line" type="cmsh:Line" />
+			<!-- Sessions data -->
+			<element minOccurs="0" maxOccurs="1" name="sessions" type="tns:Sessions2" />
+		</sequence>
+	</group>
+
+	
+	<!-- Sessions data -->
+	<complexType name="Sessions2">
+		<sequence>
+			<!-- period Start Date Time -->
+			<element minOccurs="1" maxOccurs="1" name="periodStartDateTime"	type="dateTime" />
+			<!-- period End Date Time -->
+			<element minOccurs="1" maxOccurs="1" name="periodEndDateTime" type="dateTime" />
+			<!-- period Sessions Count -->
+			<element minOccurs="1" maxOccurs="1" name="totalNumberOfResults" type="string" />
+			<!-- first Session Date Time -->
+			<element minOccurs="0" maxOccurs="1" name="firstSessionDateTime" type="dateTime" />
+			<!-- last Session Date Time -->
+			<element minOccurs="0" maxOccurs="1" name="lastSessionDateTime" type="dateTime" />
+			<!-- number of results remaining -->
+			<element minOccurs="1" maxOccurs="1" name="numberOfRemainingResults" type="int" />
+			<!-- Sessions -->
+			<element minOccurs="0" maxOccurs="unbounded" name="session"	type="tns:Session2" />
+		</sequence>
+	</complexType>
+
+	<!-- Session data -->
+	<complexType name="Session2">
+		<sequence>
+			<element minOccurs="1" maxOccurs="1" name="communicationWay" type="cmsh:communicationWay" />
+			<element minOccurs="1" maxOccurs="1" name="emissionDate" type="dateTime" />
+			<element minOccurs="0" maxOccurs="1" name="imei" type="string" />
+			<element minOccurs="1" maxOccurs="1" name="bearerType" type="cm:BearerType" />
+			<element minOccurs="1" maxOccurs="1" name="originatedCountry" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="originatedCountryMcc" type="int" />
+			<element minOccurs="0" maxOccurs="1" name="operator" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="durationInSeconds" type="int" />
+			<element minOccurs="0" maxOccurs="1" name="volumeInInBytes" type="long" />
+			<element minOccurs="0" maxOccurs="1" name="volumeOutInBytes" type="long" />
+			<element minOccurs="0" maxOccurs="1" name="apn" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="pdpAddress" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="pdpContextType" type="tns:pdpContextType" />
+			<element minOccurs="0" maxOccurs="1" name="msisdnEmission" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="currentMsisdnFlag" type="boolean" />
+			<element minOccurs="0" maxOccurs="1" name="currentMsisdnFlagCheckDate" type="dateTime" />
+			<element minOccurs="0" maxOccurs="1" name="ggsnAddress" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="sgsnAddress" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="sgsnAddress2" type="string" />
+			<element minOccurs="0" maxOccurs="1" name="lac" type="int" />
+			<element minOccurs="0" maxOccurs="1" name="cellId" type="int" />
+			<element minOccurs="0" maxOccurs="1" name="efficiencyIndicator" type="boolean" />
+			<element minOccurs="0" maxOccurs="1" name="whiteZonePrefix" type="tns:whiteZone" />
+		</sequence>
+	</complexType>
+
+	<simpleType name="pdpContextType">
+		<restriction base="string">
+			<enumeration value="IPV4" />
+			<enumeration value="IPV6" />
+			<enumeration value="PPP" />
+			<enumeration value="UNKNOWN" />
+			<enumeration value="NA" />
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="whiteZone">
+		<restriction base="string">
+			<enumeration value="NATIONAL" />
+			<enumeration value="INTERNATIONAL" />
+			<enumeration value="UNKNOWN" />
+			<enumeration value="MOBILE_STATION_ROAMING_NUMBER" />
+			<enumeration value="NA" />
+		</restriction>
+	</simpleType>
+
+</schema>
+

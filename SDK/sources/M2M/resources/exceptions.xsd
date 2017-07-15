@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ============================================ -->
+<!-- Malima Exception type                        -->
+<!-- ============================================ -->
+<schema 
+    targetNamespace="http://exception.malima.francetelecom.com"
+       xmlns:tns="http://exception.malima.francetelecom.com"
+	   xmlns:cm="http://common.types.malima.francetelecom.com"
+       xmlns="http://www.w3.org/2001/XMLSchema">
+
+  <annotation>
+    <documentation>
+      This schema lists the Malima services exceptions.
+    </documentation>
+  </annotation>
+
+  <!-- Common types external schema -->
+	<import namespace="http://common.types.malima.francetelecom.com" schemaLocation="common.xsd"/>
+
+  <!-- Malima generic error -->
+  <element name="MalimaError">
+    <complexType>
+      <sequence>
+               <element minOccurs="1" maxOccurs="1" name="code" type="string"/>
+               <element minOccurs="1" maxOccurs="1" name="message" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- Occurs when the line identifiers number threshold is exceeded -->
+  <element name="TooManyLineIdentifiersError">
+    <complexType>
+      <sequence>
+               <element minOccurs="1" maxOccurs="1" name="maxAllowedLineIdentifiersNumber" type="int"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- Occurs when the line identifiers number threshold is exceeded -->
+  <element name="TooManyAlarmIdentifiersError">
+    <complexType>
+      <sequence>
+               <element minOccurs="1" maxOccurs="1" name="maxAllowedAlarmIdentifiersNumber" type="int"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- Occurs when the ws returns too many results -->
+  <element name="TooManyResultsError">
+    <complexType>
+      <sequence>
+               <element minOccurs="1" maxOccurs="1" name="maxAllowedResults" type="int"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- Unknown line identifier error -->
+  <element name="UnknownLineIdentifierError">
+    <complexType>
+      <sequence>
+    	       <element minOccurs="1" maxOccurs="1" name="lineIdentifier" type="cm:LineIdentifier"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name="UnknownCustomerEnvironnementNumberError">
+    <complexType>
+      <sequence>
+    			<element minOccurs="1" maxOccurs="1" name="unknownCustomerEnvironnementNumber" type="cm:CustomerEnvironmentNumber"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- Invalid period error -->
+  <element name="InvalidPeriodError">
+    <complexType>
+      <sequence>
+                  <element minOccurs="1" maxOccurs="1" name="message" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- Invalid parameter error -->
+  <element name="InvalidParameterError">
+    <complexType>
+      <sequence>
+                  <element minOccurs="1" maxOccurs="1" name="message" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- Telco Information System error -->
+  <element name="TelcoISError">
+    <complexType>
+      <sequence>
+               <element minOccurs="0" maxOccurs="1" name="code" type="string"/>
+               <element minOccurs="1" maxOccurs="1" name="message" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- Unknown ticket error -->
+  <element name="UnknownTicketError">
+    <complexType>
+      <sequence>
+               <element minOccurs="1" maxOccurs="1" name="ticketNumber" type="int"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- Result already retrieved error -->
+  <element name="ResultAlreadyRetrievedError">
+    <complexType>
+      <sequence>
+               <element minOccurs="1" maxOccurs="1" name="retrievalDate" type="dateTime"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- Geoloc Service error -->
+  <element name="GeolocServiceError">
+    <complexType>
+      <sequence>
+               <element minOccurs="1" maxOccurs="1" name="message" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <!-- NetworkStatus Service error -->
+  <element name="NetworkStatusServiceError">
+    <complexType>
+      <sequence>
+               <element minOccurs="1" maxOccurs="1" name="message" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- Trigger error -->
+  <element name="TriggerError">
+    <complexType>
+      <sequence>
+    			<element minOccurs="1" maxOccurs="1" name="message" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name="UnknownTriggerIdentifierError">
+    <complexType>
+      <sequence>
+    			<element minOccurs="1" maxOccurs="1" name="triggerIdentifier" type="cm:TriggerIdentifier"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- alarm error -->
+  <element name="AlarmError">
+    <complexType>
+      <sequence>
+    			<element minOccurs="1" maxOccurs="1" name="message" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+
+  <!-- alarm error -->
+  <element name="TriggerLimitExceededError">
+    <complexType>
+      <sequence>
+    			<element minOccurs="1" maxOccurs="1" name="triggerLimit" type="int"/>
+      </sequence>
+    </complexType>
+  </element>
+
+</schema>

@@ -1,0 +1,8 @@
+# File: .gitignore
+
+*.DS_Store
+composer.lock
+
+/Tests/app
+/vendor
+/.idea
