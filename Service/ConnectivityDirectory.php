@@ -102,16 +102,16 @@ class ConnectivityDirectory implements ServiceInterface
         ];
 
         $connectivityDirectory = new getConnectivityDirectory();
-        if (! array_key_exists('lineIdentifiers', $parameters)) {
+        if (! array_key_exists('subscriptionNumber', $parameters)) {
             throw new InvalidArgumentException;
         }
 
         $connectivityDirectory->lineIdentifiers = new LineIdentifierCollection();
-        if (! is_array($parameters['lineIdentifiers'])) {
-            $parameters['lineIdentifiers'] = [$parameters['lineIdentifiers']];
+        if (! is_array($parameters['subscriptionNumber'])) {
+            $parameters['subscriptionNumber'] = [$parameters['subscriptionNumber']];
         }
         $connectivityDirectory->lineIdentifiers = new LineIdentifierCollection();
-        $connectivityDirectory->lineIdentifiers->subscriptionNumber = $parameters['line_identifiers'];
+        $connectivityDirectory->lineIdentifiers->subscriptionNumber = $parameters['subscriptionNumber'];
 
         foreach ($cunsumption as $key => $value) {
             if (array_key_exists($key, $parameters)) {

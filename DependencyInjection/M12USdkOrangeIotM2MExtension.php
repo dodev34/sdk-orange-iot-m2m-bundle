@@ -14,6 +14,10 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 class M12USdkOrangeIotM2MExtension extends Extension
 {
+    public function getAlias()
+    {
+        return '';
+    }
     /**
      * {@inheritdoc}
      */

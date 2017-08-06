@@ -13,8 +13,7 @@ $service = $provider->get('connectivity_directory');
 // finily, call your service
 try {
     $parameters = [
-        'subscriptionNumber' => 'your subscription number',
-        'lineIdentifier' => ['array of your lines indentifier]
+        'subscriptionNumber' => ['your arry of subscriptions numbers']|'your subscription number'
     ];
     
     $response = $service->getConnectivityDirectory($parameters);

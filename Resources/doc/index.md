@@ -14,7 +14,7 @@ Configuration YML
 # app/config/config.yml
 # minimal configuration
 
-m12_u_sdk_orange_iot_m2_m:
+m12u_sdk_orange_iot_m2m:
     DisableLogger: 'yes' # or 'no'
     iccidPrefix: '893301'
     connection:
